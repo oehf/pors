@@ -1,0 +1,254 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:a4j="http://richfaces.org/a4j">
+<body>
+
+<ui:composition template="/template.xhtml">
+<ui:define name="headerTitle"><h:outputText value="#{labels.showsinglehistory_title}"/></ui:define>
+<ui:define name="content">
+	<h:form rendered="#{presenter.userLoggedIn}">
+	
+		<h:panelGrid columns="2" rendered="#{presenter.userLoggedIn}">
+		<h:outputLabel value="#{labels.showsinglehistory_sessiondata_title}" />
+		<h:outputLabel value="" />
+		
+		<h:outputLabel value="#{labels.showsinglehistory_sessiondata_entryid}" />
+        <h:outputText value="#{presenter.history.logEntryId}"/>
+
+		<h:outputLabel value="#{labels.showsinglehistory_sessiondata_username}" />
+		<h:outputText value="#{presenter.history.userName}" />
+
+		<h:outputLabel value="#{labels.showsinglehistory_sessiondata_date}" />
+		<h:outputText value="#{presenter.history.logDateString}" />
+
+		<h:outputLabel value="#{labels.showsinglehistory_sessiondata_time}" />
+		<h:outputText value="#{presenter.history.logTimeString}" />
+
+		<h:outputLabel value="#{labels.showsinglehistory_sessiondata_domain}" />
+		<h:outputText value="#{presenter.history.domain}" />
+		
+		<h:outputLabel value="#{labels.showsinglehistory_sessiondata_action}" />
+		<h:outputText value="#{presenter.history.action}" />
+		
+		<h:outputLabel value="#{labels.showsinglehistory_sessiondata_ipaddress}" />
+		<h:commandLink id="ipSearch" value="#{presenter.historyIpAddress}" action="#{presenter.searchHistoryByIp}"/>
+		
+		<h:outputLabel value="#{labels.showsinglehistory_sessiondata_sessionid}" />
+		<h:commandLink id="sessionIdSearch" value="#{presenter.historySessionID}" action="#{presenter.searchHistoryBySession}"/>
+		
+	</h:panelGrid>
+	
+	<rich:dataTable rendered="#{presenter.providerAvailable}" value="#{presenter.providerHistoryData}" var="dataItem"
+				id="providerList" styleClass="detailList" sortMode="single"
+				width="50%">
+		<f:facet name="header">
+			<h:outputText value="#{labels.showsinglehistory_providerdata_header}" />
+		</f:facet>
+				
+		<rich:column>
+			<f:facet name="header">
+				<h:outputText value="#{labels.showsinglehistory_data_table_header}" />
+			</f:facet>
+			<h:outputText value="#{dataItem.title}" />
+		</rich:column>
+				
+		<rich:column>
+			<f:facet name="header">
+				<h:outputText value="#{labels.showsinglehistory_data_table_old}" />
+			</f:facet>
+			<h:outputText  style="color:#{dataItem.color}" value="#{dataItem.old}" />
+		</rich:column>
+				
+		<rich:column>
+			<f:facet name="header">
+				<h:outputText value="#{labels.showsinglehistory_data_table_new}" />
+			</f:facet>
+			<h:outputText style="color:#{dataItem.color}" value="#{dataItem.new}" />
+		</rich:column>				
+	</rich:dataTable>
+	
+	
+	<rich:dataTable rendered="#{presenter.organisationAvailable}" 
+				value="#{presenter.organisationHistoryData}" var="dataItem"
+				id="organisationList" sortMode="single" styleClass="detailList"
+				width="50%" >
+		<f:facet name="header">
+			<h:outputText value="#{labels.showsinglehistory_organisationdata_header}" />
+		</f:facet>
+				
+		<rich:column>
+			<f:facet name="header">
+				<h:outputText value="#{labels.showsinglehistory_data_table_header}" />
+			</f:facet>
+			<h:outputText value="#{dataItem.title}" />
+		</rich:column>
+				
+		<rich:column>
+			<f:facet name="header">
+				<h:outputText value="#{labels.showsinglehistory_data_table_old}" />
+			</f:facet>
+			<h:outputText  style="color:#{dataItem.color}" value="#{dataItem.old}" />
+		</rich:column>
+				
+		<rich:column>
+			<f:facet name="header">
+				<h:outputText value="#{labels.showsinglehistory_data_table_new}" />
+			</f:facet>
+			<h:outputText style="color:#{dataItem.color}" value="#{dataItem.new}" />
+		</rich:column>				
+	</rich:dataTable>
+	
+	<rich:dataTable rendered="#{presenter.addressAvailable}" value="#{presenter.addressHistoryData}" var="dataItem"
+				id="addressList" sortMode="single" styleClass="detailList"
+				width="50%" >
+		<f:facet name="header">
+			<h:outputText value="#{labels.showsinglehistory_addressdata_header}" />
+		</f:facet>
+				
+		<rich:column>
+			<f:facet name="header">
+				<h:outputText value="#{labels.showsinglehistory_data_table_header}" />
+			</f:facet>
+			<h:outputText value="#{dataItem.title}" />
+		</rich:column>
+				
+		<rich:column>
+			<f:facet name="header">
+				<h:outputText value="#{labels.showsinglehistory_data_table_old}" />
+			</f:facet>
+			<h:outputText  style="color:#{dataItem.color}" value="#{dataItem.old}" />
+		</rich:column>
+				
+		<rich:column>
+			<f:facet name="header">
+				<h:outputText value="#{labels.showsinglehistory_data_table_new}" />
+			</f:facet>
+			<h:outputText style="color:#{dataItem.color}" value="#{dataItem.new}" />
+		</rich:column>				
+	</rich:dataTable>
+	
+	<rich:dataTable rendered="#{presenter.localIdAvailable}" value="#{presenter.localIdHistoryData}" var="dataItem"
+				id="localIdList" sortMode="single" styleClass="detailList"
+				width="50%" >
+		<f:facet name="header">
+			<h:outputText value="#{labels.showsinglehistory_localiddata_header}" />
+		</f:facet>
+				
+		<rich:column>
+			<f:facet name="header">
+				<h:outputText value="#{labels.showsinglehistory_data_table_header}" />
+			</f:facet>
+			<h:outputText value="#{dataItem.title}" />
+		</rich:column>
+				
+		<rich:column>
+			<f:facet name="header">
+				<h:outputText value="#{labels.showsinglehistory_data_table_old}" />
+			</f:facet>
+			<h:outputText  style="color:#{dataItem.color}" value="#{dataItem.old}" />
+		</rich:column>
+				
+		<rich:column>
+			<f:facet name="header">
+				<h:outputText value="#{labels.showsinglehistory_data_table_new}" />
+			</f:facet>
+			<h:outputText style="color:#{dataItem.color}" value="#{dataItem.new}" />
+		</rich:column>				
+	</rich:dataTable>
+	
+	<rich:dataTable rendered="#{presenter.providerHasAddressAvailable}" value="#{presenter.providerHasAddressHistoryData}" var="dataItem"
+				id="providerhasaddressList" sortMode="single" styleClass="detailList"
+				width="50%" >
+		<f:facet name="header">
+			<h:outputText value="#{labels.showsinglehistory_providerhasaddressdata_header}" />
+		</f:facet>
+				
+		<rich:column>
+			<f:facet name="header">
+				<h:outputText value="#{labels.showsinglehistory_data_table_header}" />
+			</f:facet>
+			<h:outputText value="#{dataItem.title}" />
+		</rich:column>
+				
+		<rich:column>
+			<f:facet name="header">
+				<h:outputText value="#{labels.showsinglehistory_data_table_old}" />
+			</f:facet>
+			<h:outputText  style="color:#{dataItem.color}" value="#{dataItem.old}" />
+		</rich:column>
+				
+		<rich:column>
+			<f:facet name="header">
+				<h:outputText value="#{labels.showsinglehistory_data_table_new}" />
+			</f:facet>
+			<h:outputText style="color:#{dataItem.color}" value="#{dataItem.new}" />
+		</rich:column>				
+	</rich:dataTable>
+	
+	<rich:dataTable rendered="#{presenter.organisationHasAddressAvailable}" value="#{presenter.organisationHasAddressHistoryData}" var="dataItem"
+				id="organisationhasaddressList" sortMode="single" styleClass="detailList"
+				width="50%" >
+		<f:facet name="header">
+			<h:outputText value="#{labels.showsinglehistory_organisationhasaddressdata_header}" />
+		</f:facet>
+				
+		<rich:column>
+			<f:facet name="header">
+				<h:outputText value="#{labels.showsinglehistory_data_table_header}" />
+			</f:facet>
+			<h:outputText value="#{dataItem.title}" />
+		</rich:column>
+				
+		<rich:column>
+			<f:facet name="header">
+				<h:outputText value="#{labels.showsinglehistory_data_table_old}" />
+			</f:facet>
+			<h:outputText  style="color:#{dataItem.color}" value="#{dataItem.old}" />
+		</rich:column>
+				
+		<rich:column>
+			<f:facet name="header">
+				<h:outputText value="#{labels.showsinglehistory_data_table_new}" />
+			</f:facet>
+			<h:outputText style="color:#{dataItem.color}" value="#{dataItem.new}" />
+		</rich:column>				
+	</rich:dataTable>
+	
+	<rich:dataTable rendered="#{presenter.organisationHasProviderAvailable}" value="#{presenter.organisationHasProviderHistoryData}" var="dataItem"
+				id="organisationhasproviderList" sortMode="single" styleClass="detailList"
+				width="50%" >
+		<f:facet name="header">
+			<h:outputText value="#{labels.showsinglehistory_organisationhasproviderdata_header}" />
+		</f:facet>
+				
+		<rich:column>
+			<f:facet name="header">
+				<h:outputText value="#{labels.showsinglehistory_data_table_header}" />
+			</f:facet>
+			<h:outputText value="#{dataItem.title}" />
+		</rich:column>
+				
+		<rich:column>
+			<f:facet name="header">
+				<h:outputText value="#{labels.showsinglehistory_data_table_old}" />
+			</f:facet>
+			<h:outputText  style="color:#{dataItem.color}" value="#{dataItem.old}" />
+		</rich:column>
+				
+		<rich:column>
+			<f:facet name="header">
+				<h:outputText value="#{labels.showsinglehistory_data_table_new}" />
+			</f:facet>
+			<h:outputText style="color:#{dataItem.color}" value="#{dataItem.new}" />
+		</rich:column>				
+	</rich:dataTable>
+	</h:form>
+</ui:define>
+</ui:composition>
+
+</body>
+</html>

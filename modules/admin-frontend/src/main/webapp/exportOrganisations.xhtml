@@ -1,0 +1,30 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:a4j="http://richfaces.org/a4j">
+<body>
+
+<ui:composition template="/template.xhtml">
+<ui:define name="headerTitle">#{labels.exportorg_title}</ui:define>
+<ui:define name="content">
+	<rich:message for="fieldSelection" showSummary="true"/>
+	<h:form rendered="#{presenter.userLoggedIn}">
+		<rich:listShuttle id="fieldSelection" sourceValue="#{presenter.organisationFields}" targetValue="#{presenter.selectedOrganisationFields}"  
+                 sourceRequired="false" targetRequired="false" var="field"
+                                sourceCaptionLabel="#{labels.exportorg_labelavailable}" targetCaptionLabel="#{labels.exportorg_labelselected}" 
+                                sourceListWidth="250px" targetListWidth="250px" listsHeight="250px">
+                <rich:column>
+                        <h:outputText value="#{field}" />
+                </rich:column>
+        </rich:listShuttle>
+	
+		<h:commandButton action="#{presenter.exportOrganisations}" value="#{labels.exportorg_button}" />
+	</h:form>
+</ui:define>
+</ui:composition>
+
+</body>
+</html>

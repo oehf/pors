@@ -1,0 +1,20 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:a4j="http://richfaces.org/a4j">
+	
+<body>
+
+<ui:composition>
+	<a4j:status style="margin-left:10px; padding: 10px;" id="commonstatus" for="#{statusid}">
+    	<f:facet name="start">
+        	<h:graphicImage  value="img/ajax-loader.gif"/>
+        </f:facet>
+    </a4j:status>
+</ui:composition>
+
+</body>
+</html>

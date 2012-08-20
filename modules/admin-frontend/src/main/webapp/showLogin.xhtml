@@ -1,0 +1,30 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:a4j="http://richfaces.org/a4j">
+<body>
+
+<ui:composition template="/template.xhtml">
+<ui:define name="headerTitle">#{labels.showlogin_title}</ui:define>
+<ui:define name="content">
+	<h:outputText rendered="#{presenter.userLoggedIn}" style="display:none" value="#{presenter.redirectionToMain}"/>
+	<h:panelGrid columns="2" rendered="#{!presenter.userLoggedIn}">
+	<h:form>
+		<h:panelGrid columns="2">
+			<h:outputLabel rendered="true" value="#{labels.showlogin_user}" />
+			<h:inputText size="15" value="#{presenter.currentUser.username}" tabindex="0" id="username"/>
+			<h:outputLabel rendered="true" value="#{labels.showlogin_pass}" />
+			<h:inputSecret size="15" value="#{presenter.currentUser.password}" id="password"/>
+			<a4j:commandButton action="#{presenter.login}" value="#{labels.showlogin_button}" id="loginButton"/>
+		</h:panelGrid>
+	</h:form>
+	<rich:hotKey key="return" handler="#{rich:element('loginButton')}.click()" selector="#password"/>
+	</h:panelGrid>
+</ui:define>
+</ui:composition>
+
+</body>
+</html>

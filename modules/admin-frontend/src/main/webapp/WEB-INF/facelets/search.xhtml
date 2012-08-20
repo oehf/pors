@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:a4j="http://richfaces.org/a4j">
+	
+<body>
+
+<ui:composition>
+
+<h3>Search</h3>
+<p>Please select a field and enter a value to start a search. You can also use wildcard characters like * for any kind and number of character or ? for exact one character. The operator is applied to every field.</p>
+<h:panelGrid columns="8" id="#{idvalue}">
+
+	Field: <h:selectOneMenu id="field1" value="#{presenter.searchBean.field1}" >
+		<f:selectItems value="#{fields}"/>
+	</h:selectOneMenu>
+	Value: <h:inputText size="20" value="#{presenter.searchBean.value1}" tabindex="0" id="value1" />
+	Operator: <h:selectOneMenu id="searchOperator" value="#{presenter.searchBean.selectedOperator}">
+		<f:selectItems value="#{presenter.searchBean.operators}"/>
+	</h:selectOneMenu>
+	<a4j:commandButton rendered="#{idvalue == 'providerSearch'}" action="#{presenter.startProviderSearch}" value="start search" reRender="#{rerenderid}" />
+	<a4j:commandButton rendered="#{idvalue == 'organisationSearch'}" action="#{presenter.startOrganisationSearch}" value="start search" reRender="#{rerenderid}" />
+	<a4j:commandButton rendered="#{idvalue == 'historySearch'}" action="#{presenter.startHistorySearch}" value="start search" reRender="#{rerenderid}" />
+	<a4j:commandButton rendered="#{idvalue == 'providerSearch'}" action="#{presenter.resetProviderSearch}" value="reset" reRender="#{rerenderid},field1,value1,field2,value2,field3,value3,searchOperator" />
+	<a4j:commandButton rendered="#{idvalue == 'organisationSearch'}" action="#{presenter.resetOrganisationSearch}" value="reset" reRender="#{rerenderid},field1,value1,field2,value2,field3,value3,searchOperator" />
+	<a4j:commandButton rendered="#{idvalue == 'historySearch'}" action="#{presenter.resetHistorySearch}" value="reset" reRender="#{rerenderid},field1,value1,field2,value2,field3,value3,searchOperator" />
+	
+	Field: <h:selectOneMenu id="field2" value="#{presenter.searchBean.field2}" >
+		<f:selectItems value="#{fields}"/>
+	</h:selectOneMenu>
+	Value: <h:inputText size="20" value="#{presenter.searchBean.value2}" tabindex="0" id="value2" />
+	<h:outputText value=""/>
+	<h:outputText value=""/>
+	<h:outputText value=""/>
+	<h:outputText value=""/>
+	
+	Field: <h:selectOneMenu id="field3" value="#{presenter.searchBean.field3}" >
+		<f:selectItems value="#{fields}"/>
+	</h:selectOneMenu>
+	Value: <h:inputText size="20" value="#{presenter.searchBean.value3}" tabindex="0" id="value3" />
+	<h:outputText value=""/>
+	<h:outputText value=""/>
+	<h:outputText value=""/>
+	<h:outputText value=""/>
+</h:panelGrid>
+
+</ui:composition>
+
+</body>
+</html>

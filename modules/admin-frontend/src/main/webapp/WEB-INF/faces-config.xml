@@ -1,0 +1,309 @@
+<?xml version="1.0"?>
+<!DOCTYPE faces-config PUBLIC
+  "-//Sun Microsystems, Inc.//DTD JavaServer Faces Config 1.1//EN"
+  "http://java.sun.com/dtd/web-facesconfig_1_1.dtd">
+<faces-config>
+	<managed-bean>
+		<managed-bean-name>presenter</managed-bean-name>
+		<managed-bean-class>org.openehealth.pors.admin_frontend.guiengine.dialogpresentation.Presenter</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>default</from-outcome>
+			<to-view-id>/default.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>showHistory</from-outcome>
+			<to-view-id>/showHistory.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>showDuplicates</from-outcome>
+			<to-view-id>/showDuplicates.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>showProvider</from-outcome>
+			<to-view-id>/showProviders.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>addProvider</from-outcome>
+			<to-view-id>/addProvider.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>exportProviders</from-outcome>
+			<to-view-id>/exportProviders.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>importProviders</from-outcome>
+			<to-view-id>/importProviders.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-action>#{presenter.checkImportProviderFile}</from-action>
+			<from-outcome>success</from-outcome>
+			<to-view-id>/importProvidersFields.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-action>#{presenter.importProviders}</from-action>
+			<from-outcome>success</from-outcome>
+			<to-view-id>/importProviderStatus.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>editProvider</from-outcome>
+			<to-view-id>/editSingleProvider.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-action>#{presenter.saveProvider}</from-action>
+			<to-view-id>/editSingleProvider.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>addUser</from-outcome>
+			<to-view-id>/addUser.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>editUser</from-outcome>
+			<to-view-id>/editUser.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>showSingleProvider</from-outcome>
+			<to-view-id>/showSingleProvider.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>addOrganization</from-outcome>
+			<to-view-id>/addOrganisation.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>importOrganisations</from-outcome>
+			<to-view-id>/importOrganisations.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-action>#{presenter.checkImportOrganisationFile}</from-action>
+			<from-outcome>success</from-outcome>
+			<to-view-id>/importOrganisationsFields.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-action>#{presenter.importOrganisations}</from-action>
+			<from-outcome>success</from-outcome>
+			<to-view-id>/importOrganisationStatus.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>exportOrganisations</from-outcome>
+			<to-view-id>/exportOrganisations.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-action>#{presenter.addOrganization}</from-action>
+			<from-outcome>success</from-outcome>
+			<to-view-id>/showSingleOrganization.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-action>#{presenter.addOrganization}</from-action>
+			<from-outcome>failure</from-outcome>
+			<to-view-id>/failed.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>showSingleOrg</from-outcome>
+			<to-view-id>/showSingleOrganisation.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>showSingleDuplicate</from-outcome>
+			<to-view-id>/showSingleDuplicate.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>editOrganisation</from-outcome>
+			<to-view-id>/editSingleOrganisation.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-action>#{presenter.saveOrg}</from-action>
+			<to-view-id>/editSingleOrganisation.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>showOrganization</from-outcome>
+			<to-view-id>/showOrganisations.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>showSingleHistory</from-outcome>
+			<to-view-id>/showSingleHistory.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>configureDuplicateRecognition</from-outcome>
+			<to-view-id>/configureDuplicateRecognition.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-action>#{presenter.logout}</from-action>
+			<from-outcome>success</from-outcome>
+			<to-view-id>/showLogin.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>sessionTimeout</from-outcome>
+			<to-view-id>/showLogin.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-action>#{presenter.login}</from-action>
+			<from-outcome>success</from-outcome>
+			<to-view-id>/start.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+<!--		<navigation-case>-->
+<!--			<from-action>#{presenter.login}</from-action>-->
+<!--			<from-outcome>failure</from-outcome>-->
+<!--			<to-view-id>/showLogin.xhtml</to-view-id>-->
+<!--			<redirect />-->
+<!--		</navigation-case>-->
+	</navigation-rule>
+
+	<application>
+		<view-handler>com.sun.facelets.FaceletViewHandler</view-handler>
+		<locale-config>
+			<default-locale>en</default-locale>
+			<supported-locale>de</supported-locale>
+		</locale-config>
+		<message-bundle>messages</message-bundle>
+	</application>
+</faces-config>

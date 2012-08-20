@@ -1,0 +1,96 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:a4j="http://richfaces.org/a4j">
+	
+<body>
+
+<ui:composition template="/template.xhtml">
+<ui:define name="headerTitle">#{labels.recognition_title}</ui:define>
+<ui:define name="content">
+	<h:form rendered="#{presenter.userLoggedIn}">
+	#{labels.recognition_text}
+	<br/>
+	    <rich:tabPanel switchType="ajax">
+        	<rich:tab label="Main">
+    			<h:panelGrid columns="2">
+					<h:outputLabel value="#{labels.recognition_threshold1}:" />
+					<rich:inputNumberSlider id="lowerThreshold" value="#{presenter.duplicateConfiguration.lowerthreshold}" showToolTip="false"></rich:inputNumberSlider>
+					<h:outputLabel value="#{labels.recognition_threshold2}:" />
+					<rich:inputNumberSlider id="upperThreshold" value="#{presenter.duplicateConfiguration.upperthreshold}" showToolTip="false"></rich:inputNumberSlider>
+				</h:panelGrid>    
+        	</rich:tab>
+        	<rich:tab label="#{labels.recognition_provider}">
+        		<h:panelGrid columns="2">
+    				<h:outputLabel value="#{labels.recognition_pnameprefixw}:" />
+					<rich:inputNumberSlider id="providernameprefix" value="#{presenter.duplicateConfiguration.providerNameprefixWeight}" showToolTip="false"></rich:inputNumberSlider>
+					<h:outputLabel value="#{labels.recognition_pfirstnamew}:" />
+					<rich:inputNumberSlider id="providerfirstname" value="#{presenter.duplicateConfiguration.providerFirstnameWeight}" showToolTip="false"></rich:inputNumberSlider>
+					<h:outputLabel value="#{labels.recognition_pmiddlenamew}:" />
+					<rich:inputNumberSlider id="providermiddlename" value="#{presenter.duplicateConfiguration.providerMiddlenameWeight}" showToolTip="false"></rich:inputNumberSlider>
+					<h:outputLabel value="#{labels.recognition_pnamew}:" />
+					<rich:inputNumberSlider id="providerlastname" value="#{presenter.duplicateConfiguration.providerLastnameWeight}" showToolTip="false"></rich:inputNumberSlider>
+					<h:outputLabel value="#{labels.recognition_pnamesuffixw}:" />
+					<rich:inputNumberSlider id="providernamesuffix" value="#{presenter.duplicateConfiguration.providerNamesuffixWeight}" showToolTip="false"></rich:inputNumberSlider>
+					<h:outputLabel value="#{labels.recognition_ptelw}:" />
+					<rich:inputNumberSlider id="providertelephone" value="#{presenter.duplicateConfiguration.providerTelephoneWeight}" showToolTip="false"></rich:inputNumberSlider>
+					<h:outputLabel value="#{labels.recognition_pfaxw}:" />
+					<rich:inputNumberSlider id="providerfax" value="#{presenter.duplicateConfiguration.providerFaxWeight}" showToolTip="false"></rich:inputNumberSlider>
+					<h:outputLabel value="#{labels.recognition_pemailw}:" />
+					<rich:inputNumberSlider id="provideremail" value="#{presenter.duplicateConfiguration.providerEmailWeight}" showToolTip="false"></rich:inputNumberSlider>
+					<h:outputLabel value="#{labels.recognition_pgenderw}:" />
+					<rich:inputNumberSlider id="providergendercode" value="#{presenter.duplicateConfiguration.providerGenderCodeWeight}" showToolTip="false"></rich:inputNumberSlider>
+					<h:outputLabel value="#{labels.recognition_pspecialw}:" />
+					<rich:inputNumberSlider id="providerspecialisation" value="#{presenter.duplicateConfiguration.providerSpecialisationWeight}" showToolTip="false"></rich:inputNumberSlider>
+					<h:outputLabel value="#{labels.recognition_poidw}:" />
+					<rich:inputNumberSlider id="provideroid" value="#{presenter.duplicateConfiguration.providerOIDWeight}" showToolTip="false"></rich:inputNumberSlider>
+					<h:outputLabel value="#{labels.recognition_pbirthw}:" />
+					<rich:inputNumberSlider id="providerbirthday" value="#{presenter.duplicateConfiguration.providerBirthdayWeight}" showToolTip="false"></rich:inputNumberSlider>
+    				<h:outputLabel value="#{labels.recognition_paddw}:" />
+					<rich:inputNumberSlider id="provideraddress" value="#{presenter.duplicateConfiguration.providerAddressWeight}" showToolTip="false"></rich:inputNumberSlider>
+    			</h:panelGrid>
+        	</rich:tab>
+    	    <rich:tab label="#{labels.recognition_organisation}">
+    	    	<h:panelGrid columns="2">
+    				<h:outputLabel value="#{labels.recognition_onamew}:" />
+					<rich:inputNumberSlider id="organisationname" value="#{presenter.duplicateConfiguration.organisationNameWeight}" showToolTip="false"></rich:inputNumberSlider>
+					<h:outputLabel value="#{labels.recognition_osecondnamew}:" />
+					<rich:inputNumberSlider id="organisationsecondname" value="#{presenter.duplicateConfiguration.organisationSecondnameWeight}" showToolTip="false"></rich:inputNumberSlider>
+					<h:outputLabel value="#{labels.recognition_ptelw}:" />
+					<rich:inputNumberSlider id="organisationtelephon" value="#{presenter.duplicateConfiguration.organisationTelephoneWeight}" showToolTip="false"></rich:inputNumberSlider>
+					<h:outputLabel value="#{labels.recognition_pfaxw}:" />
+					<rich:inputNumberSlider id="organisationfax" value="#{presenter.duplicateConfiguration.organisationFaxWeight}" showToolTip="false"></rich:inputNumberSlider>
+					<h:outputLabel value="#{labels.recognition_pemailw}:" />
+					<rich:inputNumberSlider id="organisationemail" value="#{presenter.duplicateConfiguration.organisationEmailWeight}" showToolTip="false"></rich:inputNumberSlider>
+					<h:outputLabel value="#{labels.recognition_paddw}:" />
+					<rich:inputNumberSlider id="organisationaddress" value="#{presenter.duplicateConfiguration.organisationAddressWeight}" showToolTip="false"></rich:inputNumberSlider>
+    			</h:panelGrid>
+        	</rich:tab>
+    		<rich:tab label="#{labels.recognition_address}">
+    		  	<h:panelGrid columns="2">
+    				<h:outputLabel value="#{labels.recognition_astreetw}:" />
+					<rich:inputNumberSlider id="addressstreet" value="#{presenter.duplicateConfiguration.addressStreetWeight}" showToolTip="false"></rich:inputNumberSlider>
+					<h:outputLabel value="#{labels.recognition_ahousew}:" />
+					<rich:inputNumberSlider id="addresshousenumber" value="#{presenter.duplicateConfiguration.addressHousenumberWeight}" showToolTip="false"></rich:inputNumberSlider>
+					<h:outputLabel value="#{labels.recognition_azipw}:" />
+					<rich:inputNumberSlider id="addresszipcode" value="#{presenter.duplicateConfiguration.addressZipCodeWeight}" showToolTip="false"></rich:inputNumberSlider>
+					<h:outputLabel value="#{labels.recognition_acityw}:" />
+					<rich:inputNumberSlider id="addresscity" value="#{presenter.duplicateConfiguration.addressCityWeight}" showToolTip="false"></rich:inputNumberSlider>
+					<h:outputLabel value="#{labels.recognition_acountryw}:" />
+					<rich:inputNumberSlider id="addresscountry" value="#{presenter.duplicateConfiguration.addressCountryWeight}" showToolTip="false"></rich:inputNumberSlider>
+					<h:outputLabel value="#{labels.recognition_astatew}:" />
+					<rich:inputNumberSlider id="addressstate" value="#{presenter.duplicateConfiguration.addressStateWeight}" showToolTip="false"></rich:inputNumberSlider>
+    			</h:panelGrid>
+        	</rich:tab>   	
+    	</rich:tabPanel>
+		<h:outputLabel value="" />
+		<a4j:commandButton align="right" action="#{presenter.updateDuplicateConfiguration}" value="#{labels.recognition_button}" />
+	</h:form>
+</ui:define>
+</ui:composition>
+
+</body>
+</html>

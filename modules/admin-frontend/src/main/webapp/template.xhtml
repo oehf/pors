@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:a4j="http://richfaces.org/a4j">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+<title><h:outputText value="#{labels.title_prefix}"/> (<ui:insert name="headerTitle">Default Title</ui:insert>)</title>
+<link rel="shortcut icon" href="img/logo.ico" />
+<base
+	href="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.requestContextPath}/" />
+<link rel="stylesheet" type="text/css" href="resources/css/style.css" />
+</head>
+
+<body>
+
+<div id="outer">
+
+<div id="header">
+	<img id="logoimg" src="img/logo.png" />Provider Organisation Registry Service
+</div>
+
+<div id="title">
+	<ui:insert name="headerTitle">Default Title</ui:insert>
+</div>
+
+<f:loadBundle basename="messages" var="labels" />
+
+<div id="menu">
+	<rich:panelMenu style="width:180px" mode="ajax" iconExpandedGroup="disc"
+		iconCollapsedGroup="disc" iconExpandedTopGroup="chevronUp"
+		iconGroupTopPosition="right" iconCollapsedTopGroup="chevronDown"
+		rendered="#{presenter.userLoggedIn}">
+		<rich:panelMenuGroup label="#{labels.menu_provider}" expanded="true" 
+		rendered="#{presenter.permissions.createProvider or presenter.permissions.readProvider}">
+			<rich:panelMenuItem styleClass="menuItem" label="#{labels.menu_add}"
+				action="#{presenter.resetProvider}" immediate="true"
+				rendered="#{presenter.permissions.createProvider}">
+				<a4j:support event="oncomplete" action="addProvider" />
+			</rich:panelMenuItem>
+			<rich:panelMenuItem styleClass="menuItem" label="#{labels.menu_show}"
+				action="#{presenter.loadShowProvider}" immediate="true"
+				rendered="#{presenter.permissions.readProvider}">
+				<a4j:support event="oncomplete" action="showProvider" />
+			</rich:panelMenuItem>
+			<rich:panelMenuItem styleClass="menuItem" label="#{labels.menu_import}"
+				action="#{presenter.loadImportProvider}" immediate="true" 
+				rendered="#{presenter.permissions.createProvider}">
+				<a4j:support event="oncomplete" action="importProviders" />
+			</rich:panelMenuItem>
+			<rich:panelMenuItem styleClass="menuItem" label="#{labels.menu_export}"
+				action="exportProviders" immediate="true" rendered="#{presenter.permissions.readProvider}">
+			</rich:panelMenuItem>
+		</rich:panelMenuGroup>
+		<rich:panelMenuGroup label="#{labels.menu_organisation}" expanded="true" 
+		rendered="#{presenter.permissions.createOrganisation or presenter.permissions.readOrganisation}">
+			<rich:panelMenuItem styleClass="menuItem" label="#{labels.menu_add}"
+				action="#{presenter.resetOrg}" immediate="true"
+				rendered="#{presenter.permissions.createOrganisation}">
+				<a4j:support event="oncomplete" action="addOrganization" />
+			</rich:panelMenuItem>
+			<rich:panelMenuItem styleClass="menuItem" label="#{labels.menu_show}"
+				action="#{presenter.loadShowOrganisation}" immediate="true"
+				rendered="#{presenter.permissions.readOrganisation}">
+				<a4j:support event="oncomplete" action="showOrganization" />
+			</rich:panelMenuItem>
+			<rich:panelMenuItem styleClass="menuItem" label="#{labels.menu_import}"
+				action="#{presenter.loadImportOrganisation}" immediate="true"
+				rendered="#{presenter.permissions.createOrganisation}">
+				<a4j:support event="oncomplete" action="importOrganisations" />
+			</rich:panelMenuItem>
+			<rich:panelMenuItem styleClass="menuItem" label="#{labels.menu_export}"
+				action="exportOrganisations" immediate="true" rendered="#{presenter.permissions.readOrganisation}">
+			</rich:panelMenuItem>
+		</rich:panelMenuGroup>
+		<rich:panelMenuGroup label="#{labels.menu_history}" expanded="true" 
+		rendered="#{presenter.permissions.readLogging}">
+			<rich:panelMenuItem styleClass="menuItem" label="#{labels.menu_show}"
+				action="#{presenter.loadShowHistory}" immediate="true"
+				rendered="#{presenter.permissions.readLogging}">
+				<a4j:support event="oncomplete" action="showHistory" />
+			</rich:panelMenuItem>
+		</rich:panelMenuGroup>
+		<rich:panelMenuGroup label="#{labels.menu_administration}" expanded="true" 
+		rendered="#{presenter.permissions.readDuplicate}">
+			<rich:panelMenuItem styleClass="menuItem" label="#{labels.menu_duplicates}"
+				action="showDuplicates" immediate="true" rendered="#{presenter.permissions.readDuplicate}">
+			</rich:panelMenuItem>
+		</rich:panelMenuGroup>
+		<rich:panelMenuGroup label="#{labels.menu_user_management}" expanded="true" 
+		rendered="#{presenter.permissions.configureUser}">
+			<rich:panelMenuItem styleClass="menuItem" label="#{labels.menu_add_user}"
+				action="#{presenter.loadAddUser}" immediate="true" rendered="#{presenter.permissions.configureUser}">
+				<a4j:support event="oncomplete" action="addUser" />
+			</rich:panelMenuItem>
+			<rich:panelMenuItem styleClass="menuItem" label="#{labels.menu_edit_user}"
+				action="#{presenter.loadEditUser}" immediate="true" rendered="#{presenter.permissions.configureUser}">
+				<a4j:support event="oncomplete" action="editUser" />
+			</rich:panelMenuItem>
+		</rich:panelMenuGroup>
+		<rich:panelMenuGroup label="#{labels.menu_configuration}" expanded="true" 
+		rendered="#{presenter.permissions.configureDuplicate}">
+			<rich:panelMenuItem styleClass="menuItem"
+				label="#{labels.menu_duplicate_recognition}"
+				action="configureDuplicateRecognition"
+				immediate="true" rendered="#{presenter.permissions.configureDuplicate}">
+			</rich:panelMenuItem>
+		</rich:panelMenuGroup>
+		<rich:panelMenuGroup label="#{labels.menu_session}" expanded="true">
+			<rich:panelMenuItem styleClass="menuItem" label="#{labels.menu_logout}"
+				action="#{presenter.logout}" immediate="true">
+			</rich:panelMenuItem>
+		</rich:panelMenuGroup>
+	</rich:panelMenu>
+</div>
+
+<h:outputText rendered="#{!presenter.userLoggedIn}" style="display:none" value="#{presenter.redirectionToLogin}"/>
+
+<div id="content">
+	<h:outputText id="dummyMessage" value=""/>
+	<rich:messages id="messagesBox" for="dummyMessage" layout="table" tooltip="true" showDetail="true" showSummary="true" style="width: 900px; border: 5px solid #8b8989; margin: 10px; padding: 10px;">
+		<f:facet name="errorMarker">
+            <h:graphicImage url="img/badge-circle-cross-24.png"/>
+      	</f:facet>
+      	<f:facet name="infoMarker">
+            <h:graphicImage url="img/badge-square-check-24.png"/>
+      	</f:facet>
+	</rich:messages>
+	<ui:insert name="content"/>
+</div>
+
+</div>
+
+</body>
+</html>

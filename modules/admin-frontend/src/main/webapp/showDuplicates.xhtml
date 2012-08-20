@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:a4j="http://richfaces.org/a4j">
+<body>
+
+<ui:composition template="/template.xhtml">
+<ui:define name="headerTitle">#{labels.showdupl_title}</ui:define>
+<ui:define name="content">
+	<h:form rendered="#{presenter.userLoggedIn}">
+	
+	<rich:spacer height="10" />
+	<rich:datascroller align="center" for="duplicateList" id="sc1"/>
+    <rich:spacer height="10" />
+	<rich:dataTable value="#{presenter.duplicateDataModel}" var="dataItem"
+				id="duplicateList" rows="10" width="100%">
+		<f:facet name="header">
+			<h:outputText value="#{labels.showdupl_duplicates}" />
+		</f:facet>
+				
+		<rich:column label="Date" width="23%">
+			<f:facet name="header">
+				<h:outputText value="#{labels.showdupl_date}" />
+			</f:facet>
+			<h:outputText value="#{dataItem.logDateString}" />
+		</rich:column>
+				
+		<rich:column label="Time" width="23%">
+			<f:facet name="header">
+				<h:outputText value="#{labels.showdupl_time}" />
+			</f:facet>
+			<h:outputText value="#{dataItem.logTimeString}" />
+		</rich:column>
+				
+		<rich:column label="Domain" width="23%">
+			<f:facet name="header">
+				<h:outputText value="#{labels.showdupl_domain}" />
+			</f:facet>
+			<h:outputText value="#{dataItem.domain}" />
+		</rich:column>
+				
+		<rich:column label="Percentage" width="23%">
+			<f:facet name="header">
+				<h:outputText value="#{labels.showdupl_percentage}" />
+			</f:facet>
+			<h:outputText value="#{dataItem.percentage}%" />
+		</rich:column>
+				
+		<rich:column width="8%" label="detail buttons" >
+			<f:facet name="header">
+				<h:outputText value="" />
+			</f:facet>
+			<a4j:commandButton id="detailDuplicate" action="#{presenter.showSingleDuplicate(dataItem)}" value="#{labels.showdupl_details}">
+				<a4j:support event="oncomplete" action="showSingleDuplicate" />
+			</a4j:commandButton>
+		</rich:column>
+				
+	</rich:dataTable>
+	</h:form>
+</ui:define>
+</ui:composition>
+
+</body>
+</html>

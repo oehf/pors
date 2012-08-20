@@ -1,0 +1,729 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:a4j="http://richfaces.org/a4j">
+
+<body>
+
+<ui:composition template="/template.xhtml">
+	<ui:define name="headerTitle">#{labels.showsingledupl_title}</ui:define>
+	<ui:define name="content" rendered="#{presenter.userLoggedIn}">
+		<h3>#{labels.showsingledupl_details}</h3>
+		<h:outputText value="#{labels.showsingledupl_strategy}:" />
+		
+		<h:form>
+		<h:panelGrid width="100%" columns="2" id="radioAndSolvePanel">
+			<h:selectOneRadio id="sor"
+				value="#{presenter.duplicateStrategy}"
+				title="#{labels.showsingledupl_strategy}" layout="pageDirection"
+				required="true" requiredMessage="#{labels.showsingledupl_message}">
+				<f:selectItem id="si1" itemLabel="#{labels.showsingledupl_s1}"
+					itemValue="1" />
+				<f:selectItem id="si2" itemLabel="#{labels.showsingledupl_s2}"
+					itemValue="2" />
+				<f:selectItem id="si3" itemLabel="#{labels.showsingledupl_s3}"
+					itemValue="3" />
+				<f:selectItem id="si4" itemLabel="#{labels.showsingledupl_s4}" itemValue="4" />
+			</h:selectOneRadio>
+			<h:outputText value=""></h:outputText>
+			<rich:message for="sor" />
+			
+			<a4j:commandButton id="solve" action="#{presenter.solve}"
+				value="#{labels.showsingledupl_buttonsolve}">
+				<a4j:support event="oncomplete" action="showDuplicates" />
+			</a4j:commandButton>
+			</h:panelGrid>
+		</h:form>
+		
+		<br />
+
+		<rich:panel id="panelOrganisation"
+			rendered="#{null!=presenter.duplicateDetails.duplicateDetail.organisation1}">
+			<h:panelGrid width="100%" columns="4" id="showorganisationddpanel">
+				<h:outputText value="" />
+				<h:outputText style="font-weight:bold" value="#{labels.showsingledupl_org1}" />
+				<h:outputText style="font-weight:bold" value="#{labels.showsingledupl_org2}" />
+				<h:outputText style="font-weight:bold" value="#{labels.showsingledupl_orgmerged}" />
+
+				<h:outputText style="font-weight:bold" value="#{labels.showsingledupl_oid}" />
+				<h:outputText
+					value="#{presenter.duplicateDetails.duplicateDetail.organisation1.oid}" />
+				<h:outputText
+					value="#{presenter.duplicateDetails.duplicateDetail.organisation2.oid}" />
+
+				<h:selectOneMenu style="width:70%" id="selecto1"
+					value="#{presenter.duplicateDetails.mergedOrganisation.oid}">
+					<f:selectItems
+						value="#{presenter.duplicateDetails.selectOrganisationOid}" />
+				</h:selectOneMenu>
+
+				<h:outputText style="font-weight:bold" value="#{labels.showsingledupl_establish}" />
+				<h:outputText
+					value="#{presenter.duplicateDetails.duplicateDetail.organisation1.establishmentId}" />
+				<h:outputText
+					value="#{presenter.duplicateDetails.duplicateDetail.organisation2.establishmentId}" />
+
+				<h:selectOneMenu style="width:70%" id="selecto2"
+					value="#{presenter.duplicateDetails.mergedOrganisation.establishmentId}">
+					<f:selectItems
+						value="#{presenter.duplicateDetails.selectOrganisationEstablishmentId}" />
+				</h:selectOneMenu>
+
+				<h:outputText style="font-weight:bold" value="#{labels.showsingledupl_name}" />
+				<h:outputText
+					value="#{presenter.duplicateDetails.duplicateDetail.organisation1.name}" />
+				<h:outputText
+					value="#{presenter.duplicateDetails.duplicateDetail.organisation2.name}" />
+
+				<h:selectOneMenu style="width:70%" id="selecto3"
+					value="#{presenter.duplicateDetails.mergedOrganisation.name}">
+					<f:selectItems
+						value="#{presenter.duplicateDetails.selectOrganisationName}" />
+				</h:selectOneMenu>
+
+				<h:outputText style="font-weight:bold" value="#{labels.showsingledupl_sname}" />
+				<h:outputText
+					value="#{presenter.duplicateDetails.duplicateDetail.organisation1.secondName}" />
+				<h:outputText
+					value="#{presenter.duplicateDetails.duplicateDetail.organisation2.secondName}" />
+
+				<h:selectOneMenu style="width:70%" id="selecto4"
+					value="#{presenter.duplicateDetails.mergedOrganisation.secondName}">
+					<f:selectItems
+						value="#{presenter.duplicateDetails.selectOrganisationSecondName}" />
+				</h:selectOneMenu>
+
+				<h:outputText style="font-weight:bold" value="#{labels.showsingledupl_description}" />
+				<h:outputText
+					value="#{presenter.duplicateDetails.duplicateDetail.organisation1.description}" />
+				<h:outputText
+					value="#{presenter.duplicateDetails.duplicateDetail.organisation2.description}" />
+
+				<h:selectOneMenu style="width:70%" id="selecto5"
+					value="#{presenter.duplicateDetails.mergedOrganisation.description}">
+					<f:selectItems
+						value="#{presenter.duplicateDetails.selectOrganisationDescription}" />
+				</h:selectOneMenu>
+
+				<h:outputText style="font-weight:bold" value="#{labels.showsingledupl_email}" />
+				<h:outputText
+					value="#{presenter.duplicateDetails.duplicateDetail.organisation1.email}" />
+				<h:outputText
+					value="#{presenter.duplicateDetails.duplicateDetail.organisation2.email}" />
+
+				<h:selectOneMenu style="width:70%" id="selecto6"
+					value="#{presenter.duplicateDetails.mergedOrganisation.email}">
+					<f:selectItems
+						value="#{presenter.duplicateDetails.selectOrganisationEmail}" />
+				</h:selectOneMenu>
+
+				<h:outputText style="font-weight:bold" value="#{labels.showsingledupl_fax}" />
+				<h:outputText
+					value="#{presenter.duplicateDetails.duplicateDetail.organisation1.fax}" />
+				<h:outputText
+					value="#{presenter.duplicateDetails.duplicateDetail.organisation2.fax}" />
+
+				<h:selectOneMenu style="width:70%" id="selecto7"
+					value="#{presenter.duplicateDetails.mergedOrganisation.fax}">
+					<f:selectItems
+						value="#{presenter.duplicateDetails.selectOrganisationFax}" />
+				</h:selectOneMenu>
+
+				<h:outputText style="font-weight:bold" value="#{labels.showsingledupl_telephone}" />
+				<h:outputText
+					value="#{presenter.duplicateDetails.duplicateDetail.organisation1.telephone}" />
+				<h:outputText
+					value="#{presenter.duplicateDetails.duplicateDetail.organisation2.telephone}" />
+
+				<h:selectOneMenu style="width:70%" id="selecto8"
+					value="#{presenter.duplicateDetails.mergedOrganisation.telephone}">
+					<f:selectItems
+						value="#{presenter.duplicateDetails.selectOrganisationTelephone}" />
+				</h:selectOneMenu>
+
+				<h:outputText style="font-weight:bold" value="#{labels.showsingledupl_ddate}" />
+				<h:outputText
+					value="#{presenter.duplicateDetails.duplicateDetail.organisation1.deactivationDate}" />
+				<h:outputText
+					value="#{presenter.duplicateDetails.duplicateDetail.organisation2.deactivationDate}" />
+
+				<h:selectOneMenu style="width:70%" id="selecto9"
+					value="#{presenter.duplicateDetails.mergedOrganisation.deactivationDate}">
+					<f:selectItems
+						value="#{presenter.duplicateDetails.selectOrganisationDeactivationDate}" />
+				</h:selectOneMenu>
+
+				<h:outputText style="font-weight:bold"
+					value="#{labels.showsingledupl_dcode}" />
+				<h:outputText
+					value="#{presenter.duplicateDetails.duplicateDetail.organisation1.deactivationReasonCode}" />
+				<h:outputText
+					value="#{presenter.duplicateDetails.duplicateDetail.organisation2.deactivationReasonCode}" />
+
+				<h:selectOneMenu style="width:70%" id="selecto10"
+					value="#{presenter.duplicateDetails.mergedOrganisation.deactivationReasonCode}">
+					<f:selectItems
+						value="#{presenter.duplicateDetails.selectOrganisationDeactivationReasonCode}" />
+				</h:selectOneMenu>
+
+				<h:outputText style="font-weight:bold" value="#{labels.showsingledupl_rdate}" />
+				<h:outputText
+					value="#{presenter.duplicateDetails.duplicateDetail.organisation1.reactivationDate}" />
+				<h:outputText
+					value="#{presenter.duplicateDetails.duplicateDetail.organisation2.reactivationDate}" />
+
+				<h:selectOneMenu style="width:70%" id="selecto11"
+					value="#{presenter.duplicateDetails.mergedOrganisation.reactivationDate}">
+					<f:selectItems
+						value="#{presenter.duplicateDetails.selectOrganisationReactivationDate}" />
+				</h:selectOneMenu>
+
+				<h:outputText style="font-weight:bold"
+					value="#{labels.showsingledupl_rcode}" />
+				<h:outputText
+					value="#{presenter.duplicateDetails.duplicateDetail.organisation1.reactivationReasonCode}" />
+				<h:outputText
+					value="#{presenter.duplicateDetails.duplicateDetail.organisation2.reactivationReasonCode}" />
+
+				<h:selectOneMenu style="width:70%" id="selecto12"
+					value="#{presenter.duplicateDetails.mergedOrganisation.reactivationReasonCode}">
+					<f:selectItems
+						value="#{presenter.duplicateDetails.selectOrganisationReactivationReasonCode}" />
+				</h:selectOneMenu>
+
+			</h:panelGrid>
+			<rich:dataTable id="selectOLocalIds"
+				value="#{presenter.duplicateDetails.organisationLocalIds}"
+				var="localID" width="100%">
+				<f:facet name="header">
+					<h:outputText value="#{labels.showsingledupl_localids}" />
+				</f:facet>
+				<rich:column>
+					<f:facet name="header">#{labels.showsingledupl_organisation1}</f:facet>
+					<h:outputText value="X"
+						rendered="#{presenter.duplicateDetails.lidListContainsLid(presenter.duplicateDetails.duplicateDetail.organisation1.localId,localID)}"></h:outputText>
+				</rich:column>
+				<rich:column>
+					<f:facet name="header">#{labels.showsingledupl_organisation2}</f:facet>
+					<h:outputText value="X"
+						rendered="#{presenter.duplicateDetails.lidListContainsLid(presenter.duplicateDetails.duplicateDetail.organisation2.localId,localID)}"></h:outputText>
+				</rich:column>
+				<rich:column>
+					<f:facet name="header">#{labels.showsingledupl_organisationmerged}</f:facet>
+					<h:selectBooleanCheckbox id="selectOrgLocalId"
+						value="#{presenter.duplicateDetails.lidListContainsLid(presenter.duplicateDetails.selectLocalIds,localID)}">
+						<a4j:support event="onchange"
+							action="#{presenter.duplicateDetails.mergeLocalId(localID)}" />
+					</h:selectBooleanCheckbox>
+				</rich:column>
+				<rich:column width="30%">
+					<f:facet name="header">#{labels.showsingledupl_localid}</f:facet>
+					<h:outputText value="#{localID.localId}"></h:outputText>
+				</rich:column>
+				<rich:column width="30%">
+					<f:facet name="header">#{labels.showsingledupl_facility}</f:facet>
+					<h:outputText value="#{localID.facility}"></h:outputText>
+				</rich:column>
+				<rich:column width="30%">
+					<f:facet name="header">#{labels.showsingledupl_application}</f:facet>
+					<h:outputText value="#{localID.application}"></h:outputText>
+				</rich:column>
+			</rich:dataTable>
+
+			<rich:dataTable id="selectOAddresses"
+				value="#{presenter.duplicateDetails.providerAddresses}"
+				var="address" width="100%">
+				<f:facet name="header">
+					<h:outputText value="#{labels.showsingledupl_addresses}" />
+				</f:facet>
+				<rich:column>
+					<f:facet name="header">#{labes.showsingledupl_organisation1}</f:facet>
+					<h:outputText value="X"
+						rendered="#{presenter.duplicateDetails.addListContainsAdd(presenter.duplicateDetails.duplicateDetail.organisation1.addresses,address)}"></h:outputText>
+				</rich:column>
+				<rich:column>
+					<f:facet name="header">#{labels.showsingledupl_organisation2}</f:facet>
+					<h:outputText value="X"
+						rendered="#{presenter.duplicateDetails.addListContainsAdd(presenter.duplicateDetails.duplicateDetail.organisation2.addresses,address)}"></h:outputText>
+				</rich:column>
+				<rich:column>
+					<f:facet name="header">#{labels.showsingledupl_organisationmerged}</f:facet>
+					<h:selectBooleanCheckbox id="selectProLocalId"
+						value="#{presenter.duplicateDetails.addListContainsAdd(presenter.duplicateDetails.selectAddresses,address)}">
+						<a4j:support event="onchange"
+							action="#{presenter.duplicateDetails.mergeAddress(address)}" />
+					</h:selectBooleanCheckbox>
+				</rich:column>
+				<rich:column width="13%">
+					<f:facet name="header">#{labels.showsingledupl_street}</f:facet>
+					<h:outputText value="#{address.street}"></h:outputText>
+				</rich:column>
+				<rich:column width="13%">
+					<f:facet name="header">#{labels.showsingledupl_house}</f:facet>
+					<h:outputText value="#{address.houseNumber}"></h:outputText>
+				</rich:column>
+				<rich:column width="13%">
+					<f:facet name="header">#{labels.showsingledupl_zip}</f:facet>
+					<h:outputText value="#{address.zipCode}"></h:outputText>
+				</rich:column>
+				<rich:column width="13%">
+					<f:facet name="header">#{labels.showsingledupl_city}</f:facet>
+					<h:outputText value="#{address.city}"></h:outputText>
+				</rich:column>
+				<rich:column width="13%">
+					<f:facet name="header">#{labels.showsingledupl_state}</f:facet>
+					<h:outputText value="#{address.state}"></h:outputText>
+				</rich:column>
+				<rich:column width="13%">
+					<f:facet name="header">#{labels.showsingledupl_country}</f:facet>
+					<h:outputText value="#{address.country}"></h:outputText>
+				</rich:column>
+				<rich:column width="13%">
+					<f:facet name="header">#{labels.showsingledupl_additional}</f:facet>
+					<h:outputText value="#{address.additional}"></h:outputText>
+				</rich:column>
+			</rich:dataTable>
+		</rich:panel>
+
+
+		<rich:panel id="panelProvider"
+			rendered="#{null!=presenter.duplicateDetails.duplicateDetail.provider1}">
+			<h:panelGrid width="100%" columns="4" id="showproviderddpanel"
+				rendered="#{null!=presenter.duplicateDetails.duplicateDetail.provider1}">
+				<h:outputText value="" />
+				<h:outputText style="font-weight:bold" value="#{labels.showsingledupl_pro1}" />
+				<h:outputText style="font-weight:bold" value="#{labels.showsingledupl_pro2}" />
+				<h:outputText style="font-weight:bold" value="#{labels.showsingledupl_promerged}" />
+
+				<h:outputText style="font-weight:bold" value="#{labels.showsingledupl_lanr}" />
+				<h:outputText
+					value="#{presenter.duplicateDetails.duplicateDetail.provider1.lanr}" />
+				<h:outputText
+					value="#{presenter.duplicateDetails.duplicateDetail.provider2.lanr}" />
+
+				<h:selectOneMenu style="width:70%" id="selectp1"
+					value="#{presenter.duplicateDetails.mergedProvider.lanr}">
+					<f:selectItems
+						value="#{presenter.duplicateDetails.selectProviderLanr}" />
+				</h:selectOneMenu>
+
+				<h:outputText style="font-weight:bold" value="#{labels.showsingledupl_oid}" />
+				<h:outputText
+					value="#{presenter.duplicateDetails.duplicateDetail.provider1.oid}" />
+				<h:outputText
+					value="#{presenter.duplicateDetails.duplicateDetail.provider2.oid}" />
+
+				<h:selectOneMenu style="width:70%" id="selectp2"
+					value="#{presenter.duplicateDetails.mergedProvider.oid}">
+					<f:selectItems
+						value="#{presenter.duplicateDetails.selectProviderOid}" />
+				</h:selectOneMenu>
+
+				<h:outputText style="font-weight:bold" value="#{labels.showsingledupl_firstname}" />
+				<h:outputText
+					value="#{presenter.duplicateDetails.duplicateDetail.provider1.firstname}" />
+				<h:outputText
+					value="#{presenter.duplicateDetails.duplicateDetail.provider2.firstname}" />
+				<h:selectOneMenu style="width:70%" id="selectp3"
+					value="#{presenter.duplicateDetails.mergedProvider.firstname}">
+					<f:selectItems
+						value="#{presenter.duplicateDetails.selectProviderFirstname}" />
+				</h:selectOneMenu>
+
+				<h:outputText style="font-weight:bold" value="#{labels.showsingledupl_lastname}" />
+				<h:outputText
+					value="#{presenter.duplicateDetails.duplicateDetail.provider1.lastname}" />
+				<h:outputText
+					value="#{presenter.duplicateDetails.duplicateDetail.provider2.lastname}" />
+
+				<h:selectOneMenu style="width:70%" id="selectp4"
+					value="#{presenter.duplicateDetails.mergedProvider.lastname}">
+					<f:selectItems
+						value="#{presenter.duplicateDetails.selectProviderLastname}" />
+				</h:selectOneMenu>
+
+				<h:outputText style="font-weight:bold" value="#{labels.showsingledupl_middlename}" />
+				<h:outputText
+					value="#{presenter.duplicateDetails.duplicateDetail.provider1.middleName}" />
+				<h:outputText
+					value="#{presenter.duplicateDetails.duplicateDetail.provider2.middleName}" />
+
+				<h:selectOneMenu style="width:70%" id="selectp5"
+					value="#{presenter.duplicateDetails.mergedProvider.middleName}">
+					<f:selectItems
+						value="#{presenter.duplicateDetails.selectProviderMiddlename}" />
+				</h:selectOneMenu>
+
+				<h:outputText style="font-weight:bold" value="#{labels.showsingledupl_nprefix}" />
+				<h:outputText
+					value="#{presenter.duplicateDetails.duplicateDetail.provider1.namePrefix}" />
+				<h:outputText
+					value="#{presenter.duplicateDetails.duplicateDetail.provider2.namePrefix}" />
+
+				<h:selectOneMenu style="width:70%" id="selectp6"
+					value="#{presenter.duplicateDetails.mergedProvider.namePrefix}">
+					<f:selectItems
+						value="#{presenter.duplicateDetails.selectProviderNameprefix}" />
+				</h:selectOneMenu>
+
+				<h:outputText style="font-weight:bold" value="#{labels.showsingledupl_nsuffix}" />
+				<h:outputText
+					value="#{presenter.duplicateDetails.duplicateDetail.provider1.nameSuffix}" />
+				<h:outputText
+					value="#{presenter.duplicateDetails.duplicateDetail.provider2.nameSuffix}" />
+
+				<h:selectOneMenu style="width:70%" id="selectp7"
+					value="#{presenter.duplicateDetails.mergedProvider.nameSuffix}">
+					<f:selectItems
+						value="#{presenter.duplicateDetails.selectProviderNamesuffix}" />
+				</h:selectOneMenu>
+
+				<h:outputText style="font-weight:bold" value="#{labels.showsingledupl_gender}" />
+				<h:outputText
+					value="#{presenter.duplicateDetails.duplicateDetail.provider1.genderCode}" />
+				<h:outputText
+					value="#{presenter.duplicateDetails.duplicateDetail.provider2.genderCode}" />
+
+				<h:selectOneMenu style="width:70%" id="selectp8"
+					value="#{presenter.duplicateDetails.mergedProvider.genderCode}">
+					<f:selectItems
+						value="#{presenter.duplicateDetails.selectProviderGendercode}" />
+				</h:selectOneMenu>
+
+				<h:outputText style="font-weight:bold" value="#{labels.showsingledupl_special}" />
+				<h:outputText
+					value="#{presenter.duplicateDetails.duplicateDetail.provider1.specialisation}" />
+				<h:outputText
+					value="#{presenter.duplicateDetails.duplicateDetail.provider2.specialisation}" />
+
+				<h:selectOneMenu style="width:70%" id="selectp9"
+					value="#{presenter.duplicateDetails.mergedProvider.specialisation}">
+					<f:selectItems
+						value="#{presenter.duplicateDetails.selectProviderSpecialisation}" />
+				</h:selectOneMenu>
+
+				<h:outputText style="font-weight:bold" value="#{labels.showsingledupl_birthday}" />
+				<h:outputText
+					value="#{presenter.duplicateDetails.duplicateDetail.provider1.birthday}" />
+				<h:outputText
+					value="#{presenter.duplicateDetails.duplicateDetail.provider2.birthday}" />
+
+				<h:selectOneMenu style="width:70%" id="selectp10"
+					value="#{presenter.duplicateDetails.mergedProvider.birthday}">
+					<f:selectItems
+						value="#{presenter.duplicateDetails.selectProviderBirthday}" />
+				</h:selectOneMenu>
+
+				<h:outputText style="font-weight:bold" value="#{labels.showsingledupl_email}" />
+				<h:outputText
+					value="#{presenter.duplicateDetails.duplicateDetail.provider1.email}" />
+				<h:outputText
+					value="#{presenter.duplicateDetails.duplicateDetail.provider2.email}" />
+				<h:selectOneMenu style="width:70%" id="selectp11"
+					value="#{presenter.duplicateDetails.mergedProvider.email}">
+					<f:selectItems
+						value="#{presenter.duplicateDetails.selectProviderEmail}" />
+				</h:selectOneMenu>
+
+				<h:outputText style="font-weight:bold" value="#{labels.showsingledupl_telephone}" />
+				<h:outputText
+					value="#{presenter.duplicateDetails.duplicateDetail.provider1.telephone}" />
+				<h:outputText
+					value="#{presenter.duplicateDetails.duplicateDetail.provider2.telephone}" />
+				<h:selectOneMenu style="width:70%" id="selectp12"
+					value="#{presenter.duplicateDetails.mergedProvider.telephone}">
+					<f:selectItems
+						value="#{presenter.duplicateDetails.selectProviderTelephone}" />
+				</h:selectOneMenu>
+
+				<h:outputText style="font-weight:bold" value="#{labels.showsingledupl_fax}" />
+				<h:outputText
+					value="#{presenter.duplicateDetails.duplicateDetail.provider1.fax}" />
+				<h:outputText
+					value="#{presenter.duplicateDetails.duplicateDetail.provider2.fax}" />
+				<h:selectOneMenu style="width:70%" id="selectp13"
+					value="#{presenter.duplicateDetails.mergedProvider.fax}">
+					<f:selectItems
+						value="#{presenter.duplicateDetails.selectProviderFax}" />
+				</h:selectOneMenu>
+
+				<h:outputText style="font-weight:bold" value="#{labels.showsingledupl_ddate}" />
+				<h:outputText
+					value="#{presenter.duplicateDetails.duplicateDetail.provider1.deactivationDate}" />
+				<h:outputText
+					value="#{presenter.duplicateDetails.duplicateDetail.provider2.deactivationDate}" />
+				<h:selectOneMenu style="width:70%" id="selectp14"
+					value="#{presenter.duplicateDetails.mergedProvider.deactivationDate}">
+					<f:selectItems
+						value="#{presenter.duplicateDetails.selectProviderDeactivationDate}" />
+				</h:selectOneMenu>
+
+				<h:outputText style="font-weight:bold"
+					value="#{labels.showsingledupl_dcode}" />
+				<h:outputText
+					value="#{presenter.duplicateDetails.duplicateDetail.provider1.deactivationReasonCode}" />
+				<h:outputText
+					value="#{presenter.duplicateDetails.duplicateDetail.provider2.deactivationReasonCode}" />
+				<h:selectOneMenu style="width:70%" id="selectp15"
+					value="#{presenter.duplicateDetails.mergedProvider.deactivationReasonCode}">
+					<f:selectItems
+						value="#{presenter.duplicateDetails.selectProviderDeactivationReasonCode}" />
+				</h:selectOneMenu>
+
+				<h:outputText style="font-weight:bold" value="#{labels.showsingledupl_rdate}" />
+				<h:outputText
+					value="#{presenter.duplicateDetails.duplicateDetail.provider1.reactivationDate}" />
+				<h:outputText
+					value="#{presenter.duplicateDetails.duplicateDetail.provider2.reactivationDate}" />
+				<h:selectOneMenu style="width:70%" id="selectp16"
+					value="#{presenter.duplicateDetails.mergedProvider.reactivationDate}">
+					<f:selectItems
+						value="#{presenter.duplicateDetails.selectProviderReactivationDate}" />
+				</h:selectOneMenu>
+
+				<h:outputText style="font-weight:bold"
+					value="#{labels.showsingledupl_rcode}" />
+				<h:outputText
+					value="#{presenter.duplicateDetails.duplicateDetail.provider1.reactivationReasonCode}" />
+				<h:outputText
+					value="#{presenter.duplicateDetails.duplicateDetail.provider2.reactivationReasonCode}" />
+				<h:selectOneMenu style="width:70%" id="selectp17"
+					value="#{presenter.duplicateDetails.mergedProvider.reactivationReasonCode}">
+					<f:selectItems
+						value="#{presenter.duplicateDetails.selectProviderReactivationReasonCode}" />
+				</h:selectOneMenu>
+
+			</h:panelGrid>
+
+			<rich:dataTable id="orgListP"
+				value="#{presenter.duplicateDetails.providerOrganisations}"
+				var="org" width="100%">
+				<f:facet name="header">
+					<h:outputText value="#{labels.showsingledupl_organisations}" />
+				</f:facet>
+				<rich:column>
+					<f:facet name="header">#{labels.showsingledupl_provider1}</f:facet>
+					<h:outputText value="X"
+						rendered="#{presenter.duplicateDetails.orgListContainsOrg(presenter.duplicateDetails.duplicateDetail.provider1.organisations,org)}"></h:outputText>
+				</rich:column>
+				<rich:column>
+					<f:facet name="header">#{labels.showsingledupl_provider2}</f:facet>
+					<h:outputText value="X"
+						rendered="#{presenter.duplicateDetails.orgListContainsOrg(presenter.duplicateDetails.duplicateDetail.provider2.organisations,org)}"></h:outputText>
+				</rich:column>
+				<rich:column>
+					<f:facet name="header">#{labels.showsingledupl_providermerged}</f:facet>
+					<h:selectBooleanCheckbox id="selectProOrg"
+						value="#{presenter.duplicateDetails.orgListContainsOrg(presenter.duplicateDetails.selectOrganisations,org)}">
+						<a4j:support event="onchange"
+							action="#{presenter.duplicateDetails.mergeOrganisation(org)}" />
+					</h:selectBooleanCheckbox>
+				</rich:column>
+				<rich:column width="50%">
+					<f:facet name="header">#{labels.showsingledupl_name}</f:facet>
+					<h:outputText value="#{org.name}" />
+				</rich:column>
+				<rich:column width="50%">
+					<f:facet name="header">#{labels.showsingledupl_name2}</f:facet>
+					<h:outputText value="#{org.secondName}" />
+				</rich:column>
+			</rich:dataTable>
+
+			<rich:dataTable id="selectPLocalIds"
+				value="#{presenter.duplicateDetails.providerLocalIds}" var="localID"
+				width="100%">
+				<f:facet name="header">
+					<h:outputText value="#{labels.showsingledupl_localids}" />
+				</f:facet>
+				<rich:column>
+					<f:facet name="header">#{labels.showsingledupl_provider1}</f:facet>
+					<h:outputText value="X"
+						rendered="#{presenter.duplicateDetails.lidListContainsLid(presenter.duplicateDetails.duplicateDetail.provider1.localId,localID)}"></h:outputText>
+				</rich:column>
+				<rich:column>
+					<f:facet name="header">#{labels.showsingledupl_provider2}</f:facet>
+					<h:outputText value="X"
+						rendered="#{presenter.duplicateDetails.lidListContainsLid(presenter.duplicateDetails.duplicateDetail.provider2.localId,localID)}"></h:outputText>
+				</rich:column>
+				<rich:column>
+					<f:facet name="header">#{labels.showsingledupl_providermerged}</f:facet>
+					<h:selectBooleanCheckbox id="selectProLocalId"
+						value="#{presenter.duplicateDetails.lidListContainsLid(presenter.duplicateDetails.selectLocalIds,localID)}">
+						<a4j:support event="onchange"
+							action="#{presenter.duplicateDetails.mergeLocalId(localID)}" />
+					</h:selectBooleanCheckbox>
+				</rich:column>
+				<rich:column width="30%">
+					<f:facet name="header">#{labels.showsingledupl_localid}</f:facet>
+					<h:outputText value="#{localID.localId}"></h:outputText>
+				</rich:column>
+				<rich:column width="30%">
+					<f:facet name="header">#{labels.showsingledupl_facility}</f:facet>
+					<h:outputText value="#{localID.facility}"></h:outputText>
+				</rich:column>
+				<rich:column width="30%">
+					<f:facet name="header">#{labels.showsingledupl_application}</f:facet>
+					<h:outputText value="#{localID.application}"></h:outputText>
+				</rich:column>
+			</rich:dataTable>
+
+			<rich:dataTable id="selectPAddresses"
+				value="#{presenter.duplicateDetails.providerAddresses}"
+				var="address" width="100%">
+				<f:facet name="header">
+					<h:outputText value="#{labels.showsingledupl_addresses}" />
+				</f:facet>
+				<rich:column>
+					<f:facet name="header">#{labels.showsingledupl_provider1}</f:facet>
+					<h:outputText value="X"
+						rendered="#{presenter.duplicateDetails.addListContainsAdd(presenter.duplicateDetails.duplicateDetail.provider1.addresses,address)}"></h:outputText>
+				</rich:column>
+				<rich:column>
+					<f:facet name="header">#{labels.showsingledupl_provider2}</f:facet>
+					<h:outputText value="X"
+						rendered="#{presenter.duplicateDetails.addListContainsAdd(presenter.duplicateDetails.duplicateDetail.provider2.addresses,address)}"></h:outputText>
+				</rich:column>
+				<rich:column>
+					<f:facet name="header">#{labels.showsingledupl_providermerged}</f:facet>
+					<h:selectBooleanCheckbox id="selectProLocalId"
+						value="#{presenter.duplicateDetails.addListContainsAdd(presenter.duplicateDetails.selectAddresses,address)}">
+						<a4j:support event="onchange"
+							action="#{presenter.duplicateDetails.mergeAddress(address)}" />
+					</h:selectBooleanCheckbox>
+				</rich:column>
+				<rich:column width="13%">
+					<f:facet name="header">#{labels.showsingledupl_street}</f:facet>
+					<h:outputText value="#{address.street}"></h:outputText>
+				</rich:column>
+				<rich:column width="13%">
+					<f:facet name="header">#{labels.showsingledupl_house}</f:facet>
+					<h:outputText value="#{address.houseNumber}"></h:outputText>
+				</rich:column>
+				<rich:column width="13%">
+					<f:facet name="header">#{labels.showsingledupl_zip}</f:facet>
+					<h:outputText value="#{address.zipCode}"></h:outputText>
+				</rich:column>
+				<rich:column width="13%">
+					<f:facet name="header">#{labels.showsingledupl_city}</f:facet>
+					<h:outputText value="#{address.city}"></h:outputText>
+				</rich:column>
+				<rich:column width="13%">
+					<f:facet name="header">#{labels.showsingledupl_state}</f:facet>
+					<h:outputText value="#{address.state}"></h:outputText>
+				</rich:column>
+				<rich:column width="13%">
+					<f:facet name="header">#{labels.showsingledupl_country}</f:facet>
+					<h:outputText value="#{address.country}"></h:outputText>
+				</rich:column>
+				<rich:column width="13%">
+					<f:facet name="header">#{labels.showsingledupl_additional}</f:facet>
+					<h:outputText value="#{address.additional}"></h:outputText>
+				</rich:column>
+			</rich:dataTable>
+		</rich:panel>
+
+
+
+		<rich:panel>
+			<h:panelGrid width="100%" columns="4" id="showaddressddpanel"
+				rendered="#{null!=presenter.duplicateDetails.duplicateDetail.address1}">
+				<h:outputText value="" />
+				<h:outputText style="font-weight:bold" value="#{labels.showsingledupl_add1}" />
+				<h:outputText style="font-weight:bold" value="#{labels.showsingledupl_add2}" />
+				<h:outputText style="font-weight:bold" value="#{labels.showsingledupl_addmerged}" />
+
+				<h:outputText style="font-weight:bold" value="#{labels.showsingledupl_street}" />
+				<h:outputText
+					value="#{presenter.duplicateDetails.duplicateDetail.address1.street}" />
+				<h:outputText
+					value="#{presenter.duplicateDetails.duplicateDetail.address2.street}" />
+
+				<h:selectOneMenu style="width:70%" id="selecta1"
+					value="#{presenter.duplicateDetails.mergedAddress.street}">
+					<f:selectItems
+						value="#{presenter.duplicateDetails.selectAddressStreet}" />
+				</h:selectOneMenu>
+
+				<h:outputText style="font-weight:bold" value="#{labels.showsingledupl_house}" />
+				<h:outputText
+					value="#{presenter.duplicateDetails.duplicateDetail.address1.houseNumber}" />
+				<h:outputText
+					value="#{presenter.duplicateDetails.duplicateDetail.address2.houseNumber}" />
+
+				<h:selectOneMenu style="width:70%" id="selecta2"
+					value="#{presenter.duplicateDetails.mergedAddress.houseNumber}">
+					<f:selectItems
+						value="#{presenter.duplicateDetails.selectAddressHouseNumber}" />
+				</h:selectOneMenu>
+
+				<h:outputText style="font-weight:bold" value="#{labels.showsingledupl_zip}" />
+				<h:outputText
+					value="#{presenter.duplicateDetails.duplicateDetail.address1.zipCode}" />
+				<h:outputText
+					value="#{presenter.duplicateDetails.duplicateDetail.address2.zipCode}" />
+
+				<h:selectOneMenu style="width:70%" id="selecta3"
+					value="#{presenter.duplicateDetails.mergedAddress.zipCode}">
+					<f:selectItems
+						value="#{presenter.duplicateDetails.selectAddressZipCode}" />
+				</h:selectOneMenu>
+
+				<h:outputText style="font-weight:bold" value="#{labels.showsingledupl_city}" />
+				<h:outputText
+					value="#{presenter.duplicateDetails.duplicateDetail.address1.city}" />
+				<h:outputText
+					value="#{presenter.duplicateDetails.duplicateDetail.address2.city}" />
+
+				<h:selectOneMenu style="width:70%" id="selecta4"
+					value="#{presenter.duplicateDetails.mergedAddress.city}">
+					<f:selectItems
+						value="#{presenter.duplicateDetails.selectAddressCity}" />
+				</h:selectOneMenu>
+
+				<h:outputText style="font-weight:bold" value="#{labels.showsingledupl_state}" />
+				<h:outputText
+					value="#{presenter.duplicateDetails.duplicateDetail.address1.state}" />
+				<h:outputText
+					value="#{presenter.duplicateDetails.duplicateDetail.address2.state}" />
+
+				<h:selectOneMenu style="width:70%" id="selecta5"
+					value="#{presenter.duplicateDetails.mergedAddress.state}">
+					<f:selectItems
+						value="#{presenter.duplicateDetails.selectAddressState}" />
+				</h:selectOneMenu>
+
+				<h:outputText style="font-weight:bold" value="#{labels.showsingledupl_country}" />
+				<h:outputText
+					value="#{presenter.duplicateDetails.duplicateDetail.address1.country}" />
+				<h:outputText
+					value="#{presenter.duplicateDetails.duplicateDetail.address2.country}" />
+
+				<h:selectOneMenu style="width:70%" id="selecta6"
+					value="#{presenter.duplicateDetails.mergedAddress.country}">
+					<f:selectItems
+						value="#{presenter.duplicateDetails.selectAddressCountry}" />
+				</h:selectOneMenu>
+
+				<h:outputText style="font-weight:bold" value="#{labels.showsingledupl_additional}" />
+				<h:outputText
+					value="#{presenter.duplicateDetails.duplicateDetail.address1.additional}" />
+				<h:outputText
+					value="#{presenter.duplicateDetails.duplicateDetail.address2.additional}" />
+
+				<h:selectOneMenu style="width:70%" id="selecta7"
+					value="#{presenter.duplicateDetails.mergedAddress.additional}">
+					<f:selectItems
+						value="#{presenter.duplicateDetails.selectAddressAdditional}" />
+				</h:selectOneMenu>
+
+			</h:panelGrid>
+		</rich:panel>
+
+	</ui:define>
+</ui:composition>
+
+</body>
+</html>

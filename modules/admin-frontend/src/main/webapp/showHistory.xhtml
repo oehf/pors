@@ -1,0 +1,82 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:a4j="http://richfaces.org/a4j">
+<body>
+
+<ui:composition template="/template.xhtml">
+<ui:param name="requestMessageId" value="detailHistory"/>
+<ui:define name="headerTitle">#{labels.showhistory_title}</ui:define>
+<ui:define name="content">
+	<h:form rendered="#{presenter.userLoggedIn}">
+	
+	<ui:include src="/WEB-INF/facelets/search.xhtml">
+		<ui:param name="idvalue" value="historySearch"/>
+		<ui:param name="fields" value="#{presenter.searchBean.availableFieldsHistory}"/> 
+		<ui:param name="rerenderid" value="historyList,sc1"/>
+		<ui:param name="resetMethod" value="#{presenter.resetHistorySearch}"/>
+	</ui:include>
+	<rich:spacer height="10" />
+	<rich:datascroller align="center" for="historyList" id="sc1"/>
+    <rich:spacer height="10" />
+	<rich:dataTable value="#{presenter.historyDataModel}" var="dataItem"
+				id="historyList" rows="10" 
+				width="100%">
+		<f:facet name="header">
+			<h:outputText value="#{labels.showhistory_history}" />
+		</f:facet>
+				
+		<rich:column label="Date" width="18%">
+			<f:facet name="header">
+				<h:outputText value="#{labels.showhistory_date}" />
+			</f:facet>
+			<h:outputText value="#{dataItem.logDateString}" />
+		</rich:column>
+				
+		<rich:column label="Time" width="18%">
+			<f:facet name="header">
+				<h:outputText value="#{labels.showhistory_time}" />
+			</f:facet>
+			<h:outputText value="#{dataItem.logTimeString}" />
+		</rich:column>
+				
+		<rich:column label="User" width="18%">
+			<f:facet name="header">
+				<h:outputText value="#{labels.showhistory_user}" />
+			</f:facet>
+			<h:outputText value="#{dataItem.userName}" />
+		</rich:column>
+				
+		<rich:column label="Domain" width="18%">
+			<f:facet name="header">
+				<h:outputText value="#{labels.showhistory_domain}" />
+			</f:facet>
+			<h:outputText value="#{dataItem.domain}" />
+		</rich:column>
+				
+		<rich:column label="Action" width="18%">
+			<f:facet name="header">
+				<h:outputText value="#{labels.showhistory_action}" />
+			</f:facet>
+			<h:outputText value="#{dataItem.action}" />
+		</rich:column>
+				
+		<rich:column width="8%" label="detail buttons" >
+			<f:facet name="header">
+				<h:outputText value="" />
+			</f:facet>
+			<a4j:commandButton id="detailHistory" action="#{presenter.showSingleHistory(dataItem)}" value="#{labels.showhistory_button}">
+				<a4j:support event="oncomplete" action="showSingleHistory" />
+			</a4j:commandButton>
+		</rich:column>
+				
+	</rich:dataTable>
+	</h:form>
+</ui:define>
+</ui:composition>
+
+</body>
+</html>

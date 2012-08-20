@@ -1,0 +1,6 @@
+"id";"lanr";"oid";"firstname";"lastname";"middleName";"namePrefix";"nameSuffix";"genderCode";"birthday";"email";"telephone";"fax";"deactivationDate";"deactivationReasonCode";"reactivationDate";"reactivationReasonCode";"lastUpdateDate";"addresses";"localids"
+9166;987654321;;"Hansi";"Beckenbauri";;;;"m";"1910-01-01 00:00:00.0";;;;;;"2010-12-09 00:00:00.0";;"2010-12-09 12:52:39.342";"&Teststr.&10^^Heidelberg^BaW^69119^DE";"1234^facility^application"
+9152;726378476;;"Hasudh";"iuasiuids";;;;"m";"1924-01-01 00:00:00.0";;;;;;"2010-12-09 00:00:00.0";;"2010-12-09 10:51:55.644";;"gue654783^uasduz^uizaasuf~981237873^jkhasdj^iuiwizadzi"
+9171;;;"test1";"rezezzt";;;;"m";"1910-01-01 00:00:00.0";;;;;;"2010-12-17 00:00:00.0";;"2010-12-17 13:47:41.072";;
+9169;"abfefuzto";;"tester";"test";;;;"m";"1910-01-01 00:00:00.0";;;;;;"2010-12-17 00:00:00.0";;"2010-12-17 11:26:51.893";;
+9147;;;"Testprovider01";"Testprovider01";;;;"u";"1910-01-01 00:00:00.0";;;;;;"2010-12-07 00:00:00.0";;"2010-12-07 10:46:20.708";;"1232^facility^application"

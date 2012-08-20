@@ -1,0 +1,26 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:a4j="http://richfaces.org/a4j">
+<body>
+
+<ui:composition>
+	<h3>Import Status</h3>
+	<h:form id="importStatus">
+	
+	<a4j:poll id="poll" interval="5000" enabled="#{enabledcondition}" reRender="poll,grid"/>
+	
+	<h:panelGrid columns="2" width="50%" id="grid">
+		Status: <h:outputText id="statusMessage" value="#{statusmessage}"/>
+		Entries: <h:outputText id="entries" value="#{entries}"/>
+		Processed: <h:outputText id="processed" value="#{processed}"/>
+    </h:panelGrid>
+	
+	</h:form>
+</ui:composition>
+
+</body>
+</html>

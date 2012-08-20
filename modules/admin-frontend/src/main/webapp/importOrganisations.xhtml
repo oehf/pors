@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:a4j="http://richfaces.org/a4j">
+<body>
+
+<ui:composition template="/template.xhtml">
+<ui:define name="headerTitle">#{labels.importorg_title}</ui:define>
+<ui:define name="content">
+	<rich:message for="uploadOrganisations" showSummary="true"/>
+	
+	<p>
+	#{labels.importorg_text}
+	#{labels.importorg_text2}
+	</p>
+	
+	<h:form id="importOrganisations">
+	
+	<rich:fileUpload fileUploadListener="#{presenter.uploadListener}"
+                maxFilesQuantity="1" id="uploadOrganisations"
+                immediateUpload="true" acceptedTypes="csv" allowFlash="false">
+   	  <a4j:support event="onuploadcomplete" reRender="importNext" />
+    </rich:fileUpload>
+	<p>
+	<h:commandButton id="importNext" 
+				     disabled="return (${rich:component('upload')}.entries.length == 0 || ${rich:component('upload')}.entries[0].state != FileUploadEntry.UPLOAD_SUCCESS);" 
+				     action="#{presenter.checkImportOrganisationFile}" value="#{labels.importorg_button}" style="width:100px;"/>
+	</p>
+	</h:form>
+</ui:define>
+</ui:composition>
+
+</body>
+</html>

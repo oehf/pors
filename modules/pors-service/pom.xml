@@ -1,0 +1,129 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<artifactId>pors</artifactId>
+		<groupId>org.openehealth.pors</groupId>
+		<version>1.1.0</version>
+	</parent>
+	<groupId>org.openehealth.pors</groupId>
+	<artifactId>pors-service</artifactId>
+	<name>PORS - Service</name>
+	<packaging>ear</packaging>
+
+	<dependencies>
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>admin</artifactId>
+			<version>1.0.0</version>
+			<type>ejb</type>
+		</dependency>
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>communication</artifactId>
+			<version>1.0.0</version>
+			<type>ejb</type>
+		</dependency>
+
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>message</artifactId>
+			<version>1.0.0</version>
+			<type>ejb</type>
+		</dependency>
+
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>auth</artifactId>
+			<version>1.0.0</version>
+			<type>ejb</type>
+		</dependency>
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>database</artifactId>
+			<version>1.0.0</version>
+			<type>ejb</type>
+		</dependency>
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>controller</artifactId>
+			<version>1.0.0</version>
+			<type>ejb</type>
+		</dependency>
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>core</artifactId>
+			<version>1.0.0</version>
+			<type>ejb</type>
+		</dependency>
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>communication-servlet</artifactId>
+			<version>1.0.0</version>
+			<type>war</type>
+		</dependency>
+	</dependencies>
+
+	
+	<version>1.0.0</version>
+	<url>http://www.openehealth.org/display/PORS/Home</url>
+	<scm>
+		<url>https://github.com/oehf/pors</url>
+	</scm>
+	<organization>
+		<name>Open eHealth Foundation</name>
+		<url>http://www.openehealth.org</url>
+	</organization>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-ear-plugin</artifactId>
+				<version>2.4.2</version>
+				<!-- configuring the ear plugin -->
+				<configuration>
+					<modules>
+						<ejbModule>
+							<groupId>${project.groupId}</groupId>
+							<artifactId>admin</artifactId>
+						</ejbModule>
+
+						<ejbModule>
+							<groupId>${project.groupId}</groupId>
+							<artifactId>message</artifactId>
+						</ejbModule>
+
+						<ejbModule>
+							<groupId>${project.groupId}</groupId>
+							<artifactId>database</artifactId>
+						</ejbModule>
+						<ejbModule>
+							<groupId>${project.groupId}</groupId>
+							<artifactId>auth</artifactId>
+						</ejbModule>
+						<ejbModule>
+							<groupId>${project.groupId}</groupId>
+							<artifactId>communication</artifactId>
+						</ejbModule>
+						<ejbModule>
+							<groupId>${project.groupId}</groupId>
+							<artifactId>controller</artifactId>
+						</ejbModule>
+						<ejbModule>
+							<groupId>${project.groupId}</groupId>
+							<artifactId>core</artifactId>
+						</ejbModule>
+						<webModule>
+							<groupId>${project.groupId}</groupId>
+							<artifactId>communication-servlet</artifactId>
+						</webModule>
+					</modules>
+					<filtering>true</filtering>
+				</configuration>
+			</plugin>
+
+		</plugins>
+		<finalName>pors-service</finalName>
+	</build>
+
+</project>

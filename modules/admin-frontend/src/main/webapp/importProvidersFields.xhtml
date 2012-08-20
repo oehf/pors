@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:a4j="http://richfaces.org/a4j">
+<body>
+
+<ui:composition template="/template.xhtml">
+<ui:define name="headerTitle">#{labels.importprofields_title}</ui:define>
+<ui:define name="content">
+	<rich:message for="uploadProvider" showSummary="true"/>
+	
+	<p>
+	#{labels.importprofields_text}
+	</p>
+	
+	<h:form id="importProvider">
+    
+    <rich:dataTable id="fieldsProvider" value="#{presenter.importProviderBean.fields}" 
+    				var="field"> 
+      <rich:column width="300px">
+          <f:facet name="header">#{labels.importprofields_csv}</f:facet>
+	      <h:outputText value="#{field.userField.value}"/>
+     </rich:column>
+
+     <rich:column width="300px">
+           <f:facet name="header">#{labels.importprofields_provider}</f:facet>
+           <h:selectOneMenu style="width:250px;" value="#{field.selectedField.value}">
+          		<f:selectItems value="#{field.available}"/>
+          		<a4j:support event="onchange" action="#{presenter.importProviderBean.updateAvailableFields}" reRender="fieldsProvider"  />
+           </h:selectOneMenu>
+     </rich:column>
+
+	</rich:dataTable>
+	<p>
+	<h:commandButton action="#{presenter.importProviders}" value="#{labels.importprofields_button}" style="width:100px;"/>
+	</p>
+	</h:form>
+</ui:define>
+</ui:composition>
+
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:a4j="http://richfaces.org/a4j">
+	
+<body>
+
+<ui:composition template="/template.xhtml">
+<ui:define name="headerTitle">#{labels.showorg_title}</ui:define>
+<ui:define name="content">
+	<h:form rendered="#{presenter.userLoggedIn}">
+	
+	<ui:include src="/WEB-INF/facelets/search.xhtml">
+		<ui:param name="idvalue" value="organisationSearch"/>
+		<ui:param name="fields" value="#{presenter.searchBean.availableFieldsOrganisation}"/> 
+		<ui:param name="rerenderid" value="organisationList,sc1"/>
+		<ui:param name="resetMethod" value="#{presenter.resetOrganisationSearch}"/>
+	</ui:include>
+	<rich:spacer height="10" />
+	<rich:datascroller align="center" for="organisationList" id="sc1"/>
+    <rich:spacer height="10" />
+	
+	<rich:dataTable value="#{presenter.organisationDataModel}"
+		var="dataItem" id="organisationList" width="100%" rows="10">
+		<f:facet name="header">#{labels.showorg_organisation}</f:facet>
+		<rich:column width="23%" label="OID" >
+			<f:facet name="header">#{labels.showorg_oid}</f:facet>
+			<h:outputText value="#{dataItem.OID}" />
+		</rich:column>
+		<rich:column width="23%" label="Name" >
+			<f:facet name="header">#{labels.showorg_name}</f:facet>
+			<h:outputText value="#{dataItem.name}" />
+		</rich:column>
+		<rich:column width="23%" label="Second name" >
+			<f:facet name="header">#{labels.showorg_sname}</f:facet>
+			<h:outputText value="#{dataItem.secondName}" />
+		</rich:column>
+		<rich:column width="23%" label="Last update">
+			<f:facet name="header">#{labels.showorg_update}</f:facet>
+			<h:outputText value="#{dataItem.lastUpdateDate.year}.#{dataItem.lastUpdateDate.month}.#{dataItem.lastUpdateDate.day}"/>
+		</rich:column>
+		<rich:column width="8%" label="detail buttons" >
+			<a4j:commandButton action="#{presenter.showSingleOrg(dataItem)}" value="#{labels.showorg_button}">
+				 <a4j:support event="oncomplete" action="showSingleOrg" />
+			</a4j:commandButton>
+		</rich:column>
+	</rich:dataTable>
+	</h:form>
+</ui:define>
+</ui:composition>
+
+</body>
+</html>

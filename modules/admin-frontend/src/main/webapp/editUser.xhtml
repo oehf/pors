@@ -1,0 +1,116 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:a4j="http://richfaces.org/a4j">
+
+<body>
+
+<ui:composition template="/template.xhtml">
+	<ui:define name="headerTitle">Edit User</ui:define>
+	<ui:define name="content">
+
+		<div id="listUser"><h:form id="editUserForm">
+			<rich:dataTable id="userList" value="#{presenter.userList}"
+				var="user">
+				<rich:column>
+					<f:facet name="header">
+						<h:outputText value="#{labels.edituser_name}" />
+					</f:facet>
+					<h:outputText value="#{user.username}"></h:outputText>
+				</rich:column>
+				<rich:column>
+					<f:facet name="header">
+						<h:outputText value="#{labels.edituser_role}" />
+					</f:facet>
+					<h:outputText value="#{user.role.name}"></h:outputText>
+				</rich:column>
+				<rich:column>
+					<f:facet name="header">
+						<h:outputText value="#{labels.edituser_active}" />
+					</f:facet>
+					<h:outputText value="x" rendered="#{user.active}"></h:outputText>
+				</rich:column>
+				<rich:column>
+					<f:facet name="header"></f:facet>
+					<a4j:commandButton id="linkEditUser" image="img/icon_edit.png"
+						action="#{presenter.setNewUser(user)}"
+						oncomplete="#{rich:component('panelEditUser')}.show()" 
+						reRender="panelEditUser" />
+					<a4j:commandButton id="linkEditUserPw" value="#{labels.edituser_changePw}"
+						action="#{presenter.setNewUser(user)}"
+						oncomplete="#{rich:component('panelChangePw')}.show()" 
+						reRender="panelChangePw" />
+				</rich:column>
+			</rich:dataTable>
+		</h:form></div>
+		
+		<rich:modalPanel id="panelChangePw" width="200" height="140">
+			<f:facet name="header">
+				<h:panelGroup>
+					<h:outputText value="#{labels.edituser_editpanel}"></h:outputText>
+				</h:panelGroup>
+			</f:facet>
+			<h:form>
+				<h:panelGrid columns="2">
+					<h:outputLabel rendered="true" value="#{labels.edituser_newPw}" />
+					<h:inputSecret id="pw" size="10" value="#{presenter.newUserPassword}"
+						tabindex="0">
+						<rich:ajaxValidator event="onblur" />
+					</h:inputSecret>
+					<h:outputLabel rendered="true" value="" /><rich:message for="pw" />
+				</h:panelGrid>
+				<a4j:commandButton type="submit" action="#{presenter.editUser}"
+					value="#{labels.edituser_ok}">
+					<a4j:support id="editUserPw" event="oncomplete"
+						oncomplete="#{rich:component('panelChangePw')}.hide()"
+						 reRender="userList" />
+				</a4j:commandButton>
+				<a4j:commandButton action="#{presenter.dummy}"
+					oncomplete="#{rich:component('panelChangePw')}.hide()"
+					value="#{labels.edituser_cancel}" />
+			</h:form>
+		</rich:modalPanel>
+		
+		<rich:modalPanel id="panelEditUser" width="200" height="130">
+			<f:facet name="header">
+				<h:panelGroup>
+					<h:outputText value="#{labels.edituser_editpanel}"></h:outputText>
+				</h:panelGroup>
+			</f:facet>
+			<h:form>
+				<h:panelGrid columns="2">
+					<h:outputLabel rendered="true" value="#{labels.edituser_name}" />
+					<h:inputText id="name" size="18" value="#{presenter.newUserName}"
+						tabindex="0">
+						<rich:ajaxValidator event="onblur" />
+					</h:inputText>
+					<h:outputLabel rendered="true" value="" /><rich:message for="name" />
+
+					<h:outputLabel rendered="true" value="#{labels.edituser_role}" />
+					<h:selectOneMenu id="role" value="#{presenter.selectedRole}">
+						<f:selectItems value="#{presenter.roles}" />
+					</h:selectOneMenu>
+					<h:outputLabel rendered="true" value="" /><rich:message for="role" />
+
+					<h:outputLabel rendered="true" value="#{labels.edituser_active}" />
+					<h:selectBooleanCheckbox id="active" value="#{presenter.newUser.active}" disabled="false"/>
+				</h:panelGrid>
+				<a4j:commandButton type="submit" action="#{presenter.editUser}"
+					value="#{labels.edituser_ok}">
+					<a4j:support id="editUser" event="oncomplete"
+						oncomplete="#{rich:component('panelEditUser')}.hide()"
+						 reRender="userList" />
+				</a4j:commandButton>
+				<a4j:commandButton action="#{presenter.dummy}"
+					oncomplete="#{rich:component('panelEditUser')}.hide()"
+					value="#{labels.edituser_cancel}" />
+			</h:form>
+		</rich:modalPanel>
+	</ui:define>
+</ui:composition>
+
+</body>
+</html>

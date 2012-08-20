@@ -1,0 +1,29 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:a4j="http://richfaces.org/a4j">
+	
+<body>
+
+<ui:composition template="/template.xhtml">
+<ui:define name="headerTitle">#{labels.importorgstatus_title}</ui:define>
+<ui:define name="content">
+	<h:form id="importForm" rendered="#{presenter.userLoggedIn}">
+	<h3>#{labels.importorgstatus_title2}</h3>
+	<a4j:poll id="poll" interval="3000" enabled="#{presenter.organisationImportStatus.statusUpdate}" reRender="importForm"/>
+	
+	<h:panelGrid columns="2" width="50%" id="grid">
+		#{labels.importorgstatus_processed}: <h:outputText id="processed" value="#{presenter.importOrganisationStatus.processed}"/>
+		#{labels.importorgstatus_entries}: <h:outputText id="entries" value="#{presenter.importOrganisationBean.result.addEntries + presenter.importProviderBean.result.updateEntries}"/>
+		#{labels.importorgstatus_status}: <h:outputText id="statusMessage" value="#{presenter.importOrganisationBean.result.statusMessage}"/>
+    </h:panelGrid>
+	
+	</h:form>
+</ui:define>
+</ui:composition>
+
+</body>
+</html>

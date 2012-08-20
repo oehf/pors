@@ -1,0 +1,120 @@
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.openehealth.pors</groupId>
+	<artifactId>pors</artifactId>
+	<version>1.1.0</version>
+	<packaging>pom</packaging>
+	<name>PORS - Provider and Organization Registry Service</name>
+	<modules>
+		<module>admin</module>
+		<module>admin-frontend</module>
+		<module>auth</module>
+		<module>communication</module>
+		<module>controller</module>
+		<module>database</module>
+		<module>message</module>
+		<module>pors-service</module>
+		<module>core</module>
+		<module>external-system</module>
+		<module>communication-servlet</module>
+	</modules>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<arquillian.version>1.0.0.Alpha4</arquillian.version>
+		<hibernate.search.index.dir>/pors/hibernate_search</hibernate.search.index.dir>
+	</properties>
+
+	<repositories>
+		<repository>
+			<id>jboss-public-repository-group</id>
+			<name>The JBoss repository</name>
+			<url>http://repository.jboss.org/nexus/content/groups/public-jboss/</url>
+			<layout>default</layout>
+		</repository>
+	</repositories>
+
+	<pluginRepositories>
+		<pluginRepository>
+			<id>jboss-public-repository-group</id>
+			<name>JBoss Public Maven Repository Group</name>
+			<url>http://repository.jboss.org/nexus/content/groups/public-jboss/</url>
+			<layout>default</layout>
+		</pluginRepository>
+	</pluginRepositories>
+
+	<description>Summarizing project</description>
+	<url>http://www.openehealth.org/display/PORS/Home</url>
+	<scm>
+		<url>https://github.com/oehf/pors</url>
+	</scm>
+	<organization>
+		<name>Open eHealth Foundation</name>
+		<url>http://www.openehealth.org</url>
+	</organization>
+	<profiles>
+		<profile>
+			<id>production</id>
+			<activation>
+				<property>
+					<name>environment</name>
+					<value>production</value>
+				</property>
+			</activation>
+			<properties>
+				<pors.logdir>jboss-6.0.0.Final/server/production/log</pors.logdir>
+				<jndi.address>192.168.178.7</jndi.address>
+				<jndi.port>1299</jndi.port>
+				<db.dsname>pors-ds-production</db.dsname>
+				<search.index.dir>production</search.index.dir>
+				<adminservice.wsdl.url>http://192.168.178.7:8280/communication/PORSAdministratorService/PorsAdministratorServiceBean?wsdl</adminservice.wsdl.url>
+			</properties>
+		</profile>
+		<profile>
+			<id>development</id>
+			<activation>
+				<property>
+					<name>environment</name>
+					<value>development</value>
+				</property>
+			</activation>
+			<properties>
+				<pors.logdir>jboss-6.0.0.Final/server/default/log</pors.logdir>
+				<jndi.address>192.168.178.7</jndi.address>
+				<jndi.port>1199</jndi.port>
+				<db.dsname>pors-ds</db.dsname>
+				<search.index.dir>dev</search.index.dir>
+				<adminservice.wsdl.url>http://192.168.178.7:8180/communication/PORSAdministratorService/PorsAdministratorServiceBean?wsdl</adminservice.wsdl.url>
+			</properties>
+		</profile>
+		<profile>
+			<id>test</id>
+			<activation>
+				<property>
+					<name>environment</name>
+					<value>test</value>
+				</property>
+			</activation>
+			<properties>
+				<pors.logdir>jboss-6.0.0.Final/server/production/log</pors.logdir>
+				<jndi.address>129.206.61.83</jndi.address>
+				<jndi.port>1299</jndi.port>
+				<db.dsname>pors-ds-production</db.dsname>
+				<search.index.dir>production</search.index.dir>
+				<adminservice.wsdl.url>http://129.206.61.83:8280/communication/PORSAdministratorService/PorsAdministratorServiceBean?wsdl</adminservice.wsdl.url>
+			</properties>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-surefire-report-plugin</artifactId>
+						<version>2.7.1</version>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+
+</project>

@@ -1,0 +1,89 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:a4j="http://richfaces.org/a4j">
+	
+<body>
+
+<ui:composition template="/template.xhtml">
+<ui:define name="headerTitle">#{labels.showpro_title}</ui:define>
+<ui:define name="content">
+	<h:form rendered="#{presenter.userLoggedIn}">
+
+	<ui:include src="/WEB-INF/facelets/search.xhtml">
+		<ui:param name="idvalue" value="providerSearch"/>
+		<ui:param name="fields" value="#{presenter.searchBean.availableFieldsProvider}"/> 
+		<ui:param name="rerenderid" value="providerList,sc1"/>
+		<ui:param name="resetMethod" value="#{presenter.resetProviderSearch}"/>
+	</ui:include>
+	<rich:spacer height="10" />
+	<rich:datascroller align="center" for="providerList" id="sc1"/>
+    <rich:spacer height="10" />
+	<rich:dataTable value="#{presenter.providerDataModel}" rows="10"
+		var="dataItem" id="providerList" width="100%">
+
+		<f:facet name="header">
+			<h:outputText value="#{labels.showpro_provider}" />
+		</f:facet>
+
+		<rich:column width="10%" label="OID" >
+			<f:facet name="header">#{labels.showpro_oid}</f:facet>
+			<h:outputText value="#{dataItem.oid}" />
+		</rich:column>
+
+		<rich:column width="10%" label="LANr" >
+			<f:facet name="header">#{labels.showpro_lanr}</f:facet>
+			<h:outputText value="#{dataItem.lanr}" />
+		</rich:column>
+
+		<rich:column width="10%" label="Nameprefix" >
+			<f:facet name="header">#{labels.showpro_nameprefix}</f:facet>
+			<h:outputText value="#{dataItem.namePrefix}" />
+		</rich:column>
+
+		<rich:column width="10%" label="Firstname" >
+			<f:facet name="header">#{labels.showpro_firstname}</f:facet>
+			<h:outputText value="#{dataItem.firstname}" />
+		</rich:column>
+
+		<rich:column width="10%" label="Middlename" >
+			<f:facet name="header">#{labels.showpro_middlename}</f:facet>
+			<h:outputText value="#{dataItem.middleName}" />
+		</rich:column>
+
+		<rich:column width="10%" label="Lastname" >
+			<f:facet name="header">#{labels.showpro_lastname}</f:facet>
+			<h:outputText value="#{dataItem.lastname}" />
+		</rich:column>
+
+		<rich:column width="10%" label="Namesuffix" >
+			<f:facet name="header">#{labels.showpro_namesuffix}</f:facet>
+			<h:outputText value="#{dataItem.nameSuffix}" />
+		</rich:column>
+
+		<rich:column width="10%" label="Sex" >
+			<f:facet name="header">#{labels.showpro_gender}</f:facet>
+			<h:outputText value="#{dataItem.genderCode}" />
+		</rich:column>
+		
+		<rich:column width="10%" label="Last Update" >
+			<f:facet name="header">#{labels.showpro_update}</f:facet>
+			<h:outputText value="#{dataItem.lastUpdateDate.year}.#{dataItem.lastUpdateDate.month}.#{dataItem.lastUpdateDate.day}" />
+		</rich:column>
+
+		<rich:column width="10%" label="detail buttons" >
+			<a4j:commandButton action="#{presenter.showSingleProvider(dataItem)}" value="#{labels.showpro_details}">
+				 <a4j:support event="oncomplete" action="showSingleProvider" />
+			</a4j:commandButton>
+		</rich:column>
+
+	</rich:dataTable>
+	</h:form>
+</ui:define>
+</ui:composition>
+
+</body>
+</html>

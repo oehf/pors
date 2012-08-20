@@ -1,0 +1,22 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:a4j="http://richfaces.org/a4j">
+
+<body>
+
+<ui:composition template="/template.xhtml">
+	<ui:define name="headerTitle">#{labels.adduser_title}</ui:define>
+	<ui:define name="content">
+	<ui:include src="/WEB-INF/facelets/userForm.xhtml">
+		<ui:param name="formid" value="adduser"/>
+		<ui:param name="rendercondition" value="true"/>
+	</ui:include>
+	</ui:define>
+</ui:composition>
+
+</body>
+</html>

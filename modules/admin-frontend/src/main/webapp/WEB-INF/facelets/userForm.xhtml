@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:a4j="http://richfaces.org/a4j">
+<body>
+
+<ui:composition>
+	<h:form id="#{formid}" rendered="#{rendercondition and presenter.userLoggedIn}">
+	
+		<h:panelGrid columns="2" rendered="#{presenter.userLoggedIn}">
+
+		<h:outputLabel rendered="true" value="Username*" />
+		<h:inputText styleClass="inputText"
+			value="#{presenter.newUserName}" tabindex="0" id="newUser">
+			<rich:ajaxValidator event="onblur"/>
+		</h:inputText>
+		<h:outputLabel value="" />
+		<rich:message for="newUser" />
+
+		<h:outputLabel rendered="true" value="Password*" />
+		<h:inputSecret styleClass="inputText" value="#{presenter.newPassword}"
+			id="newPassword">
+			<rich:ajaxValidator event="onblur"/>
+		</h:inputSecret>
+		<h:outputLabel value="" />
+		<rich:message for="newPassword" />
+		
+		<h:outputLabel rendered="true" value="Role" />
+		<h:selectOneMenu id="newRole" value="#{presenter.selectedRole}">
+			<f:selectItems value="#{presenter.roles}" />
+		</h:selectOneMenu>
+		<a4j:commandButton rendered="#{formid == 'adduser'}" action="#{presenter.addUser}" value="Add user"/>	
+		
+		</h:panelGrid> 
+	</h:form>
+</ui:composition>
+
+</body>
+</html>

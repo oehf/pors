@@ -1,0 +1,112 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:a4j="http://richfaces.org/a4j">
+
+<body>
+
+<ui:composition template="/template.xhtml">
+<ui:define name="headerTitle"><h:outputText value="#{labels.showsingleorganisation_title}"/></ui:define>
+<ui:define name="content">
+	<div id="listOrganisation">
+	<h:form id="orgAdded">
+	<a4j:commandButton action="editOrganisation" value="#{labels.showsingleorganisation_edit_organisation}"/>
+	<br/>
+	<h:panelGrid columns="2" rendered="#{presenter.userLoggedIn}">
+	
+		<h:outputLabel rendered="true" value="#{labels.showsingleorganisation_oid}" />
+		<h:outputText size="18" value="#{presenter.orgOid}" tabindex="0" id="oid"/>
+
+		<h:outputLabel rendered="true" value="#{labels.showsingleorganisation_name}" />
+		<h:outputText size="18" value="#{presenter.orgName}" tabindex="0" id="name"/>
+
+		<h:outputLabel rendered="true" value="#{labels.showsingleorganisation_name2}" />
+		<h:outputText size="18" value="#{presenter.orgName2}" id="name2"/>
+
+		<h:outputLabel rendered="true" value="#{labels.showsingleorganisation_description}" />
+		<h:outputText value="#{presenter.orgDesc}" id="desc" width="140px" height="80px"/>
+
+		<h:outputLabel rendered="true" value="#{labels.showsingleorganisation_deactivated}" />
+		<h:outputText size="18" id="deactive" value="#{presenter.orgdeactive}" />
+		           
+        <h:outputLabel id="deactivationtext" rendered="#{presenter.orgdeactive}" value=" - #{labels.showsingleorganisation_reason}" />
+        <h:outputText size="18" rendered="#{presenter.orgdeactive}" value="#{presenter.orgdeactivationreason}"
+					id="deactivationreason" />
+				
+		<h:outputLabel rendered="true" value="#{labels.showsingleorganisation_email}" />
+		<h:outputText size="18" value="#{presenter.orgEmail}" id="email"/>
+
+		<h:outputLabel rendered="true" value="#{labels.showsingleorganisation_telephone}" />
+		<h:outputText size="18" value="#{presenter.orgTelephone}" id="telephone"/>
+
+		<h:outputLabel rendered="true" value="#{labels.showsingleorganisation_fax}" />
+		<h:outputText size="18" value="#{presenter.orgFax}" id="fax"/>
+		
+	</h:panelGrid>
+	</h:form>
+	</div>
+	
+	<div id="listLocalids">
+		<rich:dataTable id="localidList" value="#{presenter.localIDs}" var="localID" width="100%">
+	        <f:facet name="header">
+	        	<h:outputText value="#{labels.showsingleorganisation_localids_header}" />
+	        </f:facet>
+	        <rich:column>
+	        	<f:facet name="header"><h:outputText value="#{labels.showsingleorganisation_localids_localid}"/></f:facet>
+	        	<h:outputText value="#{localID.localId}"></h:outputText>
+	        </rich:column>
+	        <rich:column>
+	        	<f:facet name="header"><h:outputText value="#{labels.showsingleorganisation_localids_facility}"/></f:facet>
+	        	<h:outputText value="#{localID.facility}"></h:outputText>
+	        </rich:column>
+	        <rich:column>
+	        	<f:facet name="header"><h:outputText value="#{labels.showsingleorganisation_localids_application}"/></f:facet>
+	        	<h:outputText value="#{localID.application}"></h:outputText>
+	        </rich:column>
+		</rich:dataTable>
+	</div>
+	
+	<div id="listAddresses">
+		<rich:dataTable id="addressList" value="#{presenter.addresses}" var="address" width="100%">
+	        <f:facet name="header">
+	        	<h:outputText value="#{labels.showsingleorganisation_addresses_header}" />
+	        </f:facet>
+	        <rich:column>
+	        	<f:facet name="header"><h:outputText value="#{labels.showsingleorganisation_addresses_street}" /></f:facet>
+	        	<h:outputText value="#{address.street}"></h:outputText>
+	        </rich:column>
+	        <rich:column>
+	        	<f:facet name="header"><h:outputText value="#{labels.showsingleorganisation_addresses_housenumber}" /></f:facet>
+	        	<h:outputText value="#{address.houseNumber}"></h:outputText>
+	        </rich:column>
+	        <rich:column>
+	        	<f:facet name="header"><h:outputText value="#{labels.showsingleorganisation_addresses_zipcode}" /></f:facet>
+	        	<h:outputText value="#{address.zipCode}"></h:outputText>
+	        </rich:column>
+	        <rich:column>
+	        	<f:facet name="header"><h:outputText value="#{labels.showsingleorganisation_addresses_city}" /></f:facet>
+	        	<h:outputText value="#{address.city}"></h:outputText>
+	        </rich:column>
+	        <rich:column>
+	        	<f:facet name="header"><h:outputText value="#{labels.showsingleorganisation_addresses_state}" /></f:facet>
+	        	<h:outputText value="#{address.state}"></h:outputText>
+	        </rich:column>
+	        <rich:column>
+	        	<f:facet name="header"><h:outputText value="#{labels.showsingleorganisation_addresses_country}" /></f:facet>
+	        	<h:outputText value="#{address.country}"></h:outputText>
+	        </rich:column>
+	        <rich:column>
+	        	<f:facet name="header"><h:outputText value="#{labels.showsingleorganisation_addresses_additional}" /></f:facet>
+	        	<h:outputText value="#{address.additional}"></h:outputText>
+	        </rich:column>
+		</rich:dataTable>
+	</div>
+	
+</ui:define>
+</ui:composition>
+	
+</body>
+</html>

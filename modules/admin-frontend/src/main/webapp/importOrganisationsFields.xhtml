@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:a4j="http://richfaces.org/a4j">
+<body>
+
+<ui:composition template="/template.xhtml">
+<ui:define name="headerTitle">#{labels.importorgfields_title}</ui:define>
+<ui:define name="content">
+	<rich:message for="uploadOrganisations" showSummary="true"/>
+	
+	<p>
+	#{labels.importorgfields_text}
+	</p>
+	
+	<h:form id="importOrganisations">
+    
+    <rich:dataTable id="fieldsOrganisations" value="#{presenter.importOrganisationBean.fields}" 
+    				var="field" style="margin-top: 15px;"> 
+      <rich:column width="300px">
+          <f:facet name="header">#{labels.importorgfields_csv}</f:facet>
+	      <h:outputText value="#{field.userField.value}"/>
+     </rich:column>
+
+     <rich:column width="300px">
+           <f:facet name="header">#{labels.importorgfields_organisation}</f:facet>
+           <h:selectOneMenu style="width:250px;" value="#{field.selectedField.value}">
+          		<f:selectItems value="#{field.available}"/>
+          		<a4j:support event="onchange" action="#{presenter.importOrganisationBean.updateAvailableFields}" reRender="fieldsOrganisations"  />
+           </h:selectOneMenu>
+     </rich:column>
+
+	</rich:dataTable>
+	<p>
+	<h:commandButton action="#{presenter.importOrganisations}" value="#{labels.importorgfields_button}" style="width:100px;"/>
+	</p>
+	</h:form>
+</ui:define>
+</ui:composition>
+
+</body>
+</html>

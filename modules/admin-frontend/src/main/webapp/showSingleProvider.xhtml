@@ -1,0 +1,146 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:a4j="http://richfaces.org/a4j">
+	
+<body>
+
+<ui:composition template="/template.xhtml">
+<ui:define name="headerTitle"><h:outputText value="#{labels.showsingleprovider_title}"/></ui:define>
+<ui:define name="content">
+
+	<h:form id="providerAdded">
+	<div id="listProvider">
+	<a4j:commandButton action="editProvider" value="#{labels.showsingleprovider_edit_provider}" />
+	<br/>
+	
+	<h:panelGrid columns="2" rendered="#{presenter.userLoggedIn}">
+		<h:outputLabel value="#{labels.showsingleprovider_lanr}" />
+		<h:outputText value="#{presenter.lanr}" />
+
+		<h:outputLabel value="#{labels.showsingleprovider_oid}" />
+		<h:outputText value="#{presenter.oid}" />
+
+		<h:outputLabel value="#{labels.showsingleprovider_firstname}" />
+		<h:outputText value="#{presenter.firstname}" />
+
+		<h:outputLabel value="#{labels.showsingleprovider_lastname}" />
+		<h:outputText value="#{presenter.lastname}" />
+
+		<h:outputLabel value="#{labels.showsingleprovider_middlename}" />
+		<h:outputText value="#{presenter.middlename}" />
+
+		<h:outputLabel value="#{labels.showsingleprovider_nameprefix}" />
+		<h:outputText value="#{presenter.nameprefix}" />
+
+		<h:outputLabel value="#{labels.showsingleprovider_namesuffix}" />
+		<h:outputText value="#{presenter.namesuffix}" />
+		
+		<h:outputLabel value="#{labels.showsingleprovider_specialisation}" />
+		<h:outputText value="#{presenter.specialisation}" />
+
+		<h:outputLabel value="#{labels.showsingleprovider_sex}" />
+		<h:outputText value="#{presenter.gendercode}" />
+
+		<h:outputLabel value="#{labels.showsingleprovider_date_of_birth}" />
+		<h:outputText value="#{presenter.birthdayString}" />
+
+		<h:outputLabel rendered="true" value="#{labels.showsingleprovider_deactivated}" />
+		<h:outputText id="deactive" value="#{presenter.deactive}" />
+		           
+        <h:outputLabel id="deactivationtext" rendered="#{presenter.deactive}" value=" - #{labels.showsingleprovider_reason}" />
+        <h:outputText rendered="#{presenter.deactive}" value="#{presenter.deactivationreason}"
+					id="deactivationreason" />
+					
+		<h:outputLabel value="#{labels.showsingleprovider_email}" />
+		<h:outputText value="#{presenter.email}" />
+
+		<h:outputLabel value="#{labels.showsingleprovider_telephone}" />
+		<h:outputText value="#{presenter.telephone}" />
+
+		<h:outputLabel value="#{labels.showsingleprovider_fax}" />
+		<h:outputText value="#{presenter.fax}" />
+    </h:panelGrid>
+	</div>
+	
+	<div id="listOrgs">
+		<rich:dataTable id="orgList" value="#{presenter.providerOrganisations}" var="org" width="100%">
+	        <f:facet name="header">
+	        	<h:outputText value="#{labels.showsingleprovider_organisations_header}" />
+	        </f:facet>
+	        <rich:column width="50%">
+	        	<f:facet name="header"><h:outputText value="#{labels.showsingleprovider_organisations_name}"/></f:facet>
+	        	<h:outputText value="#{org.name}" />
+	        </rich:column>
+	        <rich:column width="50%">
+	        	<f:facet name="header"><h:outputText value="#{labels.showsingleprovider_organisations_name2}"/></f:facet>
+	        	<h:outputText value="#{org.secondName}" />
+	        </rich:column>
+		</rich:dataTable>
+	</div>
+    </h:form>
+	
+	<div id="listLocalids">
+		<rich:dataTable id="localidList" value="#{presenter.localIDs}" var="localID" width="100%">
+	        <f:facet name="header">
+	        	<h:outputText value="#{labels.showsingleprovider_localids_header}" />
+	        </f:facet>
+	        <rich:column>
+	        	<f:facet name="header"><h:outputText value="#{labels.showsingleprovider_localids_localid}"/></f:facet>
+	        	<h:outputText value="#{localID.localId}"></h:outputText>
+	        </rich:column>
+	        <rich:column>
+	        	<f:facet name="header"><h:outputText value="#{labels.showsingleprovider_localids_facility}"/></f:facet>
+	        	<h:outputText value="#{localID.facility}"></h:outputText>
+	        </rich:column>
+	        <rich:column>
+	        	<f:facet name="header"><h:outputText value="#{labels.showsingleprovider_localids_application}"/></f:facet>
+	        	<h:outputText value="#{localID.application}"></h:outputText>
+	        </rich:column>
+		</rich:dataTable>
+	</div>
+	
+	<div id="listAddresses">
+		<rich:dataTable id="addressList" value="#{presenter.addresses}" var="address" width="100%">
+	        <f:facet name="header">
+	        	<h:outputText value="#{labels.showsingleprovider_addresses_header}" />
+	        </f:facet>
+	        <rich:column>
+	        	<f:facet name="header"><h:outputText value="#{labels.showsingleprovider_addresses_street}" /></f:facet>
+	        	<h:outputText value="#{address.street}"></h:outputText>
+	        </rich:column>
+	        <rich:column>
+	        	<f:facet name="header"><h:outputText value="#{labels.showsingleprovider_addresses_housenumber}" /></f:facet>
+	        	<h:outputText value="#{address.houseNumber}"></h:outputText>
+	        </rich:column>
+	        <rich:column>
+	        	<f:facet name="header"><h:outputText value="#{labels.showsingleprovider_addresses_zipcode}" /></f:facet>
+	        	<h:outputText value="#{address.zipCode}"></h:outputText>
+	        </rich:column>
+	        <rich:column>
+	        	<f:facet name="header"><h:outputText value="#{labels.showsingleprovider_addresses_city}" /></f:facet>
+	        	<h:outputText value="#{address.city}"></h:outputText>
+	        </rich:column>
+	        <rich:column>
+	        	<f:facet name="header"><h:outputText value="#{labels.showsingleprovider_addresses_state}" /></f:facet>
+	        	<h:outputText value="#{address.state}"></h:outputText>
+	        </rich:column>
+	        <rich:column>
+	        	<f:facet name="header"><h:outputText value="#{labels.showsingleprovider_addresses_country}" /></f:facet>
+	        	<h:outputText value="#{address.country}"></h:outputText>
+	        </rich:column>
+	        <rich:column>
+	        	<f:facet name="header"><h:outputText value="#{labels.showsingleprovider_addresses_additional}" /></f:facet>
+	        	<h:outputText value="#{address.additional}"></h:outputText>
+	        </rich:column>
+		</rich:dataTable>
+	</div>
+
+</ui:define>
+</ui:composition>
+
+</body>
+</html>

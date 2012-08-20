@@ -1,0 +1,422 @@
+<html>
+<head>
+<title>HL7 test messages page</title>
+<STYLE type="text/css">
+	li {padding-top: 15px;}
+	h2 {padding-top: 10px;}
+</STYLE>
+</head>
+<body>
+<h2>Systemtests Add Provider</h2>
+<ul>
+<li>
+<b>Add provider</b><br /><a id="p1" href="http://wega.ifi.uni-heidelberg.de:9436/communication-servlet/PorsServlet?user=Testuser&password=testpass&msg=MSH%7C%5E%7E%5C%26%7CSAP-ISH%5Esapr3t%5E002%7CUKHD%5E0999%7CPORS%7C%7C200912151600%7C%7CMFN%5EM02%5EMFN_M02%7C1234%7CP%7C2.5.1%0D%0AMFI%7CPRO%5EPractitioner+Master+File%5EHL70175%7C%7CUPD%7C%7C%7CAL%0D%0AMFE%7CMAD%7C%7C%7C8909%7CPL%0D%0ASTF%7C8909%7C154999911%7CBrueckenbauer%5EFranziy%5EJoef%5EJR%5EDr%7CInternist%7EDermatologe%7EOptiker%7CM%7C19501101%7C%7C%7C%7C00496221566736%5E00496221562000%5Ekurt%40beckenbauer.de%7CStreetOrMail%26Streetress%26200%5EOtherDesiuuation%5ECztty%5EState%5E78905%5EDE%7C20091211%7C20081101%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7CR" >MSH|^~\&|SAP-ISH^sapr3t^002|UKHD^0999|PORS||200912151600||MFN^M02^MFN_M02|1234|P|2.5.1
+MFI|PRO^Practitioner Master File^HL70175||UPD|||AL
+MFE|MAD|||8909|PL
+STF|8909|154999989|Brueckenbauer^Franziy^Josef^JR^Dr|Internist~Dermatologe~Optiker|M|19501101||||00496221566736^00496221562000^franz@beckenbauer.de|StreetOrMailing&Streetress&200^OtherDesiuunation^Cztty^State^78905^DE|20091211|20081101|||||||||||||||||||||||||R</a><br /><b>Expected Result</b><br />
+MSH|^~\&|PORS||SAP-ISH^sapr3t^002|UKHD^0999|20101116034500||MFK^M02^MFK_M02|1235|P|2.5.1
+MSA|CA|1235
+MFI|PRO^Practitioner Master File^HL70175||UPD|||AL
+ERR|^^^0&ERROR&hl70357&&Message Accepted||0|I||||||||
+</li>
+<li>
+<b>Add provider (User not found exception)</b><br /><a id="p2" href="http://wega.ifi.uni-heidelberg.de:9436/communication-servlet/PorsServlet?user=unknownuser&password=admin&msg=MSH%7C%5E%7E%5C%26%7CSAP-ISH%5Esapr3t%5E002%7CUKHD%5E0999%7CPORS%7C%7C200912151600%7C%7CMFN%5EM02%5EMFN_M02%7C1234%7CP%7C2.5.1%0D%0AMFI%7CPRO%5EPractitioner+Master+File%5EHL70175%7C%7CUPD%7C%7C%7CAL%0D%0AMFE%7CMAD%7C%7C%7C0000018909%7CPL%0D%0ASTF%7C0000018909%7C154999987%7CBrueckenhauer%5ELudwig%5EJosef%5EJR%5EDr%7CInternist%7CM%7C19501101%7C%7C%7C%7C00496221566736%5E00496221562000%5Ekurt%40beckenbauer.de%7CStreetOrMail%26Streetress%26200%5EOtherDesiuuation%5ECztty%5EState%5E78905%5EDE%7C20091211%7C20081101%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7CR" >MSH|^~\&|SAP-ISH^sapr3t^002|UKHD^0999|PORS||200912151600||MFN^M02^MFN_M02|1234|P|2.5.1
+MFI|PRO^Practitioner Master File^HL70175||UPD|||AL
+MFE|MAD|||0000018909|PL
+STF|0000018909|154999987|Brueckenhauer^Ludwig^Josef^JR^Dr|Internist|M|19501101||||00496221566736^00496221562000^franz@beckenbauer.de|StreetOrMailing&Streetress&200^OtherDesiuunation^Cztty^State^78905^DE|20091211|20081101|||||||||||||||||||||||||R</a><br /><b>Expected Result</b><br />
+MSH|^~\&|PORS||SAP-ISH^sapr3t^002|UKHD^0999|20101116044443||MFK^M02^MFK_M02|1235|P|2.5.1
+MSA|CR|1235
+MFI|PRO^Practitioner Master File^HL70175||UPD|||AL
+ERR|^^^207&ERROR&hl70357&&User not found||207|E||||||||
+</li>
+<li>
+<b>Add provider (Password incorrect exception)</b><br /><a id="p3" href="http://wega.ifi.uni-heidelberg.de:9436/communication-servlet/PorsServlet?user=Testuser&password=nichtkorrekt&msg=MSH%7C%5E%7E%5C%26%7CSAP-ISH%5Esapr3t%5E002%7CUKHD%5E0999%7CPORS%7C%7C200912151600%7C%7CMFN%5EM02%5EMFN_M02%7C1234%7CP%7C2.5.1%0D%0AMFI%7CPRO%5EPractitioner+Master+File%5EHL70175%7C%7CUPD%7C%7C%7CAL%0D%0AMFE%7CMAD%7C%7C%7C0000018909%7CPL%0D%0ASTF%7C0000018909%7C154999987%7CBrueckenhauer%5ELudwig%5EJosef%5EJR%5EDr%7CInternist%7CM%7C19501101%7C%7C%7C%7C00496221566736%5E00496221562000%5Ekurt%40beckenbauer.de%7CStreetOrMail%26Streetress%26200%5EOtherDesiuuation%5ECztty%5EState%5E78905%5EDE%7C20091211%7C20081101%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7CR">MSH|^~\&|SAP-ISH^sapr3t^002|UKHD^0999|PORS||200912151600||MFN^M02^MFN_M02|1234|P|2.5.1
+MFI|PRO^Practitioner Master File^HL70175||UPD|||AL
+MFE|MAD|||0000018909|PL
+STF|0000018909|154999987|Brueckenhauer^Ludwig^Josef^JR^Dr|Internist|M|19501101||||00496221566736^00496221562000^franz@beckenbauer.de|StreetOrMailing&Streetress&200^OtherDesiuunation^Cztty^State^78905^DE|20091211|20081101|||||||||||||||||||||||||R</a><br /><b>Expected Result</b><br />
+MSH|^~\&|PORS||SAP-ISH^sapr3t^002|UKHD^0999|20101118103702||MFK^M02^MFK_M02|1235|P|2.5.1
+MSA|CR|1235
+MFI|PRO^Practitioner Master File^HL70175||UPD|||AL
+ERR|^^^207&ERROR&hl70357&&Password incorrect||207|E||||||||
+</li>
+<li>
+<b>Add provider (HL7 message not parsable)</b><br /><a id="p4" href="http://wega.ifi.uni-heidelberg.de:9436/communication-servlet/PorsServlet?user=Testuser&password=testpass&msg=MSH%7C%5E%7E%5C%26%7CSAP-ISH%5Esapr3t%5E002%7CUKHD%5E0999%7CPORS%7C%7C200912151600%7C%7CMFN%5EM02%5EMFN_M02%7C1234%7CP%7C2.5.1%0D%0AMFI%7CPRO%5EPractitioner+Master+File%5EHL70175%7C%7CUPD%7C%7C%7CAL%0D%0AMFE%7CMAD%7C%7C%7C0000018909%7CPL%0D%0Anichtkorrekt%7C0000018909%7C154999987%7CBrueckenhauer%5ELudwig%5EJosef%5EJR%5EDr%7CInternist%7CM%7C19501101%7C%7C%7C%7C00496221566736%5E00496221562000%5Ekurt%40beckenbauer.de%7CStreetOrMail%26Streetress%26200%5EOtherDesiuuation%5ECztty%5EState%5E78905%5EDE%7C20091211%7C20081101%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7CR">MSH|^~\&|SAP-ISH^sapr3t^002|UKHD^0999|PORS||200912151600||MFN^M02^MFN_M02|1234|P|2.5.1
+MFI|PRO^Practitioner Master File^HL70175||UPD|||AL
+MFE|MAD|||0000018909|PL
+nichtkorrekt|0000018909|154999987|Brueckenhauer^Ludwig^Josef^JR^Dr|Internist|M|19501101||||00496221566736^00496221562000^franz@beckenbauer.de|StreetOrMailing&Streetress&200^OtherDesiuunation^Cztty^State^78905^DE|20091211|20081101|||||||||||||||||||||||||R</a><br /><b>Expected Result</b><br />
+MSH|^~\&|PORS||||20101118111514||MFK^M02^MFK_M02|999999999|P|2.5.1
+MSA|CE|999999999
+MFI|||UPD|||AL
+ERR|^^^207&ERROR&hl70357&&Can't parse message beginning MSH|\\^\\~\\\&|SAP-ISH\\^sapr3t\\^002|UKHD\\^0999|PORS||200912||207|E||||MSH|\\^\\~\\\&|SAP-ISH\\^sapr3t\\^002|UKHD\\^0999|PORS||200912151600||MFN\\^M02\\^MFN_M02|1234|P|2.5.1\r\nMFI|PRO\\^Practitioner Master File\\^HL70175||UPD|||AL\r\nMFE|MAD|||0000018909|PL\r\nnichtkorrekt|0000018909|154999987|Brueckenhauer\\^Ludwig\\^Josef\\^JR\\^Dr|Internist|M|19501101||||00496221566736\\^00496221562000\\^kurt@beckenbauer.de|StreetOrMail\&Streetress\&200\\^OtherDesiuuation\\^Cztty\\^State\\^78905\\^DE|20091211|20081101|||||||||||||||||||||||||R||||
+</li>
+<li>
+<b>Add provider (Invalid HL7 Message)</b> Record Level Event Code<br /><a id="p5" href="http://wega.ifi.uni-heidelberg.de:9436/communication-servlet/PorsServlet?user=Testuser&password=testpass&msg=MSH%7C%5E%7E%5C%26%7CSAP-ISH%5Esapr3t%5E002%7CUKHD%5E0999%7CPORS%7C%7C200912151600%7C%7CMFN%5EM02%5EMFN_M02%7C1234%7CP%7C2.5.1%0D%0AMFI%7CPRO%5EPractitioner+Master+File%5EHL70175%7C%7CUPD%7C%7C%7CAL%0D%0AMFE%7Cnichtkorrekt%7C%7C%7C0000018909%7CPL%0D%0ASTF%7C0000018909%7C154999987%7CBrueckenhauer%5ELudwig%5EJosef%5EJR%5EDr%7CInternist%7CM%7C19501101%7C%7C%7C%7C00496221566736%5E00496221562000%5Ekurt%40beckenbauer.de%7CStreetOrMail%26Streetress%26200%5EOtherDesiuuation%5ECztty%5EState%5E78905%5EDE%7C20091211%7C20081101%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7CR">MSH|^~\&|SAP-ISH^sapr3t^002|UKHD^0999|PORS||200912151600||MFN^M02^MFN_M02|1234|P|2.5.1
+MFI|PRO^Practitioner Master File^HL70175||UPD|||AL
+MFE|nichtkorrekt|||0000018909|PL
+STF|0000018909|154999987|Brueckenhauer^Ludwig^Josef^JR^Dr|Internist|M|19501101||||00496221566736^00496221562000^franz@beckenbauer.de|StreetOrMailing&Streetress&200^OtherDesiuunation^Cztty^State^78905^DE|20091211|20081101|||||||||||||||||||||||||R</a><br /><b>Expected Result</b><br />
+MSH|^~\&|PORS||SAP-ISH^sapr3t^002|UKHD^0999|20101118112434||MFK^M02^MFK_M02|1235|P|2.5.1
+MSA|CE|1235
+MFI|PRO^Practitioner Master File^HL70175||UPD|||AL
+ERR|^^^201&ERROR&hl70357&&No such record level event code||201|E||||||||
+</li>
+<li>
+<b>Add provider (Invalid HL7 Message)</b> No such masterfile<br /><a id="p6" href="http://wega.ifi.uni-heidelberg.de:9436/communication-servlet/PorsServlet?user=Testuser&password=testpass&msg=MSH%7C%5E%7E%5C%26%7CSAP-ISH%5Esapr3t%5E002%7CUKHD%5E0999%7CPORS%7C%7C200912151600%7C%7CMFN%5EM02%5EMFN_M02%7C1234%7CP%7C2.5.1%0D%0AMFI%7Cschwachsinn%7C%7CUPD%7C%7C%7CAL%0D%0AMFE%7CMAD%7C%7C%7C0000001234%7CPL%0D%0ASTF%7C0000001234%7C179999922%7CBeckenbauer%5EFranz%5EJosef%5EJR%5EDr%7CInternist%7CM%7C19501101%7C%7C%7C999%5EOrgName1%5EOrgName2%5E0000002345%7C00496221566736%5E00496221562000%5Efranz%40beckenbauer.de%7CStreetOrMailing%26StreetAddress%2699%5EOtherDesignation%5ECity%5EState%5EZip%5ECY%7C20091211%7C20081101%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7CR">MSH|^~\&|SAP-ISH^sapr3t^002|UKHD^0999|PORS||200912151600||MFN^M02^MFN_M02|1234|P|2.5.1
+MFI|schwachsinn||UPD|||AL
+MFE|MAD|||0000001234|PL
+STF|0000001234|179999922|Beckenbauer^Franz^Josef^JR^Dr|Internist|M|19501101|||999^OrgName1^OrgName2^0000002345|00496221566736^00496221562000^franz@beckenbauer.de|StreetOrMailing&StreetAddress&99^OtherDesignation^City^State^Zip^CY|20091211|20081101|||||||||||||||||||||||||R</a><br /><b>Expected Result</b><br />MSH|^~\&|PORS||SAP-ISH^sapr3t^002|UKHD^0999|20101109103503||MFK^M02^MFK_M02|1235|P|2.5.1
+MSA|CE|1235
+MFI|schwachsinn||UPD|||AL
+ERR|^^^0&ERROR&hl70357&&No such Masterfile||0|E||||||||
+</li>
+<li>
+<b>Add provider (Invalid HL7 Message)</b>Missing Master File Event Segment<br /><a id="p7" href="http://wega.ifi.uni-heidelberg.de:9436/communication-servlet/PorsServlet?user=Testuser&password=testpass&msg=MSH%7C%5E%7E%5C%26%7CSAP-ISH%5Esapr3t%5E002%7CUKHD%5E0999%7CPORS%7C%7C200912151600%7C%7CMFN%5EM02%5EMFN_M02%7C1234%7CP%7C2.5.1%0D%0AMFI%7CPRO%5EPractitioner+Master+File%5EHL70175%7C%7CUPD%7C%7C%7CAL%0D%0ASTF%7C0000001234%7C179999925%7CBeckenbauer%5EFranz%5EJosef%5EJR%5EDr%7CInternist%7CM%7C19501101%7C%7C%7C999%5EOrgName1%5EOrgName2%5E0000002345%7C00496221566736%5E00496221562000%5Efranz%40beckenbauer.de%7CStreetOrMailing%26StreetAddress%2699%5EOtherDesignation%5ECity%5EState%5EZip%5ECY%7C20091211%7C20081101%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7CR">MSH|^~\&|SAP-ISH^sapr3t^002|UKHD^0999|PORS||200912151600||MFN^M02^MFN_M02|1234|P|2.5.1
+MFI|PRO^Practitioner Master File^HL70175||UPD|||AL
+STF|0000001234|179999925|Beckenbauer^Franz^Josef^JR^Dr|Internist|M|19501101|||999^OrgName1^OrgName2^0000002345|00496221566736^00496221562000^franz@beckenbauer.de|StreetOrMailing&StreetAddress&99^OtherDesignation^City^State^Zip^CY|20091211|20081101|||||||||||||||||||||||||R</a><br /><b>Expected Result</b><br />MSH|^~\&|PORS||SAP-ISH^sapr3t^002|UKHD^0999|20101109033701||MFK^M02^MFK_M02|1235|P|2.5.1
+MSA|CE|1235
+MFI|PRO^Practitioner Master File^HL70175||UPD|||AL
+ERR|^^^100&ERROR&hl70357&&MFE Segment not correct or not present||100|E||||||||
+</li>
+<li>
+<b>Add provider (Missing Rights)</b><br /><a id="p8" href="http://wega.ifi.uni-heidelberg.de:9436/communication-servlet/PorsServlet?user=Testuser2&password=testpass&msg=MSH%7C%5E%7E%5C%26%7CSAP-ISH%5Esapr3t%5E002%7CUKHD%5E0999%7CPORS%7C%7C200912151600%7C%7CMFN%5EM02%5EMFN_M02%7C1234%7CP%7C2.5.1%0D%0AMFI%7CPRO%5EPractitioner+Master+File%5EHL70175%7C%7CUPD%7C%7C%7CAL%0D%0AMFE%7CMAD%7C%7C%7C0000018909%7CPL%0D%0ASTF%7C0000018909%7C154999987%7CBrueckenhauer%5ELudwig%5EJosef%5EJR%5EDr%7CInternist%7CM%7C19501101%7C%7C%7C%7C00496221566736%5E00496221562000%5Ekurt%40beckenbauer.de%7CStreetOrMail%26Streetress%26200%5EOtherDesiuuation%5ECztty%5EState%5E78905%5EDE%7C20091211%7C20081101%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7CR">MSH|^~\&|SAP-ISH^sapr3t^002|UKHD^0999|PORS||200912151600||MFN^M02^MFN_M02|1234|P|2.5.1
+MFI|PRO^Practitioner Master File^HL70175||UPD|||AL
+MFE|MAD|||0000018909|PL
+STF|0000018909|154999987|Brueckenhauer^Ludwig^Josef^JR^Dr|Internist|M|19501101||||00496221566736^00496221562000^franz@beckenbauer.de|StreetOrMailing&Streetress&200^OtherDesiuunation^Cztty^State^78905^DE|20091211|20081101|||||||||||||||||||||||||R</a><br /><b>Expected Result</b><br />
+MSH|^~\&|PORS||SAP-ISH^sapr3t^002|UKHD^0999|20101118124641||MFK^M02^MFK_M02|1235|P|2.5.1
+MSA|CR|1235
+MFI|PRO^Practitioner Master File^HL70175||UPD|||AL
+ERR|^^^207&ERROR&hl70357&&missing rights||207|E||||||||
+</li>
+<li>
+<b>Add another provider </b><br /><a id="p9" href="http://wega.ifi.uni-heidelberg.de:9436/communication-servlet/PorsServlet?user=Testuser&password=testpass&msg=MSH%7C%5E%7E%5C%26%7CSAP-ISH%5Esapr3t%5E002%7CUKHD%5E0999%7CPORS%7C%7C200912151600%7C%7CMFN%5EM02%5EMFN_M02%7C1234%7CP%7C2.5.1%0D%0AMFI%7CPRO%5EPractitioner+Master+File%5EHL70175%7C%7CUPD%7C%7C%7CAL%0D%0AMFE%7CMAD%7C%7C%7C8929%7CPL%0D%0ASTF%7C8929%7C154999929%7CBeckenbauer%5EFranz%5EJosef%5EJR%5EDr%7CInternist%7CM%7C19501101%7C%7C%7C%7C00496221566736%5E00496221562000%5Ekurt%40beckenbauer.de%7CStreetOrMail%26Streetress%26200%5EOtherDesiuuation%5ECztty%5EState%5E78905%5EDE%7C20091211%7C20081101%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7CR">MSH|^~\&|SAP-ISH^sapr3t^002|UKHD^0999|PORS||200912151600||MFN^M02^MFN_M02|1234|P|2.5.1
+MFI|PRO^Practitioner Master File^HL70175||UPD|||AL
+MFE|MAD|||8929|PL
+STF|8929|154999929|Beckenbauer^Franz^Josef^JR^Dr|Internist|M|19501101||||00496221566736^00496221562000^franz@beckenbauer.de|StreetOrMailing&Streetress&200^OtherDesiuunation^Cztty^State^78905^DE|20091211|20081101|||||||||||||||||||||||||R</a><br /><b>Expected Result</b><br />
+MSH|^~\&|PORS|UKHD|SAP-ISH^sapr3t^002|UKHD^0999|20110208022004||MFK^M02^MFK_M02|1235|P|2.5.1
+MSA|CA|1234
+MFI|PRO^Practitioner Master File^HL70175||UPD|||AL
+ERR|^^^0&ERROR&hl70357&&Message Accepted||0|I||||||||
+</li>
+</ul>
+<h2>Systemtests Add Organisation</h2>
+<ul>
+<li>
+<b>Add organisation</b><br /><a id="o1" href="http://wega.ifi.uni-heidelberg.de:9436/communication-servlet/PorsServlet?user=Testuser&password=testpass&msg=MSH%7C%5E%7E%5C%26%7CSAP-ISH%5Esapr3t%5E002%7CUKHD%5E0999%7CPORS%7C%7C200912151600%7C%7CMFN%5EM02%5EMFN_M02%7C1239%7CP%7C2.5.1%0D%0AMFI%7CORG%5EPractitioner+Master+File%5EHL70175%7C%7CUPD%7C%7C%7CAL%0D%0AMFE%7CMAD%7C%7C%7C0000002349%7CPL%0D%0ASTF%7C0000002349%7C179999900%7COrgName1%5EOrgName2%7CFachrichtung%7C%7C%7C%7C%7C999%5EUKHD%5EUniversit%E4tsklinikum+Heidelberg%5E1.2.276.0.76.3.1.80%7C00496221566736%5E00496221562000%5EMail%40Mail.de%7CStreetOrMailing%26HouseStreet%26100%5Egugug%5ECity%5EState%5E67126%5EDE%7C20091211%7C20081101%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7CR">MSH|^~\&|SAP-ISH^sapr3t^002|UKHD^0999|PORS||200912151600||MFN^M02^MFN_M02|1239|P|2.5.1
+MFI|ORG^Practitioner Master File^HL70175||UPD|||AL
+MFE|MAD|||0000002349|PL
+STF|0000002349|179999900|OrgName1^OrgName2|Fachrichtung|||||999^UKHD^Universitaetsklinikum Heidelberg^1.2.276.0.76.3.1.80|00496221566736^00496221562000^Mail@Mail.de|StreetOrMailing&HouseStreet&100^gugug^City^State^67126^DE|20091211|20081101|||||||||||||||||||||||||R</a><br /><b>Expected Result</b><br />MSH|^~\&|PORS||SAP-ISH^sapr3t^002|UKHD^0999|20101109103210||MFK^M02^MFK_M02|1235|P|2.5.1
+MSA|CA|1235
+MFI|ORG^Practitioner Master File^HL70175||UPD|||AL
+ERR|^^^0&ERROR&hl70357&&Message Accepted||0|I||||||||
+</li>
+<li>
+<b>Add organisation (User not found)</b><br /><a id="o2" href="http://wega.ifi.uni-heidelberg.de:9436/communication-servlet/PorsServlet?user=Nichtkorrekt&password=userpass&msg=MSH%7C%5E%7E%5C%26%7CSAP-ISH%5Esapr3t%5E002%7CUKHD%5E0999%7CPORS%7C%7C200912151600%7C%7CMFN%5EM02%5EMFN_M02%7C1239%7CP%7C2.5.1%0D%0AMFI%7CORG%5EPractitioner+Master+File%5EHL70175%7C%7CUPD%7C%7C%7CAL%0D%0AMFE%7CMAD%7C%7C%7C0000001234%7CPL%0D%0ASTF%7C0000002349%7C179999900%7COrgName1%5EOrgName2%7CFachrichtung%7C%7C%7C%7C%7C999%5EUKHD%5EUniversit%E4tsklinikum+Heidelberg%5E1.2.276.0.76.3.1.80%7C00496221566736%5E00496221562000%5EMail%40Mail.de%7CStreetOrMailing%26HouseStreet%26100%5Egugug%5ECity%5EState%5E67126%5EDE%7C20091211%7C20081101%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7CR">MSH|^~\&|SAP-ISH^sapr3t^002|UKHD^0999|PORS||200912151600||MFN^M02^MFN_M02|1239|P|2.5.1
+MFI|ORG^Practitioner Master File^HL70175||UPD|||AL
+MFE|MAD|||0000001234|PL
+STF|0000002349|179999900|OrgName1^OrgName2|Fachrichtung|||||999^UKHD^Universitaetsklinikum Heidelberg^1.2.276.0.76.3.1.80|00496221566736^00496221562000^Mail@Mail.de|StreetOrMailing&HouseStreet&100^gugug^City^State^67126^DE|20091211|20081101|||||||||||||||||||||||||R</a><br /><b>Expected Result</b><br />MSH|^~\&|PORS||SAP-ISH^sapr3t^002|UKHD^0999|20101118022301||MFK^M02^MFK_M02|1240|P|2.5.1
+MSA|CR|1240
+MFI|ORG^Practitioner Master File^HL70175||UPD|||AL
+ERR|^^^207&ERROR&hl70357&&User not found||207|E||||||||
+</li>
+<li>
+<b>Add organisation (Password incorrect)</b><br /><a id="o3" href="http://wega.ifi.uni-heidelberg.de:9436/communication-servlet/PorsServlet?user=Testuser&password=nichtkorrekt&msg=MSH%7C%5E%7E%5C%26%7CSAP-ISH%5Esapr3t%5E002%7CUKHD%5E0999%7CPORS%7C%7C200912151600%7C%7CMFN%5EM02%5EMFN_M02%7C1239%7CP%7C2.5.1%0D%0AMFI%7CORG%5EPractitioner+Master+File%5EHL70175%7C%7CUPD%7C%7C%7CAL%0D%0AMFE%7CMAD%7C%7C%7C0000001234%7CPL%0D%0ASTF%7C0000002349%7C179999900%7COrgName1%5EOrgName2%7CFachrichtung%7C%7C%7C%7C%7C999%5EUKHD%5EUniversit%E4tsklinikum+Heidelberg%5E1.2.276.0.76.3.1.80%7C00496221566736%5E00496221562000%5EMail%40Mail.de%7CStreetOrMailing%26HouseStreet%26100%5Egugug%5ECity%5EState%5E67126%5EDE%7C20091211%7C20081101%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7CR">MSH|^~\&|SAP-ISH^sapr3t^002|UKHD^0999|PORS||200912151600||MFN^M02^MFN_M02|1239|P|2.5.1
+MFI|ORG^Practitioner Master File^HL70175||UPD|||AL
+MFE|MAD|||0000001234|PL
+STF|0000002349|179999900|OrgName1^OrgName2|Fachrichtung|||||999^UKHD^Universitaetsklinikum Heidelberg^1.2.276.0.76.3.1.80|00496221566736^00496221562000^Mail@Mail.de|StreetOrMailing&HouseStreet&100^gugug^City^State^67126^DE|20091211|20081101|||||||||||||||||||||||||R</a><br /><b>Expected Result</b><br />MSH|^~\&|PORS||SAP-ISH^sapr3t^002|UKHD^0999|20101118022658||MFK^M02^MFK_M02|1240|P|2.5.1
+MSA|CR|1240
+MFI|ORG^Practitioner Master File^HL70175||UPD|||AL
+ERR|^^^207&ERROR&hl70357&&Password incorrect||207|E||||||||
+</li>
+<li>
+<b>Add organisation (HL7 message not parsable)</b><br /><a id="o4" href="http://wega.ifi.uni-heidelberg.de:9436/communication-servlet/PorsServlet?user=Testuser&password=testpass&msg=MSH%7C%5E%7E%5C%26%7CSAP-ISH%5Esapr3t%5E002%7CUKHD%5E0999%7CPORS%7C%7C200912151600%7C%7CMFN%5EM02%5EMFN_M02%7C1239%7CP%7C2.5.1%0D%0AMFI%7CORG%5EPractitioner+Master+File%5EHL70175%7C%7CUPD%7C%7C%7CAL%0D%0AMFE%7CMAD%7C%7C%7C0000001234%7CPL%0D%0ANichtkorrekt%7C0000002349%7C179999900%7COrgName1%5EOrgName2%7CFachrichtung%7C%7C%7C%7C%7C999%5EUKHD%5EUniversit%E4tsklinikum+Heidelberg%5E1.2.276.0.76.3.1.80%7C00496221566736%5E00496221562000%5EMail%40Mail.de%7CStreetOrMailing%26HouseStreet%26100%5Egugug%5ECity%5EState%5E67126%5EDE%7C20091211%7C20081101%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7CR">MSH|^~\&|SAP-ISH^sapr3t^002|UKHD^0999|PORS||200912151600||MFN^M02^MFN_M02|1239|P|2.5.1
+MFI|ORG^Practitioner Master File^HL70175||UPD|||AL
+MFE|MAD|||0000001234|PL
+Nichtkorrekt|0000002349|179999900|OrgName1^OrgName2|Fachrichtung|||||999^UKHD^Universitaetsklinikum Heidelberg^1.2.276.0.76.3.1.80|00496221566736^00496221562000^Mail@Mail.de|StreetOrMailing&HouseStreet&100^gugug^City^State^67126^DE|20091211|20081101|||||||||||||||||||||||||R</a><br /><b>Expected Result</b><br />MSH|^~\&|PORS||||20101118023110||MFK^M02^MFK_M02|999999999|P|2.5.1
+MSA|CE|999999999
+MFI|||UPD|||AL
+ERR|^^^207&ERROR&hl70357&&Can't parse message beginning MSH|\\^\\~\\\&|SAP-ISH\\^sapr3t\\^002|UKHD\\^0999|PORS||200912||207|E||||MSH|\\^\\~\\\&|SAP-ISH\\^sapr3t\\^002|UKHD\\^0999|PORS||200912151600||MFN\\^M02\\^MFN_M02|1239|P|2.5.1\r\nMFI|ORG\\^Practitioner Master File\\^HL70175||UPD|||AL\r\nMFE|MAD|||0000001234|PL\r\nNichtkorrekt|0000002349|179999900|OrgName1\\^OrgName2|Fachrichtung|||||999\\^UKHD\\^Universitätsklinikum Heidelberg\\^1.2.276.0.76.3.1.80|00496221566736\\^00496221562000\\^Mail@Mail.de|StreetOrMailing\&HouseStreet\&100\\^gugug\\^City\\^State\\^67126\\^DE|20091211|20081101|||||||||||||||||||||||||R||||
+</li>
+<li>
+<b>Add organisation (Invalid HL7 message)</b> Record Level Event Code<br /><a id="o5" href="http://wega.ifi.uni-heidelberg.de:9436/communication-servlet/PorsServlet?user=Testuser&password=testpass&msg=MSH%7C%5E%7E%5C%26%7CSAP-ISH%5Esapr3t%5E002%7CUKHD%5E0999%7CPORS%7C%7C200912151600%7C%7CMFN%5EM02%5EMFN_M02%7C1239%7CP%7C2.5.1%0D%0AMFI%7CORG%5EPractitioner+Master+File%5EHL70175%7C%7CUPD%7C%7C%7CAL%0D%0AMFE%7CNichtkorrekt%7C%7C%7C0000001234%7CPL%0D%0ASTF%7C0000002349%7C179999900%7COrgName1%5EOrgName2%7CFachrichtung%7C%7C%7C%7C%7C999%5EUKHD%5EUniversit%E4tsklinikum+Heidelberg%5E1.2.276.0.76.3.1.80%7C00496221566736%5E00496221562000%5EMail%40Mail.de%7CStreetOrMailing%26HouseStreet%26100%5Egugug%5ECity%5EState%5E67126%5EDE%7C20091211%7C20081101%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7CR">MSH|^~\&|SAP-ISH^sapr3t^002|UKHD^0999|PORS||200912151600||MFN^M02^MFN_M02|1239|P|2.5.1
+MFI|ORG^Practitioner Master File^HL70175||UPD|||AL
+MFE|Nichtkorrekt|||0000001234|PL
+STF|0000002349|179999900|OrgName1^OrgName2|Fachrichtung|||||999^UKHD^Universitaetsklinikum Heidelberg^1.2.276.0.76.3.1.80|00496221566736^00496221562000^Mail@Mail.de|StreetOrMailing&HouseStreet&100^gugug^City^State^67126^DE|20091211|20081101|||||||||||||||||||||||||R</a><br /><b>Expected Result</b><br />MSH|^~\&|PORS||SAP-ISH^sapr3t^002|UKHD^0999|20101118023841||MFK^M02^MFK_M02|1240|P|2.5.1
+MSA|CE|1240
+MFI|ORG^Practitioner Master File^HL70175||UPD|||AL
+ERR|^^^201&ERROR&hl70357&&No such record level event code||201|E||||||||
+</li>
+<li>
+<b>Add organisation (Missing Rights)</b><br /><a id="o6" href="http://wega.ifi.uni-heidelberg.de:9436/communication-servlet/PorsServlet?user=Testuser2&password=testpass&msg=MSH%7C%5E%7E%5C%26%7CSAP-ISH%5Esapr3t%5E002%7CUKHD%5E0999%7CPORS%7C%7C200912151600%7C%7CMFN%5EM02%5EMFN_M02%7C1239%7CP%7C2.5.1%0D%0AMFI%7CORG%5EPractitioner+Master+File%5EHL70175%7C%7CUPD%7C%7C%7CAL%0D%0AMFE%7CMAD%7C%7C%7C0000001234%7CPL%0D%0ASTF%7C0000002349%7C179999900%7COrgName1%5EOrgName2%7CFachrichtung%7C%7C%7C%7C%7C999%5EUKHD%5EUniversit%E4tsklinikum+Heidelberg%5E1.2.276.0.76.3.1.80%7C00496221566736%5E00496221562000%5EMail%40Mail.de%7CStreetOrMailing%26HouseStreet%26100%5Egugug%5ECity%5EState%5E67126%5EDE%7C20091211%7C20081101%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7CR">MSH|^~\&|SAP-ISH^sapr3t^002|UKHD^0999|PORS||200912151600||MFN^M02^MFN_M02|1239|P|2.5.1
+MFI|ORG^Practitioner Master File^HL70175||UPD|||AL
+MFE|MAD|||0000001234|PL
+STF|0000002349|179999900|OrgName1^OrgName2|Fachrichtung|||||999^UKHD^Universitaetsklinikum Heidelberg^1.2.276.0.76.3.1.80|00496221566736^00496221562000^Mail@Mail.de|StreetOrMailing&HouseStreet&100^gugug^City^State^67126^DE|20091211|20081101|||||||||||||||||||||||||R</a><br /><b>Expected Result</b><br />MSH|^~\&|PORS||SAP-ISH^sapr3t^002|UKHD^0999|20101118024858||MFK^M02^MFK_M02|1240|P|2.5.1
+MSA|CR|1240
+MFI|ORG^Practitioner Master File^HL70175||UPD|||AL
+ERR|^^^207&ERROR&hl70357&&missing rights||207|E||||||||
+</li>
+<li>
+<b>Add another organisation</b><br /><a id="o7" href="http://wega.ifi.uni-heidelberg.de:9436/communication-servlet/PorsServlet?user=Testuser&password=testpass&msg=MSH%7C%5E%7E%5C%26%7CSAP-ISH%5Esapr3t%5E002%7CUKHD%5E0999%7CPORS%7C%7C200912151600%7C%7CMFN%5EM02%5EMFN_M02%7C1239%7CP%7C2.5.1%0D%0AMFI%7CORG%5EPractitioner+Master+File%5EHL70175%7C%7CUPD%7C%7C%7CAL%0D%0AMFE%7CMAD%7C%7C%7C3333%7CPL%0D%0ASTF%7C3333%7C179993300%7CKrankenhausHeidelberg%5ESchoen%7CFachrichtung%7C%7C%7C%7C%7C999%5EUKHD%5EUniversit%E4tsklinikum+Heidelberg%5E1.2.276.0.76.3.1.80%7C00496221566736%5E00496221562000%5EMail%40Mail.de%7CStreetOrMailing%26HouseStreet%26100%5Egugug%5ECity%5EState%5E67126%5EDE%7C20091211%7C20081101%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7CR">MSH|^~\&|SAP-ISH^sapr3t^002|UKHD^0999|PORS||200912151600||MFN^M02^MFN_M02|1239|P|2.5.1
+MFI|ORG^Practitioner Master File^HL70175||UPD|||AL
+MFE|MAD|||3333|PL
+STF|3333|179993300|KrankenhausHeidelberg^Schoen|Fachrichtung|||||999^UKHD^Universitaetsklinikum Heidelberg^1.2.276.0.76.3.1.80|00496221566736^00496221562000^Mail@Mail.de|StreetOrMailing&HouseStreet&100^gugug^City^State^67126^DE|20091211|20081101|||||||||||||||||||||||||R</a><br /><b>Expected Result</b><br />MSH|^~\&|PORS|UKHD|SAP-ISH^sapr3t^002|UKHD^0999|20110208024047||MFK^M02^MFK_M02|1240|P|2.5.1
+MSA|CA|1239
+MFI|ORG^Practitioner Master File^HL70175||UPD|||AL
+ERR|^^^0&ERROR&hl70357&&Message Accepted||0|I||||||||
+</li>
+<li>
+<b>Add organisation (Missing required field)</b><br /><a id="o8" href="http://wega.ifi.uni-heidelberg.de:9436/communication-servlet/PorsServlet?user=Testuser&password=testpass&msg=MSH%7C%5E%7E%5C%26%7CSAP-ISH%5Esapr3t%5E002%7CUKHD%5E0999%7CPORS%7C%7C200912151600%7C%7CMFN%5EM02%5EMFN_M02%7C1239%7CP%7C2.5.1%0D%0AMFI%7CORG%5EPractitioner+Master+File%5EHL70175%7C%7CUPD%7C%7C%7CAL%0D%0AMFE%7CMAD%7C%7C%7C0000002345%7CPL%0D%0ASTF%7C0000002345%7C179999905%7C%5EOrgName2%7CFachrichtung%7C%7C%7C%7C%7C999%5EUKHD%5EUniversit%E4tsklinikum+Heidelberg%5E1.2.276.0.76.3.1.80%7C00496221566736%5E00496221562000%5EMail%40Mail.de%7CStreetOrMailing%26HouseStreet%26100%5Egugug%5ECity%5EState%5E67126%5EDE%7C20091211%7C20081101%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7CR">MSH|^~\&|SAP-ISH^sapr3t^002|UKHD^0999|PORS||200912151600||MFN^M02^MFN_M02|1239|P|2.5.1
+MFI|ORG^Practitioner Master File^HL70175||UPD|||AL
+MFE|MAD|||0000002345|PL
+STF|0000002345|179999905|^OrgName2|Fachrichtung|||||999^UKHD^Universitaetsklinikum Heidelberg^1.2.276.0.76.3.1.80|00496221566736^00496221562000^Mail@Mail.de|StreetOrMailing&HouseStreet&100^gugug^City^State^67126^DE|20091211|20081101|||||||||||||||||||||||||R</a><br /><b>Expected Result</b><br />MSH|^~\&|PORS||SAP-ISH^sapr3t^002|UKHD^0999|20101118032410||MFK^M02^MFK_M02|1240|P|2.5.1
+MSA|CE|1240
+MFI|ORG^Practitioner Master File^HL70175||UPD|||AL
+ERR|^^^101&ERROR&hl70357&&Name is not set||101|E||||||||
+</li>
+</ul>
+<h2>Systemtests Update Provider</h2>
+<ul>
+<li>
+<b>Update provider</b> Changing first provider of adding provider testcases<br /><a id="up1" href="http://wega.ifi.uni-heidelberg.de:9436/communication-servlet/PorsServlet?user=Testuser&password=testpass&msg=MSH%7C%5E%7E%5C%26%7CSAP-ISH%5Esapr3t%5E002%7CUKHD%5E0999%7CPORS%7C%7C200912151600%7C%7CMFN%5EM02%5EMFN_M02%7C1234%7CP%7C2.5.1%0D%0AMFI%7CPRO%5EPractitioner+Master+File%5EHL70175%7C%7CUPD%7C%7C%7CAL%0D%0AMFE%7CMUP%7C%7C%7C8909%7CPL%0D%0ASTF%7C8909%7C154999989%7CBrueckenbauer%5EToyman%5EKurt%5EJR%5EDr%7CInternist%7CM%7C19501101%7C%7C%7C%7C00496221566736%5E00496221562000%5Ekurt%40beckenbauer.de%7CStreetOrMail%26Streetress%26200%5EOtherDesiuuation%5ECztty%5EState%5E78905%5EDE%7C20091211%7C20081101%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7CR">MSH|^~\&|SAP-ISH^sapr3t^002|UKHD^0999|PORS||200912151600||MFN^M02^MFN_M02|1234|P|2.5.1
+MFI|PRO^Practitioner Master File^HL70175||UPD|||AL
+MFE|MUP|||8909|PL
+STF|8909|154999989|Brueckenbauer^Toyman^Kurt^JR^Dr|Internist|M|19501101||||00496221566736^00496221562000^franz@beckenbauer.de|StreetOrMailing&Streetress&200^OtherDesiuunation^Cztty^State^78905^DE|20091211|20081101|||||||||||||||||||||||||R</a><br /><b>Expected Result</b><br />
+MSH|^~\&|PORS||SAP-ISH^sapr3t^002|UKHD^0999|20101116034500||MFK^M02^MFK_M02|1235|P|2.5.1
+MSA|CA|1235
+MFI|PRO^Practitioner Master File^HL70175||UPD|||AL
+ERR|^^^0&ERROR&hl70357&&Message Accepted||0|I||||||||
+</li>
+<li>
+<b>Update provider (User not found exception)</b> Changing first provider of adding provider testcases<br /><a id="up2" href="http://wega.ifi.uni-heidelberg.de:9436/communication-servlet/PorsServlet?user=UnknownUser&password=testpass&msg=MSH%7C%5E%7E%5C%26%7CSAP-ISH%5Esapr3t%5E002%7CUKHD%5E0999%7CPORS%7C%7C200912151600%7C%7CMFN%5EM02%5EMFN_M02%7C1234%7CP%7C2.5.1%0D%0AMFI%7CPRO%5EPractitioner+Master+File%5EHL70175%7C%7CUPD%7C%7C%7CAL%0D%0AMFE%7CMUP%7C%7C%7C0000008909%7CPL%0D%0ASTF%7C0000008909%7C154999989%7CBrueckenbauer%5EToyman%5EKurt%5EJR%5EDr%7CInternist%7CM%7C19501101%7C%7C%7C%7C00496221566736%5E00496221562000%5Ekurt%40beckenbauer.de%7CStreetOrMail%26Streetress%26200%5EOtherDesiuuation%5ECztty%5EState%5E78905%5EDE%7C20091211%7C20081101%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7CR">MSH|^~\&|SAP-ISH^sapr3t^002|UKHD^0999|PORS||200912151600||MFN^M02^MFN_M02|1234|P|2.5.1
+MFI|PRO^Practitioner Master File^HL70175||UPD|||AL
+MFE|MUP|||0000008909|PL
+STF|0000008909|154999989|Brueckenbauer^Toyman^Kurt^JR^Dr|Internist|M|19501101||||00496221566736^00496221562000^franz@beckenbauer.de|StreetOrMailing&Streetress&200^OtherDesiuunation^Cztty^State^78905^DE|20091211|20081101|||||||||||||||||||||||||R</a><br /><b>Expected Result</b><br />
+MSH|^~\&|PORS||SAP-ISH^sapr3t^002|UKHD^0999|20101129023629||MFK^M02^MFK_M02|1235|P|2.5.1
+MSA|CR|1235
+MFI|PRO^Practitioner Master File^HL70175||UPD|||AL
+ERR|^^^207&ERROR&hl70357&&User not found||207|E||||||||
+</li>
+<li>
+<b>Update provider (Password incorrect)</b> Changing first provider of adding provider testcases<br /><a id="up3" href="http://wega.ifi.uni-heidelberg.de:9436/communication-servlet/PorsServlet?user=Testuser&password=wrongpassword&msg=MSH%7C%5E%7E%5C%26%7CSAP-ISH%5Esapr3t%5E002%7CUKHD%5E0999%7CPORS%7C%7C200912151600%7C%7CMFN%5EM02%5EMFN_M02%7C1234%7CP%7C2.5.1%0D%0AMFI%7CPRO%5EPractitioner+Master+File%5EHL70175%7C%7CUPD%7C%7C%7CAL%0D%0AMFE%7CMUP%7C%7C%7C0000008909%7CPL%0D%0ASTF%7C0000008909%7C154999989%7CBrueckenbauer%5EToyman%5EKurt%5EJR%5EDr%7CInternist%7CM%7C19501101%7C%7C%7C%7C00496221566736%5E00496221562000%5Ekurt%40beckenbauer.de%7CStreetOrMail%26Streetress%26200%5EOtherDesiuuation%5ECztty%5EState%5E78905%5EDE%7C20091211%7C20081101%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7CR">MSH|^~\&|SAP-ISH^sapr3t^002|UKHD^0999|PORS||200912151600||MFN^M02^MFN_M02|1234|P|2.5.1
+MFI|PRO^Practitioner Master File^HL70175||UPD|||AL
+MFE|MUP|||0000008909|PL
+STF|0000008909|154999989|Brueckenbauer^Toyman^Kurt^JR^Dr|Internist|M|19501101||||00496221566736^00496221562000^franz@beckenbauer.de|StreetOrMailing&Streetress&200^OtherDesiuunation^Cztty^State^78905^DE|20091211|20081101|||||||||||||||||||||||||R</a><br /><b>Expected Result</b><br />
+MSH|^~\&|PORS||SAP-ISH^sapr3t^002|UKHD^0999|20101129024620||MFK^M02^MFK_M02|1235|P|2.5.1
+MSA|CR|1235
+MFI|PRO^Practitioner Master File^HL70175||UPD|||AL
+ERR|^^^207&ERROR&hl70357&&Password incorrect||207|E||||||||
+</li>
+<li>
+<b>Update provider (Invalid HL7 Message)</b> Changing first provider of adding provider testcases<br /><a id="up4" href="http://wega.ifi.uni-heidelberg.de:9436/communication-servlet/PorsServlet?user=Testuser&password=testpass&msg=MSH%7C%5E%7E%5C%26%7C%7C%7C200912151600%7C%7CMFN%5EM02%5EMFN_M02%7C1234%7CP%7C2.5.1%0D%0AMFI%7CPRO%5EPractitioner+Master+File%5EHL70175%7C%7CUPD%7C%7C%7CAL%0D%0AMFE%7CMUP%7C%7C%7C0000008909%7CPL%0D%0ASTF%7C0000008909%7C154999989%7CBrueckenbauer%5EToyman%5EKurt%5EJR%5EDr%7CInternist%7CM%7C19501101%7C%7C%7C%7C00496221566736%5E00496221562000%5Ekurt%40beckenbauer.de%7CStreetOrMail%26Streetress%26200%5EOtherDesiuuation%5ECztty%5EState%5E78905%5EDE%7C20091211%7C20081101%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7CR">MSH|^~\&|||200912151600||MFN^M02^MFN_M02|1234|P|2.5.1
+MFI|PRO^Practitioner Master File^HL70175||UPD|||AL
+MFE|MUP|||0000008909|PL
+STF|0000008909|154999989|Brueckenbauer^Toyman^Kurt^JR^Dr|Internist|M|19501101||||00496221566736^00496221562000^franz@beckenbauer.de|StreetOrMailing&Streetress&200^OtherDesiuunation^Cztty^State^78905^DE|20091211|20081101|||||||||||||||||||||||||R</a><br /><b>Expected Result</b><br />
+MSH|^~\&|PORS||||20101129025827||MFK^M02^MFK_M02|999999999|P|2.5.1
+MSA|CE|999999999
+MFI|||UPD|||AL
+ERR|^^^101&ERROR&hl70357&&Can't find version ID - MSH has only 10 fields.||101|E||||MSH|\\^\\~\\\&|||200912151600||MFN\\^M02\\^MFN_M02|1234|P|2.5.1\r\nMFI|PRO\\^Practitioner Master File\\^HL70175||UPD|||AL\r\nMFE|MUP|||0000008909|PL\r\nSTF|0000008909|154999989|Brueckenbauer\\^Toyman\\^Kurt\\^JR\\^Dr|Internist|M|19501101||||00496221566736\\^00496221562000\\^kurt@beckenbauer.de|StreetOrMail\&Streetress\&200\\^OtherDesiuuation\\^Cztty\\^State\\^78905\\^DE|20091211|20081101|||||||||||||||||||||||||R||||
+</li>
+<li>
+<b>Update provider (Missing Rights)</b> Changing first provider of adding provider testcases<br /><a id="up5" href="http://wega.ifi.uni-heidelberg.de:9436/communication-servlet/PorsServlet?user=Testuser2&password=testpass&msg=MSH%7C%5E%7E%5C%26%7CSAP-ISH%5Esapr3t%5E002%7CUKHD%5E0999%7CPORS%7C%7C200912151600%7C%7CMFN%5EM02%5EMFN_M02%7C1234%7CP%7C2.5.1%0D%0AMFI%7CPRO%5EPractitioner+Master+File%5EHL70175%7C%7CUPD%7C%7C%7CAL%0D%0AMFE%7CMUP%7C%7C%7C0000008909%7CPL%0D%0ASTF%7C0000008909%7C154999989%7CBrueckenbauer%5EToyman%5EKurt%5EJR%5EDr%7CInternist%7CM%7C19501101%7C%7C%7C%7C00496221566736%5E00496221562000%5Ekurt%40beckenbauer.de%7CStreetOrMail%26Streetress%26200%5EOtherDesiuuation%5ECztty%5EState%5E78905%5EDE%7C20091211%7C20081101%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7CR">MSH|^~\&|SAP-ISH^sapr3t^002|UKHD^0999|PORS||200912151600||MFN^M02^MFN_M02|1234|P|2.5.1
+MFI|PRO^Practitioner Master File^HL70175||UPD|||AL
+MFE|MUP|||0000008909|PL
+STF|0000008909|154999989|Brueckenbauer^Toyman^Kurt^JR^Dr|Internist|M|19501101||||00496221566736^00496221562000^franz@beckenbauer.de|StreetOrMailing&Streetress&200^OtherDesiuunation^Cztty^State^78905^DE|20091211|20081101|||||||||||||||||||||||||R</a><br /><b>Expected Result</b><br />
+MSH|^~\&|PORS||SAP-ISH^sapr3t^002|UKHD^0999|20101129030121||MFK^M02^MFK_M02|1235|P|2.5.1
+MSA|CR|1235
+MFI|PRO^Practitioner Master File^HL70175||UPD|||AL
+ERR|^^^207&ERROR&hl70357&&missing rights||207|E||||||||
+</li>
+<li>
+<b>Update provider (Provider Not Found)</b><br /><a id="up6" href="http://wega.ifi.uni-heidelberg.de:9436/communication-servlet/PorsServlet?user=Testuser&password=testpass&msg=MSH%7C%5E%7E%5C%26%7CUnknownSystem%7CUKHD%5E0999%7CPORS%7C%7C200912151600%7C%7CMFN%5EM02%5EMFN_M02%7C1234%7CP%7C2.5.1%0D%0AMFI%7CPRO%5EPractitioner+Master+File%5EHL70175%7C%7CUPD%7C%7C%7CAL%0D%0AMFE%7CMUP%7C%7C%7C0000008909%7CPL%0D%0ASTF%7C0000008909%7C154999989%7CBrueckenbauer%5EToyman%5EKurt%5EJR%5EDr%7CInternist%7CM%7C19501101%7C%7C%7C%7C00496221566736%5E00496221562000%5Efranz%40beckenbauer.de%7CStreetOrMailing%26Streetress%26200%5EOtherDesiuunation%5ECztty%5EState%5E78905%5EDE%7C20091211%7C20081101%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7CR">MSH|^~\&|UnknownSystem|UKHD^0999|PORS||200912151600||MFN^M02^MFN_M02|1234|P|2.5.1
+MFI|PRO^Practitioner Master File^HL70175||UPD|||AL
+MFE|MUP|||0000008909|PL
+STF|0000008909|154999989|Brueckenbauer^Toyman^Kurt^JR^Dr|Internist|M|19501101||||00496221566736^00496221562000^franz@beckenbauer.de|StreetOrMailing&Streetress&200^OtherDesiuunation^Cztty^State^78905^DE|20091211|20081101|||||||||||||||||||||||||R</a><br /><b>Expected Result</b><br />
+MSH|^~\&|PORS||UnknownSystem|UKHD^0999|20101129030536||MFK^M02^MFK_M02|1235|P|2.5.1
+MSA|CR|1235
+MFI|PRO^Practitioner Master File^HL70175||UPD|||AL
+ERR|^^^207&ERROR&hl70357&&There is no such provider!||207|E||||||||
+</li>
+<li>
+<b>Update provider</b> Changing address of first provider of adding provider testcases<br /><a id="up7" href="http://wega.ifi.uni-heidelberg.de:9436/communication-servlet/PorsServlet?user=Testuser&password=testpass&msg=MSH%7C%5E%7E%5C%26%7CSAP-ISH%5Esapr3t%5E002%7CUKHD%5E0999%7CPORS%7C%7C200912151600%7C%7CMFN%5EM02%5EMFN_M02%7C1234%7CP%7C2.5.1%0D%0AMFI%7CPRO%5EPractitioner+Master+File%5EHL70175%7C%7CUPD%7C%7C%7CAL%0D%0AMFE%7CMUP%7C%7C%7C8909%7CPL%0D%0ASTF%7C8909%7C154999989%7CBrueckenbauer%5EToyman%5EKurt%5EJR%5EDr%7CInternist%7CM%7C19501101%7C%7C%7C%7C00496221566736%5E00496221562000%5Ekurt%40beckenbauer.de%7C%26ChangedStreet%26200%5EChangedAdditional%5EChangedCity%5EChangedState%5E99221%5EDE%7C20091211%7C20081101%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7CR">MSH|^~\&|SAP-ISH^sapr3t^002|UKHD^0999|PORS||200912151600||MFN^M02^MFN_M02|1234|P|2.5.1
+MFI|PRO^Practitioner Master File^HL70175||UPD|||AL
+MFE|MUP|||8909|PL
+STF|8909|154999989|Brueckenbauer^Toyman^Kurt^JR^Dr|Internist|M|19501101||||00496221566736^00496221562000^franz@beckenbauer.de|ChangedStreet&200^ChangedAdditional^ChangedCity^ChangedState^99221^DE|20091211|20081101|||||||||||||||||||||||||R</a><br /><b>Expected Result</b><br />
+MSH|^~\&|PORS||SAP-ISH^sapr3t^002|UKHD^0999|20101116034500||MFK^M02^MFK_M02|1235|P|2.5.1
+MSA|CA|1235
+MFI|PRO^Practitioner Master File^HL70175||UPD|||AL
+ERR|^^^0&ERROR&hl70357&&Message Accepted||0|I||||||||
+</li>
+<li>
+<b>Update provider</b> Changing first provider and address of adding provider testcases<br /><a id="up8" href="http://wega.ifi.uni-heidelberg.de:9436/communication-servlet/PorsServlet?user=Testuser&password=testpass&msg=MSH%7C%5E%7E%5C%26%7CSAP-ISH%5Esapr3t%5E002%7CUKHD%5E0999%7CPORS%7C%7C200912151600%7C%7CMFN%5EM02%5EMFN_M02%7C1234%7CP%7C2.5.1%0D%0AMFI%7CPRO%5EPractitioner+Master+File%5EHL70175%7C%7CUPD%7C%7C%7CAL%0D%0AMFE%7CMUP%7C%7C%7C8909%7CPL%0D%0ASTF%7C8909%7C154999989%7CBrueckenbauer%5EToyman%5EKurt%5EJR%5EDr%7CInternist%7CM%7C19501101%7C%7C%7C%7C00496221566736%5E00496221562000%5Ekurt%40beckenbauer.de%7CStreetChanged%26Streetress%26220%5EOtherDesiuuation%5ECztty%5EState%5E78905%5EDE%7C20091211%7C20081101%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7CR">MSH|^~\&|SAP-ISH^sapr3t^002|UKHD^0999|PORS||200912151600||MFN^M02^MFN_M02|1234|P|2.5.1
+MFI|PRO^Practitioner Master File^HL70175||UPD|||AL
+MFE|MUP|||8909|PL
+STF|8909|154999989|Brueckenbauer^Toyman^Kurt^JR^Dr|Internist|M|19501101||||00496221566736^00496221562000^franz@beckenbauer.de|StreetOrMailing&Streetress&200^OtherDesiuunation^Cztty^State^78905^DE|20091211|20081101|||||||||||||||||||||||||R</a><br /><b>Expected Result</b><br />
+MSH|^~\&|PORS||SAP-ISH^sapr3t^002|UKHD^0999|20101116034500||MFK^M02^MFK_M02|1235|P|2.5.1
+MSA|CA|1235
+MFI|PRO^Practitioner Master File^HL70175||UPD|||AL
+ERR|^^^0&ERROR&hl70357&&Message Accepted||0|I||||||||
+</li>
+</ul>
+<h2>Systemtests Update Organisation</h2>
+<ul>
+<li>
+<b>Update organisation</b> Changing first organisation of systemtests add organisation<br /><a id="uo1" href="http://wega.ifi.uni-heidelberg.de:9436/communication-servlet/PorsServlet?user=Testuser&password=testpass&msg=MSH%7C%5E%7E%5C%26%7CSAP-ISH%5Esapr3t%5E002%7CUKHD%5E0999%7CPORS%7C%7C200912151600%7C%7CMFN%5EM02%5EMFN_M02%7C1239%7CP%7C2.5.1%0D%0AMFI%7CORG%5EPractitioner+Master+File%5EHL70175%7C%7CUPD%7C%7C%7CAL%0D%0AMFE%7CMUP%7C%7C%7C0000002349%7CPL%0D%0ASTF%7C0000002349%7C179999900%7COrgName1%5EChangedSecond%7CFachrichtung%7C%7C%7C%7C%7C%7C00496221566736%5E00496221562000%5EMail%40Mail.de%7CStreetOrMailing%26HouseStreet%26100%5Egugug%5ECity%5EState%5E67126%5EDE%7C20091211%7C20081101%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7CR">MSH|^~\&|SAP-ISH^sapr3t^002|UKHD^0999|PORS||200912151600||MFN^M02^MFN_M02|1239|P|2.5.1
+MFI|ORG^Practitioner Master File^HL70175||UPD|||AL
+MFE|MAD|||0000002349|PL
+STF|0000002349|179999900|OrgName1^ChangedSecond|Fachrichtung||||||00496221566736^00496221562000^Mail@Mail.de|StreetOrMailing&HouseStreet&100^gugug^City^State^67126^DE|20091211|20081101|||||||||||||||||||||||||R</a><br /><b>Expected Result</b><br />MSH|^~\&|PORS||SAP-ISH^sapr3t^002|UKHD^0999|20101109103210||MFK^M02^MFK_M02|1235|P|2.5.1
+MSA|CA|1235
+MFI|ORG^Practitioner Master File^HL70175||UPD|||AL
+ERR|^^^0&ERROR&hl70357&&Message Accepted||0|I||||||||
+</li>
+<li>
+<b>Update organisation (User Not Found)</b> Changing first organisation of systemtests add organisation<br /><a id="uo2" href="http://wega.ifi.uni-heidelberg.de:9436/communication-servlet/PorsServlet?user=UnknownUser&password=testpass&msg=MSH%7C%5E%7E%5C%26%7CSAP-ISH%5Esapr3t%5E002%7CUKHD%5E0999%7CPORS%7C%7C200912151600%7C%7CMFN%5EM02%5EMFN_M02%7C1239%7CP%7C2.5.1%0D%0AMFI%7CORG%5EPractitioner+Master+File%5EHL70175%7C%7CUPD%7C%7C%7CAL%0D%0AMFE%7CMUP%7C%7C%7C0000002349%7CPL%0D%0ASTF%7C0000002349%7C179999900%7COrgName1%5EChangedSecond%7CFachrichtung%7C%7C%7C%7C%7C999%5EUKHD%5EUniversit%E4tsklinikum+Heidelberg%5E1.2.276.0.76.3.1.80%7C00496221566736%5E00496221562000%5EMail%40Mail.de%7CStreetOrMailing%26HouseStreet%26100%5Egugug%5ECity%5EState%5E67126%5EDE%7C20091211%7C20081101%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7CR">MSH|^~\&|SAP-ISH^sapr3t^002|UKHD^0999|PORS||200912151600||MFN^M02^MFN_M02|1239|P|2.5.1
+MFI|ORG^Practitioner Master File^HL70175||UPD|||AL
+MFE|MAD|||0000002349|PL
+STF|0000002349|179999900|OrgName1^ChangedSecond|Fachrichtung|||||999^UKHD^Universitaetsklinikum Heidelberg^1.2.276.0.76.3.1.80|00496221566736^00496221562000^Mail@Mail.de|StreetOrMailing&HouseStreet&100^gugug^City^State^67126^DE|20091211|20081101|||||||||||||||||||||||||R</a><br /><b>Expected Result</b><br />MSH|^~\&|PORS||SAP-ISH^sapr3t^002|UKHD^0999|20101129041357||MFK^M02^MFK_M02|1240|P|2.5.1
+MSA|CR|1240
+MFI|ORG^Practitioner Master File^HL70175||UPD|||AL
+ERR|^^^207&ERROR&hl70357&&User not found||207|E||||||||
+</li>
+<li>
+<b>Update organisation (Password Incorrect)</b> Changing first organisation of systemtests add organisation<br /><a id="uo3" href="http://wega.ifi.uni-heidelberg.de:9436/communication-servlet/PorsServlet?user=Testuser&password=incorrectpass&msg=MSH%7C%5E%7E%5C%26%7CSAP-ISH%5Esapr3t%5E002%7CUKHD%5E0999%7CPORS%7C%7C200912151600%7C%7CMFN%5EM02%5EMFN_M02%7C1239%7CP%7C2.5.1%0D%0AMFI%7CORG%5EPractitioner+Master+File%5EHL70175%7C%7CUPD%7C%7C%7CAL%0D%0AMFE%7CMUP%7C%7C%7C0000002349%7CPL%0D%0ASTF%7C0000002349%7C179999900%7COrgName1%5EChangedSecond%7CFachrichtung%7C%7C%7C%7C%7C999%5EUKHD%5EUniversit%E4tsklinikum+Heidelberg%5E1.2.276.0.76.3.1.80%7C00496221566736%5E00496221562000%5EMail%40Mail.de%7CStreetOrMailing%26HouseStreet%26100%5Egugug%5ECity%5EState%5E67126%5EDE%7C20091211%7C20081101%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7CR">MSH|^~\&|SAP-ISH^sapr3t^002|UKHD^0999|PORS||200912151600||MFN^M02^MFN_M02|1239|P|2.5.1
+MFI|ORG^Practitioner Master File^HL70175||UPD|||AL
+MFE|MAD|||0000002349|PL
+STF|0000002349|179999900|OrgName1^ChangedSecond|Fachrichtung|||||999^UKHD^Universitaetsklinikum Heidelberg^1.2.276.0.76.3.1.80|00496221566736^00496221562000^Mail@Mail.de|StreetOrMailing&HouseStreet&100^gugug^City^State^67126^DE|20091211|20081101|||||||||||||||||||||||||R</a><br /><b>Expected Result</b><br />MSH|^~\&|PORS||SAP-ISH^sapr3t^002|UKHD^0999|20101129041523||MFK^M02^MFK_M02|1240|P|2.5.1
+MSA|CR|1240
+MFI|ORG^Practitioner Master File^HL70175||UPD|||AL
+ERR|^^^207&ERROR&hl70357&&Password incorrect||207|E||||||||
+</li>
+<li>
+<b>Update organisation (Invalid HL7 Message)</b> Changing first organisation of systemtests add organisation<br /><a id="uo4" href="http://wega.ifi.uni-heidelberg.de:9436/communication-servlet/PorsServlet?user=Testuser&password=testpass&msg=MSH%7C%5E%7E%5C%26%7CSAP-ISH%5Esapr3t%5E002%7CUKHD%5E0999%7CPORS%7C%7C200912151600%7C%7CMFN%5EM02%5EMFN_M02%7C1239%7CP%7C2.5.1%0D%0AMFI%7CORG%5EPractitioner+Master+File%5EHL70175%7C%7CUPD%7C%7C%7CAL%0D%0AMFE%7CMUP%7C%7C%7C0000002349%7CPL%0D%0ASTF%7C0000002349%7C179999900%7CFachrichtung%7C%7C%7C%7C%7C999%5EUKHD%5EUniversit%E4tsklinikum+Heidelberg%5E1.2.276.0.76.3.1.80%7C00496221566736%5E00496221562000%5EMail%40Mail.de%7CStreetOrMailing%26HouseStreet%26100%5Egugug%5ECity%5EState%5E67126%5EDE%7C20091211%7C20081101%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7CR">MSH|^~\&|SAP-ISH^sapr3t^002|UKHD^0999|PORS||200912151600||MFN^M02^MFN_M02|1239|P|2.5.1
+MFI|ORG^Practitioner Master File^HL70175||UPD|||AL
+MFE|MAD|||0000002349|PL
+STF|0000002349|179999900|Fachrichtung|||||999^UKHD^Universitaetsklinikum Heidelberg^1.2.276.0.76.3.1.80|00496221566736^00496221562000^Mail@Mail.de|StreetOrMailing&HouseStreet&100^gugug^City^State^67126^DE|20091211|20081101|||||||||||||||||||||||||R</a><br /><b>Expected Result</b><br />MSH|^~\&|PORS||||20101129041909||MFK^M02^MFK_M02|999999999|P|2.5.1
+MSA|CE|999999999
+MFI|||UPD|||AL
+ERR|^^^207&ERROR&hl70357&&Failed validation rule for value "DE": Matches the regular expression (\\+|\\-)?\\d*\\.?\\d*: Segment: STF (rep 1) Field #10||207|E||||MSH|\\^\\~\\\&|SAP-ISH\\^sapr3t\\^002|UKHD\\^0999|PORS||200912151600||MFN\\^M02\\^MFN_M02|1239|P|2.5.1\r\nMFI|ORG\\^Practitioner Master File\\^HL70175||UPD|||AL\r\nMFE|MUP|||0000002349|PL\r\nSTF|0000002349|179999900|Fachrichtung|||||999\\^UKHD\\^Universitätsklinikum Heidelberg\\^1.2.276.0.76.3.1.80|00496221566736\\^00496221562000\\^Mail@Mail.de|StreetOrMailing\&HouseStreet\&100\\^gugug\\^City\\^State\\^67126\\^DE|20091211|20081101|||||||||||||||||||||||||R||||
+</li>
+<li>
+<b>Update organisation (Missing Rights)</b> Changing first organisation of systemtests add organisation<br /><a id="uo5" href="http://wega.ifi.uni-heidelberg.de:9436/communication-servlet/PorsServlet?user=Testuser2&password=testpass&msg=MSH%7C%5E%7E%5C%26%7CSAP-ISH%5Esapr3t%5E002%7CUKHD%5E0999%7CPORS%7C%7C200912151600%7C%7CMFN%5EM02%5EMFN_M02%7C1239%7CP%7C2.5.1%0D%0AMFI%7CORG%5EPractitioner+Master+File%5EHL70175%7C%7CUPD%7C%7C%7CAL%0D%0AMFE%7CMUP%7C%7C%7C0000002349%7CPL%0D%0ASTF%7C0000002349%7C179999900%7COrgName1%5EChangedSecond%7CFachrichtung%7C%7C%7C%7C%7C999%5EUKHD%5EUniversit%E4tsklinikum+Heidelberg%5E1.2.276.0.76.3.1.80%7C00496221566736%5E00496221562000%5EMail%40Mail.de%7CStreetOrMailing%26HouseStreet%26100%5Egugug%5ECity%5EState%5E67126%5EDE%7C20091211%7C20081101%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7CR">MSH|^~\&|SAP-ISH^sapr3t^002|UKHD^0999|PORS||200912151600||MFN^M02^MFN_M02|1239|P|2.5.1
+MFI|ORG^Practitioner Master File^HL70175||UPD|||AL
+MFE|MAD|||0000002349|PL
+STF|0000002349|179999900|OrgName1^ChangedSecond|Fachrichtung|||||999^UKHD^Universitaetsklinikum Heidelberg^1.2.276.0.76.3.1.80|00496221566736^00496221562000^Mail@Mail.de|StreetOrMailing&HouseStreet&100^gugug^City^State^67126^DE|20091211|20081101|||||||||||||||||||||||||R</a><br /><b>Expected Result</b><br />MSH|^~\&|PORS||SAP-ISH^sapr3t^002|UKHD^0999|20101129042225||MFK^M02^MFK_M02|1240|P|2.5.1
+MSA|CR|1240
+MFI|ORG^Practitioner Master File^HL70175||UPD|||AL
+ERR|^^^207&ERROR&hl70357&&missing rights||207|E||||||||
+</li>
+<li>
+<b>Update organisation (No such organisation)</b><br /><a id="uo6" href="http://wega.ifi.uni-heidelberg.de:9436/communication-servlet/PorsServlet?user=Testuser&password=testpass&msg=MSH%7C%5E%7E%5C%26%7CSAP-ISH%5Esapr3t%5E002%7CUKHD%5E0999%7CPORS%7C%7C200912151600%7C%7CMFN%5EM02%5EMFN_M02%7C1239%7CP%7C2.5.1%0D%0AMFI%7CORG%5EPractitioner+Master+File%5EHL70175%7C%7CUPD%7C%7C%7CAL%0D%0AMFE%7CMUP%7C%7C%7C0000009999%7CPL%0D%0ASTF%7C0000009999%7C179999900%7COrgName1%5EChangedSecond%7CFachrichtung%7C%7C%7C%7C%7C999%5EUKHD%5EUniversit%E4tsklinikum+Heidelberg%5E1.2.276.0.76.3.1.80%7C00496221566736%5E00496221562000%5EMail%40Mail.de%7CStreetOrMailing%26HouseStreet%26100%5Egugug%5ECity%5EState%5E67126%5EDE%7C20091211%7C20081101%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7CR">MSH|^~\&|SAP-ISH^sapr3t^002|UKHD^0999|PORS||200912151600||MFN^M02^MFN_M02|1239|P|2.5.1
+MFI|ORG^Practitioner Master File^HL70175||UPD|||AL
+MFE|MAD|||0000009999|PL
+STF|0000009999|179999900|OrgName1^ChangedSecond|Fachrichtung|||||999^UKHD^Universitaetsklinikum Heidelberg^1.2.276.0.76.3.1.80|00496221566736^00496221562000^Mail@Mail.de|StreetOrMailing&HouseStreet&100^gugug^City^State^67126^DE|20091211|20081101|||||||||||||||||||||||||R</a><br /><b>Expected Result</b><br />MSH|^~\&|PORS||SAP-ISH^sapr3t^002|UKHD^0999|20101129052854||MFK^M02^MFK_M02|1240|P|2.5.1
+MSA|CR|1240
+MFI|ORG^Practitioner Master File^HL70175||UPD|||AL
+ERR|^^^207&ERROR&hl70357&&There is no such organisation!||207|E||||||||
+</li>
+<li>
+<b>Update organisation</b> Changing first organisation and its address of systemtests add organisation<br /><a id="uo7" href="http://wega.ifi.uni-heidelberg.de:9436/communication-servlet/PorsServlet?user=Testuser&password=testpass&msg=MSH%7C%5E%7E%5C%26%7CSAP-ISH%5Esapr3t%5E002%7CUKHD%5E0999%7CPORS%7C%7C200912151600%7C%7CMFN%5EM02%5EMFN_M02%7C1239%7CP%7C2.5.1%0D%0AMFI%7CORG%5EPractitioner+Master+File%5EHL70175%7C%7CUPD%7C%7C%7CAL%0D%0AMFE%7CMUP%7C%7C%7C0000002349%7CPL%0D%0ASTF%7C0000002349%7C179999900%7COrgName1%5EChangedSecond%7CFachrichtung%7C%7C%7C%7C%7C999%5EUKHD%5EUniversit%E4tsklinikum+Heidelberg%5E1.2.276.0.76.3.1.80%7C00496221566736%5E00496221562000%5EMail%40Mail.de%7CStreetdiChanged%26house%26110%5Egugug%5ECity%5EState%5E67126%5EDE%7C20091211%7C20081101%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7CR">MSH|^~\&|SAP-ISH^sapr3t^002|UKHD^0999|PORS||200912151600||MFN^M02^MFN_M02|1239|P|2.5.1
+MFI|ORG^Practitioner Master File^HL70175||UPD|||AL
+MFE|MAD|||0000002349|PL
+STF|0000002349|179999900|OrgName1^ChangedSecond|Fachrichtung|||||999^UKHD^Universitaetsklinikum Heidelberg^1.2.276.0.76.3.1.80|00496221566736^00496221562000^Mail@Mail.de|StreetOrMailing&HouseStreet&100^gugug^City^State^67126^DE|20091211|20081101|||||||||||||||||||||||||R</a><br /><b>Expected Result</b><br />MSH|^~\&|PORS||SAP-ISH^sapr3t^002|UKHD^0999|20101109103210||MFK^M02^MFK_M02|1235|P|2.5.1
+MSA|CA|1235
+MFI|ORG^Practitioner Master File^HL70175||UPD|||AL
+ERR|^^^0&ERROR&hl70357&&Message Accepted||0|I||||||||
+</li>
+</ul>
+<h2>Systemtests Add Provider with Organisation</h2>
+<ul>
+<li>
+<b>Add provider with organisation</b><br /><a id="p11" href="http://wega.ifi.uni-heidelberg.de:9436/communication-servlet/PorsServlet?user=Testuser&password=testpass&msg=MSH%7C%5E%7E%5C%26%7CSAP-ISH%5Esapr3t%5E002%7CUKHD%5E0999%7CPORS%7C%7C200912151600%7C%7CMFN%5EM02%5EMFN_M02%7C1234%7CP%7C2.5.1%0D%0AMFI%7CPRO%5EPractitioner+Master+File%5EHL70175%7C%7CUPD%7C%7C%7CAL%0D%0AMFE%7CMAD%7C%7C%7C0000008909%7CPL%0D%0ASTF%7C0000008909%7C154229989%7CBrueckenbauer%5EFranziboy%5EJosef%5EJR%5EDr%7CInternist%7CM%7C19501101%7C%7C%7C0000002349%7C00496221566736%5E00496221562000%5Ekurt%40beckenbauer.de%7CStreetOrMail%26Streetress%26200%5EOtherDesiuuation%5ECztty%5EState%5E78905%5EDE%7C20091211%7C20081101%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7CR">MSH|^~\&|SAP-ISH^sapr3t^002|UKHD^0999|PORS||200912151600||MFN^M02^MFN_M02|1234|P|2.5.1
+MFI|PRO^Practitioner Master File^HL70175||UPD|||AL
+MFE|MAD|||0000008909|PL
+STF|0000008909|154229989|Brueckenbauer^Franziboy^Josef^JR^Dr|Internist|M|19501101|||0000002349|00496221566736^00496221562000^franz@beckenbauer.de|StreetOrMailing&Streetress&200^OtherDesiuunation^Cztty^State^78905^DE|20091211|20081101|||||||||||||||||||||||||R</a><br /><b>Expected Result</b><br />
+MSH|^~\&|PORS||SAP-ISH^sapr3t^002|UKHD^0999|20101116034500||MFK^M02^MFK_M02|1235|P|2.5.1
+MSA|CA|1235
+MFI|PRO^Practitioner Master File^HL70175||UPD|||AL
+ERR|^^^0&ERROR&hl70357&&Message Accepted||0|I||||||||
+</li>
+<li>
+<b>Add provider with Address = schwachsinn (Missing Required Field)</b><br /><a id="p10" href="http://wega.ifi.uni-heidelberg.de:9436/communication-servlet/PorsServlet?user=Testuser&password=testpass&msg=MSH%7C%5E%7E%5C%26%7CSAP-ISH%5Esapr3t%5E002%7CUKHD%5E0999%7CPORS%7C%7C200912151600%7C%7CMFN%5EM02%5EMFN_M02%7C1234%7CP%7C2.5.1%0D%0AMFI%7CPRO%5EPractitioner+Master+File%5EHL70175%7C%7CUPD%7C%7C%7CAL%0D%0AMFE%7CMAD%7C%7C%7C2233%7CPL%0D%0ASTF%7C2233%7C179992222%7CPorsiger%5EFranz%5EJosef%5EJR%5EDr%7CInternist%7CM%7C19501101%7C%7C%7C%5E%5EOrgName1%5EOrgName2%7C00496221566736%5E00496221562000%5Efranz%40beckenbauer.de%7Cschwachsinn%7C20091211%7C20081101%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7CR">MSH|^~\&|SAP-ISH^sapr3t^002|UKHD^0999|PORS||200912151600||MFN^M02^MFN_M02|1234|P|2.5.1
+MFI|PRO^Practitioner Master File^HL70175||UPD|||AL
+MFE|MAD|||2233|PL
+STF|2233|179992222|Porsiger^Franz^Josef^JR^Dr|Internist|M|19501101|||^^OrgName1^OrgName2|00496221566736^00496221562000^franz@beckenbauer.de|schwachsinn|20091211|20081101|||||||||||||||||||||||||R</a><br /><b>Expected Result</b><br />MSH|^~\&|PORS||SAP-ISH^sapr3t^002|UKHD^0999|20101109033555||MFK^M02^MFK_M02|1235|P|2.5.1
+MSA|CE|1235
+MFI|PRO^Practitioner Master File^HL70175||UPD|||AL
+ERR|^^^101&ERROR&hl70357&&House number is missing in address||101|E||||||||
+</li>
+</ul>
+<h2>Systemtests Request Provider</h2>
+<ul>
+<li>
+<b>Request Provider with LocalId 8909 App SAP-ISH^sapr3t^002 Fac UKHD^0999</b><br /><a id="rp1" href="http://wega.ifi.uni-heidelberg.de:9436/communication-servlet/PorsServlet?user=Testuser&password=testpass&msg=MSH%7C%5E%7E%5C%26%7CSAP-ISH%5Esapr3t%5E002%7CUKHD%5E0999%7CPORS%7C%7C200912151600%7C%7CQBP%5EZ80%5EQBP_Q11%7C1234%7CP%7C2.5.1%0D%0AQPD%7CZ80%5EPORS+Query%5EHL70471%7C1234%7CPRO%5EPractitioner+Master+File%5EHL7015%7C%7C8909%0D%0ARCP%7CI%7C%7CR">MSH|^~\&|SAP-ISH^sapr3t^002|UKHD^0999|PORS||200912151600||QBP^Z80^QBP_Q11|1234|P|2.5.1
+QPD|Z80^PORS Query^HL70471|1234|PRO^Practitioner Master File^HL7015||8909
+RCP|I||R</a><br /><b>Expected Result</b><br />
+</li>
+<li>
+<b>Request Provider with Lastname Beckenbauer</b><br /><a id="rp2" href="http://wega.ifi.uni-heidelberg.de:9436/communication-servlet/PorsServlet?user=Testuser&password=testpass&msg=MSH%7C%5E%7E%5C%26%7CISHmed%7CUKHD%7CPORS%7C%7C200912151600%7C%7CQBP%5EZ80%5EQBP_Q11%7C1234%7CP%7C2.5.1%0D%0AQPD%7CZ81%5EPORS+Query%5EHL70471%7C1234%7CPRO%5EPractitioner+Master+File%5EHL7015%7C%7C%7C%7CBeckenbauer%0D%0ARCP%7CI%7C%7CR">MSH|^~\&|ISHmed|UKHD|PORS||200912151600||QBP^Z80^QBP_Q11|1234|P|2.5.1
+QPD|Z81^PORS Query^HL70471|1234|PRO^Practitioner Master File^HL7015||||Beckenbauer
+RCP|I||R</a><br /><b>Expected Result</b><br />
+MSH|^~\&|PORS|UKHD|ISHmed|UKHD|20110208045152||RSP^Z80^QBP_Q11|1235|P|2.5.1
+MSA|CA|1234
+QAK|1234|OK|Z81^PORS Query^HL70471
+QPD|Z81^PORS Query^HL70471|1234|PRO^Practitioner Master File^HL7015||||Beckenbauer
+MFE|MAD|||25467|PL
+STF|2546725467|154999929|Beckenbauer^Franz^Josef^JR^Dr|Internist|M|1950-11-01 00:00:00.0|active||00496221566736^00496221562000^kurt@beckenbauer.de|&StreetOrMail Streetress&200^OtherDesiuuation^Cztty^State^78905^DE|2008-11-01 00:00:00.0|2009-12-11 00:00:00.0|||||||||||||||||||||||||R
+</li>
+<li>
+<b>Request Provider with Birthday 1.11.1950</b><br /><a id="rp3" href="http://wega.ifi.uni-heidelberg.de:9436/communication-servlet/PorsServlet?user=Testuser&password=testpass&msg=MSH%7C%5E%7E%5C%26%7CISHmed%7CUKHD%7CPORS%7C%7C200912151600%7C%7CQBP%5EZ80%5EQBP_Q11%7C1234%7CP%7C2.5.1%0D%0AQPD%7CZ80%5EPORS+Query%5EHL70471%7C1234%7CPRO%5EPractitioner+Master+File%5EHL7015%7C%7C%7C%7C%7C%7C%7C19501101%0D%0ARCP%7CI%7C%7CR">MSH|^~\&|ISHmed|UKHD|PORS||200912151600||QBP^Z80^QBP_Q11|1234|P|2.5.1
+QPD|Z80^PORS Query^HL70471|1234|PRO^Practitioner Master File^HL7015||||||||19501101
+RCP|I||R</a><br /><b>Expected Result</b><br />
+</li>
+<li>
+<b>Request Provider with Lastname Brueckenbauer or Firstname Franz</b><br /><a id="rp4" href="http://wega.ifi.uni-heidelberg.de:9436/communication-servlet/PorsServlet?user=Testuser&password=testpass&msg=MSH%7C%5E%7E%5C%26%7CISHmed%7CUKHD%7CPORS%7C%7C200912151600%7C%7CQBP%5EZ81%5EQBP_Q11%7C1234%7CP%7C2.5.1%0D%0AQPD%7CZ81%5EPORS+Query%5EHL70471%7C1234%7CPRO%5EPractitioner+Master+File%5EHL7015%7C%7C%7C%7CBrueckenbauer%5EFranz%7C%7C%7C%7C%0D%0ARCP%7CI%7C%7CR">MSH|^~\&|ISHmed|UKHD|PORS||200912151600||QBP^Z81^QBP_Q11|1234|P|2.5.1
+QPD|Z81^PORS Query^HL70471|1234|PRO^Practitioner Master File^HL7015||||Brueckenbauer^Franz||||
+RCP|I||R</a><br /><b>Expected Result</b><br />
+</li>
+MSH|^~\&|PORS|UKHD|ISHmed|UKHD|20110208050207||RSP^Z80^QBP_Q11|1235|P|2.5.1
+MSA|CA|1234
+QAK|1234|OK|Z81^PORS Query^HL70471
+QPD|Z81^PORS Query^HL70471|1234|PRO^Practitioner Master File^HL7015||||Brueckenbauer^Franz
+MFE|MAD|||25459^25503^25467|PL
+STF|2545925459|154999989|Brueckenbauer^Toyman^Kurt^JR^Dr|Internist|M|1950-11-01 00:00:00.0|active||00496221566736^00496221562000^kurt@beckenbauer.de|&StreetChanged Streetress&220^OtherDesiuuation^Cztty^State^78905^DE|2008-11-01 00:00:00.0|2009-12-11 00:00:00.0|||||||||||||||||||||||||R
+STF|2550325503|154229989|Brueckenbauer^Franziboy^Josef^JR^Dr|Internist|M|1950-11-01 00:00:00.0|active|^179999900^OrgName1^ChangedSecond|00496221566736^00496221562000^kurt@beckenbauer.de|&StreetOrMail Streetress&200^OtherDesiuuation^Cztty^State^78905^DE|2008-11-01 00:00:00.0|2009-12-11 00:00:00.0|||||||||||||||||||||||||R
+STF|2546725467|154999929|Beckenbauer^Franz^Josef^JR^Dr|Internist|M|1950-11-01 00:00:00.0|active||00496221566736^00496221562000^kurt@beckenbauer.de|&StreetOrMail Streetress&200^OtherDesiuuation^Cztty^State^78905^DE|2008-11-01 00:00:00.0|2009-12-11 00:00:00.0|||||||||||||||||||||||||R
+</ul>
+<h2>Systemtests Request Organisation</h2>
+<ul>
+<li>
+<b>Request Organisation with establishmentId 179999900 or Name2 Schoen</b><br /><a id="ro1" href="http://wega.ifi.uni-heidelberg.de:9436/communication-servlet/PorsServlet?user=Testuser&password=testpass&msg=MSH%7C%5E%7E%5C%26%7CISHmed%7CUKHD%7CPORS%7C%7C200912151600%7C%7CQBP%5EZ81%5EQBP_Q11%7C1234%7CP%7C2.5.1%0D%0AQPD%7CZ81%5EPORS+Query%5EHL70471%7C1234%7CORG%5EOrganisation%5EUKHD0001%7C%7C%7C179999900%7C%5ESchoen%7C%7C%7C%7C%0D%0ARCP%7CI%7C%7CR">MSH|^~\&|ISHmed|UKHD|PORS||200912151600||QBP^Z81^QBP_Q11|1234|P|2.5.1
+QPD|Z81^PORS Query^HL70471|1234|ORG^Organisation^UKHD0001|||179999900|^Schoen||||
+RCP|I||R</a><br /><b>Expected Result</b><br />
+MSH|^~\&|PORS|UKHD|ISHmed|UKHD|20110210025628||RSP^Z80^QBP_Q11|1235|P|2.5.1
+MSA|CA|1234
+QAK|1234|OK|Z81^PORS Query^HL70471
+QPD|Z81^PORS Query^HL70471|1234|ORG^Organisation^UKHD0001|||179999900|^Schoen
+MFE|MAD|||25567^25561|PL
+STF|25567|179993300|KrankenhausHeidelberg^Schoen||||active|||00496221566736^00496221562000^Mail@Mail.de|&StreetOrMailing HouseStreet&100^gugug^City^State^67126^DE|2008-11-01 00:00:00.0|2009-12-11 00:00:00.0||R
+STF|25561|179999900|OrgName1^ChangedSecond||||active|||00496221566736^00496221562000^Mail@Mail.de|&StreetdiChanged house&110^gugug^City^State^67126^DE|2008-11-01 00:00:00.0|2009-12-11 00:00:00.0||R
+</li>
+<li>
+<b>Request Organisation with establishmentId 179993300 and Name2 Schoen</b><br /><a id="ro2" href="http://wega.ifi.uni-heidelberg.de:9436/communication-servlet/PorsServlet?user=Testuser&password=testpass&msg=MSH%7C%5E%7E%5C%26%7CISHmed%7CUKHD%7CPORS%7C%7C200912151600%7C%7CQBP%5EZ80%5EQBP_Q11%7C1234%7CP%7C2.5.1%0D%0AQPD%7CZ80%5EPORSQuery%5EHL70471%7C1234%7CORG%5EOrganisation%5EUKHD0001%7C%7C%7C179993300%7C%5ESchoen%7C%7C%7C%7C%7C%7C%7C00496221566736%0D%0ARCP%7CI%7C%7CR">MSH|^~\&|ISHmed|UKHD|PORS||200912151600||QBP^Z80^QBP_Q11|1234|P|2.5.1
+QPD|Z80^PORSQuery^HL70471|1234|ORG^Organisation^UKHD0001|||179993300|^Schoen||||
+RCP|I||R</a><br /><b>Expected Result</b><br />
+MSH|^~\&|PORS|UKHD|ISHmed|UKHD|20110210025656||RSP^Z80^QBP_Q11|1235|P|2.5.1
+MSA|CA|1234
+QAK|1234|OK|Z80^PORSQuery^HL70471
+QPD|Z80^PORSQuery^HL70471|1234|ORG^Organisation^UKHD0001|||179993300|^Schoen
+MFE|MAD|||25567|PL
+STF|25567|179993300|KrankenhausHeidelberg^Schoen||||active|||00496221566736^00496221562000^Mail@Mail.de|&StreetOrMailing HouseStreet&100^gugug^City^State^67126^DE|2008-11-01 00:00:00.0|2009-12-11 00:00:00.0||R
+</li>
+<li>
+<b>Request Organisation Telephone 00496221566736</b><br /><a id="ro3" href="http://wega.ifi.uni-heidelberg.de:9436/communication-servlet/PorsServlet?user=Testuser&password=testpass&msg=MSH%7C%5E%7E%5C%26%7CISHmed%7CUKHD%7CPORS%7C%7C200912151600%7C%7CQBP%5EZ80%5EQBP_Q11%7C1234%7CP%7C2.5.1%0D%0AQPD%7CZ80%5EPORSQuery%5EHL70471%7C1234%7CORG%5EOrganisation%5EUKHD0001%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C%7C00496221566736%0D%0ARCP%7CI%7C%7CR">MSH|^~\&|ISHmed|UKHD|PORS||200912151600||QBP^Z80^QBP_Q11|1234|P|2.5.1
+QPD|Z80^PORSQuery^HL70471|1234|ORG^Organisation^UKHD0001|||||||||||00496221566736
+RCP|I||R</a><br /><b>Expected Result</b><br />
+MSH|^~\&|PORS|UKHD|ISHmed|UKHD|20110210031434||RSP^Z80^QBP_Q11|1235|P|2.5.1
+MSA|CA|1234
+QAK|1234|OK|Z80^PORSQuery^HL70471
+QPD|Z80^PORSQuery^HL70471|1234|ORG^Organisation^UKHD0001|||||||||||00496221566736
+MFE|MAD|||25567^25561|PL
+STF|25567|179993300|KrankenhausHeidelberg^Schoen||||active|||00496221566736^00496221562000^Mail@Mail.de|&StreetOrMailing HouseStreet&100^gugug^City^State^67126^DE|2008-11-01 00:00:00.0|2009-12-11 00:00:00.0||R
+STF|25561|179999900|OrgName1^ChangedSecond||||active|||00496221566736^00496221562000^Mail@Mail.de|&StreetdiChanged house&110^gugug^City^State^67126^DE|2008-11-01 00:00:00.0|2009-12-11 00:00:00.0||R
+</li>
+</ul>
+</body>
+</html>

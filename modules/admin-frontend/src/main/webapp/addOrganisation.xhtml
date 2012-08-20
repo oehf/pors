@@ -1,0 +1,431 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:a4j="http://richfaces.org/a4j">
+
+<body>
+
+<ui:composition template="/template.xhtml">
+	<ui:define name="headerTitle"><h:outputText value="#{labels.addorganisation_title}"/></ui:define>
+	<ui:define name="content">
+		<div id="listOrganisation"><h:form id="main">
+			<rich:messages layout="table" showDetail="true" showSummary="true" style="display:none" />
+			<h:panelGrid columns="2" rendered="#{presenter.userLoggedIn}">
+
+				<h:outputLabel rendered="true" value="#{labels.addorganisation_listoid}" />
+				<h:inputText styleClass="inputText" size="18"
+					value="#{presenter.orgOid}" tabindex="0" id="oid">
+					<rich:ajaxValidator event="onblur" />
+				</h:inputText>
+				<h:outputLabel value="" />
+				<rich:message for="oid" />
+
+				<h:outputLabel rendered="true" value="#{labels.addorganisation_listname}" />
+				<h:inputText styleClass="inputText" size="18"
+					value="#{presenter.orgName}" tabindex="0" id="name">
+					<rich:ajaxValidator event="onblur" />
+				</h:inputText>
+				<h:outputLabel value="" />
+				<rich:message for="name" />
+
+				<h:outputLabel rendered="true" value="#{labels.addorganisation_listname2}" />
+				<h:inputText styleClass="inputText" size="18"
+					value="#{presenter.orgName2}" id="name2">
+					<rich:ajaxValidator event="onblur" />
+				</h:inputText>
+				<h:outputLabel value="" />
+				<rich:message for="name2" />
+
+				<h:outputLabel rendered="true" value="#{labels.addorganisation_listdescription}" />
+				<h:inputTextarea styleClass="inputTextarea"
+					value="#{presenter.orgDesc}" id="desc" width="140px" height="80px">
+					<rich:ajaxValidator event="onblur" />
+				</h:inputTextarea>
+				<h:outputLabel value="" />
+				<rich:message for="desc" />
+
+				<h:outputLabel rendered="true" value="#{labels.addorganisation_listdeactive}" />
+				<h:selectBooleanCheckbox id="deactive" value="#{presenter.orgdeactive}">
+					<a4j:support event="onclick" reRender="main" ajaxSingle="true" />
+                </h:selectBooleanCheckbox>
+                
+                <h:outputLabel id="deactivationtext" rendered="#{presenter.orgdeactive}" value="#{labels.addorganisation_listreason}" />
+                <h:inputText rendered="#{presenter.orgdeactive}" styleClass="inputText" value="#{presenter.orgdeactivationreason}"
+					id="deactivationreason">
+					<rich:ajaxValidator event="onblur" />
+				</h:inputText>
+				
+				<h:outputLabel rendered="true" value="#{labels.addorganisation_listemail}" />
+				<h:inputText styleClass="inputText" size="18"
+					value="#{presenter.orgEmail}" id="email">
+					<rich:ajaxValidator event="onblur" />
+				</h:inputText>
+				<h:outputLabel value="" />
+				<rich:message for="email" />
+
+				<h:outputLabel rendered="true" value="#{labels.addorganisation_listtelephone}" />
+				<h:inputText styleClass="inputText" size="18"
+					value="#{presenter.orgTelephone}" id="telephone">
+					<rich:ajaxValidator event="onblur" />
+				</h:inputText>
+				<h:outputLabel value="" />
+				<rich:message for="telephone" />
+
+				<h:outputLabel rendered="true" value="#{labels.addorganisation_listfax}" />
+				<h:inputText styleClass="inputText" size="18"
+					value="#{presenter.orgFax}" id="fax">
+					<rich:ajaxValidator event="onblur" />
+				</h:inputText>
+				<h:outputLabel value="" />
+				<rich:message for="fax" />
+
+				<h:outputLabel value="" />
+				<h:outputLabel style="font-size:x-small;" value="#{labels.addorganisation_requiredfields}" />
+				<h:outputLabel value="" />
+
+				<a4j:commandButton action="#{presenter.addOrganization}"
+					value="#{labels.addorganisation_addorganisation}"
+					reRender="msg, newLocalIdTemp, idList, oid, name, name2, desc, telephone, email, fax, addList, main, localidList, addresslist">
+					<a4j:support event="oncomplete" reRender="localidList, addressList" limitToList="true"/>
+				</a4j:commandButton>
+			</h:panelGrid>
+		</h:form></div>
+
+		<div id="listLocalids"><h:form id="localidForm">
+			<rich:dataTable id="localidList" value="#{presenter.localIDs}"
+				var="localID" width="100%">
+				<f:facet name="header">
+					<h:outputText value="#{labels.addorganisation_localids}" />
+				</f:facet>
+				<rich:column>
+					<f:facet name="header"><h:outputText value="#{labels.addorganisation_localid}" /></f:facet>
+					<h:outputText value="#{localID.localId}"></h:outputText>
+				</rich:column>
+				<rich:column>
+					<f:facet name="header"><h:outputText value="#{labels.addorganisation_facility}" /></f:facet>
+					<h:outputText value="#{localID.facility}"></h:outputText>
+				</rich:column>
+				<rich:column>
+					<f:facet name="header"><h:outputText value="#{labels.addorganisation_application}" /></f:facet>
+					<h:outputText value="#{localID.application}"></h:outputText>
+				</rich:column>
+				<rich:column>
+					<f:facet name="header"></f:facet>
+					<a4j:commandButton id="linkEditLocalId" image="img/icon_edit.png"
+						action="#{presenter.prepareEditLocalId(localID)}"
+						oncomplete="#{rich:component('panelEditLocalId')}.show()"
+						reRender="localidList, localidForm, listLocalids, panelEditLocalId, elocalId, eapplication, efacility" />
+					<a4j:commandButton id="linkDelLocalId" image="img/icon_del.png"
+						action="#{presenter.removeLocalId(localID)}"
+						reRender="localidList, localidForm, listLocalids">
+						<a4j:support event="oncomplete" action="#{presenter.dummy}"
+							reRender="localidList, localidForm, listLocalids" />
+					</a4j:commandButton>
+				</rich:column>
+			</rich:dataTable>
+			<a4j:commandButton id="linkAddLocalId" value="#{labels.addorganisation_addlocalid}"
+				action="#{presenter.resetLocalId}"
+				oncomplete="#{rich:component('panelAddLocalId')}.show()"
+				reRender="localidList, localidForm, listLocalids, localId, application, facility" />
+		</h:form></div>
+
+		<div id="listAddresses"><h:form id="addressForm">
+			<rich:dataTable id="addressList" value="#{presenter.addresses}"
+				var="address" width="100%">
+				<f:facet name="header">
+					<h:outputText value="#{labels.addorganisation_addresses}" />
+				</f:facet>
+				<rich:column>
+					<f:facet name="header"><h:outputText value="#{labels.addorganisation_addresses_street}" /></f:facet>
+					<h:outputText value="#{address.street}"></h:outputText>
+				</rich:column>
+				<rich:column>
+					<f:facet name="header">
+						<h:outputText value="#{labels.addorganisation_addresses_housenumber}" />
+					</f:facet>
+					<h:outputText value="#{address.houseNumber}"></h:outputText>
+				</rich:column>
+				<rich:column>
+					<f:facet name="header"><h:outputText value="#{labels.addorganisation_addresses_zipcode}" />
+					</f:facet>
+					<h:outputText value="#{address.zipCode}"></h:outputText>
+				</rich:column>
+				<rich:column>
+					<f:facet name="header"><h:outputText value="#{labels.addorganisation_addresses_city}" />
+					</f:facet>
+					<h:outputText value="#{address.city}"></h:outputText>
+				</rich:column>
+				<rich:column>
+					<f:facet name="header"><h:outputText value="#{labels.addorganisation_addresses_state}" />
+					</f:facet>
+					<h:outputText value="#{address.state}"></h:outputText>
+				</rich:column>
+				<rich:column>
+					<f:facet name="header"><h:outputText value="#{labels.addorganisation_addresses_country}" />
+					</f:facet>
+					<h:outputText value="#{address.country}"></h:outputText>
+				</rich:column>
+				<rich:column>
+					<f:facet name="header"><h:outputText value="#{labels.addorganisation_addresses_additional}" />
+					</f:facet>
+					<h:outputText value="#{address.additional}"></h:outputText>
+				</rich:column>
+				<rich:column>
+					<f:facet name="header"></f:facet>
+					<a4j:commandButton id="linkEditAddress" image="img/icon_edit.png"
+						action="#{presenter.prepareEditAddress(address)}"
+						oncomplete="#{rich:component('panelEditAddress')}.show()"
+						reRender="panelEditAddress, estreet, enumber, ezipCode, ecity, eadditional, estate, ecountry" />
+					<a4j:commandButton id="linkDelAddress" image="img/icon_del.png"
+						action="#{presenter.removeAddress(address)}"
+						reRender="listAddresses, addressForm, addressList">
+						<a4j:support event="oncomplete" action="#{presenter.dummy}"
+							reRender="listAddresses, addressForm, addressList" />
+					</a4j:commandButton>
+				</rich:column>
+			</rich:dataTable>
+			<a4j:commandButton id="linkAddAddress" value="#{labels.addorganisation_addaddress}"
+				action="#{presenter.resetAddress}"
+				oncomplete="#{rich:component('panelAddAddress')}.show()"
+				reRender="listAddresses, addressForm, addressList, panelAddAddress, street, number, zipCode, city, additional, state, country" />
+		</h:form></div>
+
+		<rich:modalPanel id="panelAddAddress" width="420" height="250">
+			<f:facet name="header">
+				<h:panelGroup>
+					<h:outputText value="#{labels.addorganisation_addaddress}"></h:outputText>
+				</h:panelGroup>
+			</f:facet>
+			<h:form>
+				<h:panelGrid columns="3">
+					<h:outputLabel rendered="true" value="#{labels.addorganisation_addaddress_street}" />
+					<h:inputText id="street" size="18" value="#{presenter.street}"
+						tabindex="0">
+						<rich:ajaxValidator event="onblur" />
+					</h:inputText>
+					<rich:message for="street" />
+
+					<h:outputLabel rendered="true" value="#{labels.addorganisation_addaddress_number}" />
+					<h:inputText id="number" size="18" value="#{presenter.number}">
+						<rich:ajaxValidator event="onblur" />
+					</h:inputText>
+					<rich:message for="number" />
+
+					<h:outputLabel rendered="true" value="#{labels.addorganisation_addaddress_zipcode}" />
+					<h:inputText id="zipCode" size="18" value="#{presenter.zipCode}">
+						<rich:ajaxValidator event="onblur" />
+					</h:inputText>
+					<rich:message for="zipCode" />
+
+					<h:outputLabel rendered="true" value="#{labels.addorganisation_addaddress_city}" />
+					<h:inputText id="city" size="18" value="#{presenter.city}">
+						<rich:ajaxValidator event="onblur" />
+					</h:inputText>
+					<rich:message for="city" />
+
+					<h:outputLabel rendered="true" value="#{labels.addorganisation_addaddress_additional}" />
+					<h:inputText id="additional" size="18"
+						value="#{presenter.additional}">
+						<rich:ajaxValidator event="onblur" />
+					</h:inputText>
+					<rich:message for="additional" />
+
+					<h:outputLabel rendered="true" value="#{labels.addorganisation_addaddress_state}" />
+					<h:inputText id="state" size="18" value="#{presenter.state}">
+						<rich:ajaxValidator event="onblur" />
+					</h:inputText>
+					<rich:message for="state" />
+
+					<h:outputLabel rendered="true" value="#{labels.addorganisation_addaddress_country}" />
+					<h:selectOneMenu id="country" value="#{presenter.country}">
+						<f:selectItems value="#{presenter.countries}" />
+					</h:selectOneMenu>
+					<h:outputLabel value="" />
+
+					<h:outputLabel value="" />
+					<h:outputLabel style="font-size:x-small;" value="#{labels.addorganisation_requiredfields}" />
+					<h:outputLabel value="" />
+
+				</h:panelGrid>
+				<a4j:commandButton type="submit" action="#{presenter.addAddress}"
+					value="#{labels.addorganisation_ok}"
+					reRender="listAddresses, addressForm, addressList, addList, addAddress">
+					<a4j:support id="addAddress"
+						rendered="#{presenter.addressModified}" event="oncomplete"
+						oncomplete="#{rich:component('panelAddAddress')}.hide()" />
+				</a4j:commandButton>
+				<a4j:commandButton action="#{presenter.resetAddress}"
+					oncomplete="#{rich:component('panelAddAddress')}.hide()"
+					value="#{labels.addorganisation_cancel}" />
+			</h:form>
+		</rich:modalPanel>
+
+		<rich:modalPanel id="panelEditAddress" width="420" height="250">
+			<f:facet name="header">
+				<h:panelGroup>
+					<h:outputText value="#{labels.addorganisation_editaddress}"></h:outputText>
+				</h:panelGroup>
+			</f:facet>
+			<h:form>
+				<h:panelGrid columns="3">
+					<h:outputLabel rendered="true" value="#{labels.addorganisation_addaddress_street}" />
+					<h:inputText id="estreet" size="18" value="#{presenter.street}"
+						tabindex="0">
+						<rich:ajaxValidator event="onblur" />
+					</h:inputText>
+					<rich:message for="estreet" />
+
+					<h:outputLabel rendered="true" value="#{labels.addorganisation_addaddress_housenumber}" />
+					<h:inputText id="enumber" size="18" value="#{presenter.number}">
+						<rich:ajaxValidator event="onblur" />
+					</h:inputText>
+					<rich:message for="enumber" />
+
+					<h:outputLabel rendered="true" value="#{labels.addorganisation_addaddress_zipcode}" />
+					<h:inputText id="ezipCode" size="18" value="#{presenter.zipCode}">
+						<rich:ajaxValidator event="onblur" />
+					</h:inputText>
+					<rich:message for="ezipCode" />
+
+					<h:outputLabel rendered="true" value="#{labels.addorganisation_addaddress_city}" />
+					<h:inputText id="ecity" size="18" value="#{presenter.city}">
+						<rich:ajaxValidator event="onblur" />
+					</h:inputText>
+					<rich:message for="ecity" />
+
+					<h:outputLabel rendered="true" value="#{labels.addorganisation_addaddress_additional}" />
+					<h:inputText id="eadditional" size="18"
+						value="#{presenter.additional}">
+						<rich:ajaxValidator event="onblur" />
+					</h:inputText>
+					<rich:message for="eadditional" />
+
+					<h:outputLabel rendered="true" value="#{labels.addorganisation_addaddress_state}" />
+					<h:inputText id="estate" size="18" value="#{presenter.state}">
+						<rich:ajaxValidator event="onblur" />
+					</h:inputText>
+					<rich:message for="estate" />
+
+					<h:outputLabel rendered="true" value="#{labels.addorganisation_addaddress_country}" />
+					<h:selectOneMenu id="ecountry" value="#{presenter.country}">
+						<f:selectItems value="#{presenter.countries}" />
+					</h:selectOneMenu>
+					<h:outputLabel value="" />
+
+					<h:outputLabel value="" />
+					<h:outputLabel style="font-size:x-small;" value="#{labels.addorganisation_requiredfields}" />
+					<h:outputLabel value="" />
+
+				</h:panelGrid>
+				<a4j:commandButton action="#{presenter.editAddress}" value="#{labels.addorganisation_ok}"
+					reRender="listAddresses, addressForm, addressList, addList, editAddress">
+					<a4j:support id="editAddress"
+						rendered="#{presenter.addressModified}" event="oncomplete"
+						oncomplete="#{rich:component('panelEditAddress')}.hide()" />
+				</a4j:commandButton>
+				<a4j:commandButton action="#{presenter.resetAddress}"
+					oncomplete="#{rich:component('panelEditAddress')}.hide()"
+					value="#{labels.addorganisation_cancel}" />
+			</h:form>
+		</rich:modalPanel>
+
+		<!-- Local IDs -->
+
+		<rich:modalPanel id="panelAddLocalId" width="420" height="180">
+			<f:facet name="header">
+				<h:panelGroup>
+					<h:outputText value="#{labels.addorganisation_addlocalid}"></h:outputText>
+				</h:panelGroup>
+			</f:facet>
+			<h:form>
+				<h:panelGrid columns="3">
+					<h:outputLabel rendered="true" value="#{labels.addorganisation_addlocalid_localid}" />
+					<h:inputText id="localId" size="18" value="#{presenter.localId}"
+						tabindex="0">
+						<rich:ajaxValidator event="onblur" />
+					</h:inputText>
+					<rich:message for="localId" />
+
+					<h:outputLabel rendered="true" value="#{labels.addorganisation_addlocalid_facility}" />
+					<h:inputText id="facility" size="18" value="#{presenter.facility}">
+						<rich:ajaxValidator event="onblur" />
+					</h:inputText>
+					<rich:message for="facility" />
+
+					<h:outputLabel rendered="true" value="#{labels.addorganisation_addlocalid_application}" />
+					<h:inputText id="application" size="18"
+						value="#{presenter.application}">
+						<rich:ajaxValidator event="onblur" />
+					</h:inputText>
+					<rich:message for="application" />
+
+					<h:outputLabel value="" />
+					<h:outputLabel style="font-size:x-small;" value="#{labels.addorganisation_requiredfields}" />
+					<h:outputLabel value="" />
+
+				</h:panelGrid>
+				<a4j:commandButton type="submit" action="#{presenter.addLocalId}"
+					value="#{labels.addorganisation_ok}"
+					reRender="localidList, localidForm, listLocalids, addLocalId">
+					<a4j:support id="addLocalId"
+						rendered="#{presenter.localIdModified}" event="oncomplete"
+						oncomplete="#{rich:component('panelAddLocalId')}.hide()" />
+				</a4j:commandButton>
+				<a4j:commandButton action="#{presenter.resetLocalId}"
+					oncomplete="#{rich:component('panelAddLocalId')}.hide()"
+					value="#{labels.addorganisation_cancel}" />
+			</h:form>
+		</rich:modalPanel>
+
+		<rich:modalPanel id="panelEditLocalId" width="420" height="180">
+			<f:facet name="header">
+				<h:panelGroup>
+					<h:outputText value="#{labels.addorganisation_editlocalid}"></h:outputText>
+				</h:panelGroup>
+			</f:facet>
+			<h:form>
+				<h:panelGrid columns="3">
+					<h:outputLabel rendered="true" value="#{labels.addorganisation_addlocalid_localid}" />
+					<h:inputText id="localId" size="18" value="#{presenter.localId}"
+						tabindex="0">
+						<rich:ajaxValidator event="onblur" />
+					</h:inputText>
+					<rich:message for="localId" />
+
+					<h:outputLabel rendered="true" value="#{labels.addorganisation_addlocalid_facility}" />
+					<h:inputText id="facility" size="18" value="#{presenter.facility}">
+						<rich:ajaxValidator event="onblur" />
+					</h:inputText>
+					<rich:message for="facility" />
+
+					<h:outputLabel rendered="true" value="#{labels.addorganisation_addlocalid_application}" />
+					<h:inputText id="application" size="18"
+						value="#{presenter.application}">
+						<rich:ajaxValidator event="onblur" />
+					</h:inputText>
+					<rich:message for="application" />
+
+					<h:outputLabel value="" />
+					<h:outputLabel style="font-size:x-small;" value="#{labels.addorganisation_requiredfields}" />
+					<h:outputLabel value="" />
+
+				</h:panelGrid>
+				<a4j:commandButton type="submit" action="#{presenter.editLocalId}"
+					value="#{labels.addorganisation_ok}"
+					reRender="localidList, localidForm, listLocalids, editLocalId">
+					<a4j:support id="editLocalId"
+						rendered="#{presenter.localIdModified}" event="oncomplete"
+						oncomplete="#{rich:component('panelEditLocalId')}.hide()" />
+				</a4j:commandButton>
+				<a4j:commandButton action="#{presenter.resetLocalId}"
+					oncomplete="#{rich:component('panelEditLocalId')}.hide()"
+					value="#{labels.addorganisation_cancel}" />
+			</h:form>
+		</rich:modalPanel>
+	</ui:define>
+</ui:composition>
+</body>
+</html>
