@@ -6,4 +6,4 @@ Similar to a Master Patient Index (MPI) PORS provides a unique Identifier for ca
 
 PORS is designed to fit into IHE based XDS compliant environments and the PORS Queries are based on HL7 V2 Syntax.
 
-More informations are available at: http://www.openehealth.org/display/PORS
+More information is available at: http://www.openehealth.org/display/PORS
